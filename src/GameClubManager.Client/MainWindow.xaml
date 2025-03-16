@@ -1,0 +1,242 @@
+﻿<Window x:Class="GameClubManager.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="{Binding Title}" 
+        Height="800" 
+        Width="1280"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundBrush}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Margin" Value="8,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style x:Key="BookingButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsAvailable}" Value="False">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковая панель -->
+        <Grid Background="{DynamicResource SurfaceBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Логотип -->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="24,0"
+                        VerticalAlignment="Center">
+                <Image Source="/Resources/logo.svg" 
+                       Height="32" 
+                       Width="32"
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                <TextBlock Text="Game Club"
+                          Margin="16,0,0,0"
+                          Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                          VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Навигационное меню -->
+            <StackPanel Grid.Row="1" Margin="8,16">
+                <Button x:Name="ProfileButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountCircle" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Профиль"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ProgramsButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Gamepad" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Игры"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="FoodButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Food" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Еда и напитки"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="TariffButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cash" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Тарифы"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="SettingsButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cog" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Настройки"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <!-- Информация о времени -->
+            <StackPanel Grid.Row="2" 
+                       Margin="16,0,16,16">
+                <TextBlock Text="Осталось времени:"
+                          Style="{StaticResource BodyTextStyle}"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,4"/>
+                <TextBlock Text="{Binding RemainingTime}"
+                          Style="{StaticResource SubheaderTextStyle}"
+                          FontSize="24"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,16"/>
+                <TextBlock Text="{Binding Balance, StringFormat={}Баланс: {0:C}}"
+                          Style="{StaticResource BodyTextStyle}"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,16"/>
+            </StackPanel>
+
+            <!-- Кнопка помощи админа -->
+            <Button x:Name="AdminHelpButton"
+                    Grid.Row="2"
+                    Style="{StaticResource ModernButton}"
+                    Margin="16,0,16,24"
+                    Height="48"
+                    VerticalAlignment="Bottom"
+                    Background="{DynamicResource PrimaryBrush}"
+                    Foreground="{DynamicResource TextPrimaryBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="HeadsetMic" 
+                                           Width="24" 
+                                           Height="24"
+                                           Margin="0,0,12,0"/>
+                    <TextBlock Text="Вызвать админа"
+                             Foreground="{DynamicResource TextPrimaryBrush}"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Основной контент -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель -->
+            <Grid Background="{DynamicResource SurfaceBrush}"
+                  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Заголовок страницы -->
+                <TextBlock Text="Game Club Manager"
+                         Margin="24,0"
+                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                         VerticalAlignment="Center"/>
+
+                <!-- Кнопки управления окном -->
+                <StackPanel Grid.Column="1" 
+                          Orientation="Horizontal"
+                          Margin="0,0,8,0">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Height="32" Width="32"
+                            Padding="4"
+                            Click="MinimizeWindow_Click">
+                        <materialDesign:PackIcon Kind="WindowMinimize"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Height="32" Width="32"
+                            Padding="4"
+                            Click="MaximizeWindow_Click">
+                        <materialDesign:PackIcon Kind="WindowMaximize"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Height="32" Width="32"
+                            Padding="4"
+                            Foreground="{DynamicResource ErrorBrush}"
+                            Click="CloseWindow_Click">
+                        <materialDesign:PackIcon Kind="WindowClose"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Область навигации -->
+            <Frame x:Name="MainContent" 
+                   Grid.Row="1"
+                   NavigationUIVisibility="Hidden"
+                   Background="Transparent"/>
+        </Grid>
+    </Grid>
+</Window>

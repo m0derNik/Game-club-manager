@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\gameclubmanager\\src\\gameclubmanager.client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|solutionrelative:src\\gameclubmanager.client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F32FC986-B535-47B2-9EEC-9B2807EDFBF3}|src\\GameClubManager.Agent\\GameClubManager.Agent.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\gameclubmanager\\src\\gameclubmanager.agent\\gameclubmanager.agent.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F32FC986-B535-47B2-9EEC-9B2807EDFBF3}|src\\GameClubManager.Agent\\GameClubManager.Agent.csproj|solutionrelative:src\\gameclubmanager.agent\\gameclubmanager.agent.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Client\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Client\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Client\\MainWindow.xaml.cs",
+              "RelativeToolTip": "src\\GameClubManager.Client\\MainWindow.xaml.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAQwEgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T12:11:54.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameClubManager.Agent.csproj",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Agent\\GameClubManager.Agent.csproj",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Agent\\GameClubManager.Agent.csproj",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Agent\\GameClubManager.Agent.csproj",
+              "RelativeToolTip": "src\\GameClubManager.Agent\\GameClubManager.Agent.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-15T14:04:54.171Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

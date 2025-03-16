@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "1ts2S8aS8AwEfT3feaxMtPseP9sZ8PuN4+VQ7a1jIJc=",
+  "Source": "GameClubManager.Server",
+  "BasePath": "_content/GameClubManager.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
