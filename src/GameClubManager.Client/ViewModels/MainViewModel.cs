@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Windows.Input;
 using GameClubManager.Client.Models;
+using GameClubManager.Client.Services;
+using GameClubManager.Client.Commands;
 using GameClubManager.Shared.Models;
 
 namespace GameClubManager.Client.ViewModels
@@ -69,23 +71,8 @@ namespace GameClubManager.Client.ViewModels
         private readonly string _configFilePath = "config.json";
         private GameConfig _gameConfig;
 
-        private TimeSpan _remainingTime = TimeSpan.FromHours(2);
-        private decimal _balance = 1000.00m;
-
-        public string RemainingTime
-        {
-            get => $"{_remainingTime.Hours:D2}:{_remainingTime.Minutes:D2}:{_remainingTime.Seconds:D2}";
-        }
-
-        public decimal Balance
-        {
-            get => _balance;
-            set
-            {
-                _balance = value;
-                OnPropertyChanged();
-            }
-        }
+        public string RemainingTime => TimeService.Instance.RemainingTime;
+        public decimal Balance => TimeService.Instance.Balance;
 
         public MainViewModel()
         {
@@ -103,7 +90,14 @@ namespace GameClubManager.Client.ViewModels
             LoadTestData();
             LoadConfig();
 
-            StartTimer();
+            // Подписываемся на изменения времени
+            TimeService.Instance.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(TimeService.RemainingTime))
+                    OnPropertyChanged(nameof(RemainingTime));
+                else if (e.PropertyName == nameof(TimeService.Balance))
+                    OnPropertyChanged(nameof(Balance));
+            };
         }
 
         private void LoadTestData()
@@ -216,84 +210,10 @@ namespace GameClubManager.Client.ViewModels
             }
         }
 
-        private void StartTimer()
-        {
-            var timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (_remainingTime > TimeSpan.Zero)
-            {
-                _remainingTime = _remainingTime.Subtract(TimeSpan.FromSeconds(1));
-                OnPropertyChanged(nameof(RemainingTime));
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public class RelayCommand : ICommand
-    {
-        private readonly Action<object?> _execute;
-        private readonly Func<object?, bool>? _canExecute;
-
-        public event EventHandler? CanExecuteChanged;
-
-        public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
-
-        public bool CanExecute(object? parameter)
-        {
-            return _canExecute?.Invoke(parameter) ?? true;
-        }
-
-        public void Execute(object? parameter)
-        {
-            _execute(parameter);
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
-    }
-
-    public class RelayCommand<T> : ICommand
-    {
-        private readonly Action<T> _execute;
-        private readonly Func<T, bool> _canExecute;
-
-        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute((T)parameter);
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute((T)parameter);
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
         }
     }
 } 

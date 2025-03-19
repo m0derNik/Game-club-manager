@@ -1,10 +1,14 @@
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using GameClubManager.Client.Models;
+using GameClubManager.Client.Commands;
 
 namespace GameClubManager.Client.ViewModels
 {
-    public class ProgramsViewModel : ViewModelBase
+    public class ProgramsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Game> _games;
         public ObservableCollection<Game> Games
@@ -13,7 +17,7 @@ namespace GameClubManager.Client.ViewModels
             set
             {
                 _games = value;
-                OnPropertyChanged(nameof(Games));
+                OnPropertyChanged();
             }
         }
 
@@ -44,6 +48,13 @@ namespace GameClubManager.Client.ViewModels
                     UseShellExecute = true
                 });
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 } 

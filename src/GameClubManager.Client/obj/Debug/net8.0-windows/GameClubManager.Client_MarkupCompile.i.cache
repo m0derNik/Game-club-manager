@@ -1,5 +1,5 @@
 ﻿GameClubManager.Client
-
+1.0.0.0
 
 winexe
 C#
@@ -12,7 +12,7 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\GameClubManager\src\GameClubManager.Client\App.xaml
 6-1158585499
 
-18-697509836
+20825141719
 2121926202607
 MainWindow.xaml;Pages\FoodPage.xaml;Pages\ProfilePage.xaml;Pages\ProgramsPage.xaml;Pages\SettingsPage.xaml;Pages\TariffPage.xaml;
 

@@ -2,16 +2,18 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
+using GameClubManager.Client.Services;
+using System.Windows.Input;
+using GameClubManager.Client.Commands;
 
 namespace GameClubManager.Client.ViewModels
 {
     public class ProfileViewModel : INotifyPropertyChanged
     {
         private string _username = "Пользователь";
-        private decimal _balance = 1000.00m;
-        private TimeSpan _remainingTime = TimeSpan.FromHours(2);
         private string _currentTariff = "Стандартный";
         private BitmapImage _avatarSource;
+        private readonly TimeService _timeService;
 
         public string Username
         {
@@ -23,20 +25,8 @@ namespace GameClubManager.Client.ViewModels
             }
         }
 
-        public decimal Balance
-        {
-            get => _balance;
-            set
-            {
-                _balance = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string RemainingTime
-        {
-            get => $"{_remainingTime.Hours:D2}:{_remainingTime.Minutes:D2}:{_remainingTime.Seconds:D2}";
-        }
+        public decimal Balance => _timeService.Balance;
+        public string RemainingTime => _timeService.RemainingTime;
 
         public string CurrentTariff
         {
@@ -58,27 +48,37 @@ namespace GameClubManager.Client.ViewModels
             }
         }
 
+        public ICommand AddBalanceCommand { get; }
+        public ICommand AddTimeCommand { get; }
+
         public ProfileViewModel()
         {
-            // Здесь можно добавить загрузку данных пользователя
-            StartTimer();
+            _timeService = TimeService.Instance;
+            
+            // Подписываемся на изменения времени
+            _timeService.PropertyChanged += TimeService_PropertyChanged;
+
+            // Инициализация команд
+            AddBalanceCommand = new RelayCommand(_ => AddBalance());
+            AddTimeCommand = new RelayCommand(_ => AddTime());
         }
 
-        private void StartTimer()
+        private void TimeService_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (_remainingTime > TimeSpan.Zero)
-            {
-                _remainingTime = _remainingTime.Subtract(TimeSpan.FromSeconds(1));
+            if (e.PropertyName == nameof(TimeService.RemainingTime))
                 OnPropertyChanged(nameof(RemainingTime));
-            }
+            else if (e.PropertyName == nameof(TimeService.Balance))
+                OnPropertyChanged(nameof(Balance));
+        }
+
+        private void AddBalance()
+        {
+            _timeService.AddBalance(100); // Добавляем 100 рублей для теста
+        }
+
+        private void AddTime()
+        {
+            _timeService.AddTime(TimeSpan.FromHours(1)); // Добавляем 1 час для теста
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

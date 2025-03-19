@@ -55,7 +55,7 @@ namespace GameClubManager.Client.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;component/pages/foodpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;V1.0.0.0;component/pages/foodpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\FoodPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

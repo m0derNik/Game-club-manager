@@ -51,6 +51,7 @@
         <Grid Background="{DynamicResource SurfaceBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -66,11 +67,30 @@
                 <TextBlock Text="Game Club"
                           Margin="16,0,0,0"
                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                          Foreground="{DynamicResource TextPrimaryBrush}"
                           VerticalAlignment="Center"/>
             </StackPanel>
 
+            <!-- Информация о времени и балансе -->
+            <StackPanel Grid.Row="1" 
+                       Margin="16,0,16,16">
+                <TextBlock Text="Осталось времени:"
+                          Style="{StaticResource BodyTextStyle}"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,4"/>
+                <TextBlock Text="{Binding RemainingTime}"
+                          Style="{StaticResource SubheaderTextStyle}"
+                          FontSize="24"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,16"/>
+                <TextBlock Text="{Binding Balance, StringFormat={}Баланс: {0:C}}"
+                          Style="{StaticResource BodyTextStyle}"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,16"/>
+            </StackPanel>
+
             <!-- Навигационное меню -->
-            <StackPanel Grid.Row="1" Margin="8,16">
+            <StackPanel Grid.Row="2" Margin="8,16">
                 <Button x:Name="ProfileButton"
                         Style="{StaticResource ModernButton}"
                         Margin="8,4">
@@ -147,27 +167,9 @@
                 </Button>
             </StackPanel>
 
-            <!-- Информация о времени -->
-            <StackPanel Grid.Row="2" 
-                       Margin="16,0,16,16">
-                <TextBlock Text="Осталось времени:"
-                          Style="{StaticResource BodyTextStyle}"
-                          HorizontalAlignment="Center"
-                          Margin="0,0,0,4"/>
-                <TextBlock Text="{Binding RemainingTime}"
-                          Style="{StaticResource SubheaderTextStyle}"
-                          FontSize="24"
-                          HorizontalAlignment="Center"
-                          Margin="0,0,0,16"/>
-                <TextBlock Text="{Binding Balance, StringFormat={}Баланс: {0:C}}"
-                          Style="{StaticResource BodyTextStyle}"
-                          HorizontalAlignment="Center"
-                          Margin="0,0,0,16"/>
-            </StackPanel>
-
             <!-- Кнопка помощи админа -->
             <Button x:Name="AdminHelpButton"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Style="{StaticResource ModernButton}"
                     Margin="16,0,16,24"
                     Height="48"

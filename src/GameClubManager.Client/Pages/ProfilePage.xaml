@@ -85,6 +85,7 @@
                           Orientation="Horizontal"
                           HorizontalAlignment="Center">
                     <Button Style="{StaticResource ModernButton}"
+                            Command="{Binding AddBalanceCommand}"
                             Margin="8,0"
                             Width="180">
                         <StackPanel Orientation="Horizontal">
@@ -98,6 +99,7 @@
                     </Button>
 
                     <Button Style="{StaticResource ModernButton}"
+                            Command="{Binding AddTimeCommand}"
                             Margin="8,0"
                             Width="180">
                         <StackPanel Orientation="Horizontal">

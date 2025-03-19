@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameClubManager.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7288bed1b2dbdf6274b1100db000bdc1cf2a81a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameClubManager.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameClubManager.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

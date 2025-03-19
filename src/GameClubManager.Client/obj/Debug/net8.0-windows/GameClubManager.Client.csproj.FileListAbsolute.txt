@@ -46,3 +46,4 @@ C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\GameClubManager\src\
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\GameClubManager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\TariffPage.g.cs
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\GameClubManager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\ProfilePage.baml
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\GameClubManager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\ProfilePage.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\GameClubManager\src\GameClubManager.Client\obj\Debug\net8.0-windows\GameClubManager.Client.sourcelink.json
