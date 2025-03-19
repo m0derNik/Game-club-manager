@@ -1,0 +1,144 @@
+<Page x:Class="GameClubManager.Admin.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GameClubManager.Admin.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="SettingsPage">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Настройки" 
+                   Style="{StaticResource HeaderTextStyle}"
+                   Margin="0,0,0,24"/>
+
+        <!-- Содержимое -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <!-- Общие настройки -->
+                <Border Background="{DynamicResource MaterialDesignPaper}"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        Margin="0,0,0,24">
+                    <StackPanel Margin="16">
+                        <TextBlock Text="Общие настройки"
+                                   Style="{StaticResource SubheaderTextStyle}"
+                                   Margin="0,0,0,16"/>
+
+                        <TextBox Width="300"
+                                 materialDesign:HintAssist.Hint="Название клуба"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding ClubName}"/>
+
+                        <TextBox Width="300"
+                                 materialDesign:HintAssist.Hint="Адрес"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding Address}"
+                                 Margin="0,16,0,0"/>
+
+                        <TextBox Width="300"
+                                 materialDesign:HintAssist.Hint="Телефон"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding Phone}"
+                                 Margin="0,16,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Настройки тарифов -->
+                <Border Background="{DynamicResource MaterialDesignPaper}"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        Margin="0,0,0,24">
+                    <StackPanel Margin="16">
+                        <TextBlock Text="Настройки тарифов"
+                                   Style="{StaticResource SubheaderTextStyle}"
+                                   Margin="0,0,0,16"/>
+
+                        <TextBox Width="300"
+                                 materialDesign:HintAssist.Hint="Стоимость часа (руб.)"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding HourlyRate}"/>
+
+                        <TextBox Width="300"
+                                 materialDesign:HintAssist.Hint="Минимальное время (мин.)"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding MinimumTime}"
+                                 Margin="0,16,0,0"/>
+
+                        <TextBox Width="300"
+                                 materialDesign:HintAssist.Hint="Максимальное время (час.)"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding MaximumTime}"
+                                 Margin="0,16,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Настройки уведомлений -->
+                <Border Background="{DynamicResource MaterialDesignPaper}"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        Margin="0,0,0,24">
+                    <StackPanel Margin="16">
+                        <TextBlock Text="Настройки уведомлений"
+                                   Style="{StaticResource SubheaderTextStyle}"
+                                   Margin="0,0,0,16"/>
+
+                        <CheckBox Content="Включить звуковые уведомления"
+                                  IsChecked="{Binding SoundNotificationsEnabled}"
+                                  Style="{StaticResource MaterialDesignCheckBox}"/>
+
+                        <CheckBox Content="Включить всплывающие уведомления"
+                                  IsChecked="{Binding PopupNotificationsEnabled}"
+                                  Style="{StaticResource MaterialDesignCheckBox}"
+                                  Margin="0,8,0,0"/>
+
+                        <CheckBox Content="Уведомлять о низком балансе"
+                                  IsChecked="{Binding LowBalanceNotificationsEnabled}"
+                                  Style="{StaticResource MaterialDesignCheckBox}"
+                                  Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Кнопки сохранения -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Command="{Binding ResetSettingsCommand}"
+                            Margin="0,0,16,0">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Restore" 
+                                                   Width="20" 
+                                                   Height="20" 
+                                                   Margin="0,0,8,0"/>
+                            <TextBlock Text="Сбросить"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                            Command="{Binding SaveSettingsCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave" 
+                                                   Width="20" 
+                                                   Height="20" 
+                                                   Margin="0,0,8,0"/>
+                            <TextBlock Text="Сохранить"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page> 

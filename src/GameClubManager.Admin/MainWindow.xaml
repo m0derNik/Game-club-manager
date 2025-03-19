@@ -3,10 +3,217 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:GameClubManager.Admin"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Game Club Manager - Админ панель" 
+        Height="800" 
+        Width="1200"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundBrush}"
+        TextElement.Foreground="{DynamicResource TextPrimaryBrush}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/">
 
+    <Window.Resources>
+        <Style TargetType="Window">
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="ResizeMode" Value="CanResize"/>
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковая панель -->
+        <Grid Background="{DynamicResource SurfaceBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Логотип -->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="24,0"
+                        VerticalAlignment="Center">
+                <Image Source="/Resources/logo.svg" 
+                       Height="32" 
+                       Width="32"
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                <TextBlock Text="Game Club Admin"
+                          Margin="16,0,0,0"
+                          Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                          Foreground="{DynamicResource TextPrimaryBrush}"
+                          VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Навигационное меню -->
+            <StackPanel Grid.Row="1" Margin="8,16">
+                <Button x:Name="ComputersButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="DesktopClassic" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Компьютеры"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="OrdersButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Food" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Заказы"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="UsersButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountGroup" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Пользователи"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="NotificationsButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Bell" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Уведомления"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="SettingsButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cog" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Настройки"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <!-- Кнопка выхода -->
+            <Button x:Name="LogoutButton"
+                    Grid.Row="2"
+                    Style="{StaticResource ModernButton}"
+                    Margin="16,0,16,24"
+                    Height="48"
+                    VerticalAlignment="Bottom"
+                    Background="{DynamicResource ErrorBrush}"
+                    Foreground="{DynamicResource TextPrimaryBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Logout" 
+                                           Width="24" 
+                                           Height="24"
+                                           Margin="0,0,12,0"/>
+                    <TextBlock Text="Выйти"
+                             Foreground="{DynamicResource TextPrimaryBrush}"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Основной контент -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель -->
+            <Grid Background="{DynamicResource SurfaceBrush}" 
+                  Height="64"
+                  MouseLeftButtonDown="DragWindow">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Заголовок страницы -->
+                <TextBlock Text="{Binding CurrentPageTitle}"
+                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                         Margin="24,0,0,0"
+                         VerticalAlignment="Center"/>
+
+                <!-- Кнопки управления окном -->
+                <StackPanel Grid.Column="1" 
+                          Orientation="Horizontal"
+                          HorizontalAlignment="Right">
+                    <Button Style="{StaticResource ModernButton}"
+                            Click="MinimizeWindow_Click"
+                            Width="48"
+                            Height="48">
+                        <materialDesign:PackIcon Kind="WindowMinimize" 
+                                               Width="20" 
+                                               Height="20"/>
+                    </Button>
+                    <Button Style="{StaticResource ModernButton}"
+                            Click="MaximizeWindow_Click"
+                            Width="48"
+                            Height="48">
+                        <materialDesign:PackIcon Kind="WindowMaximize" 
+                                               Width="20" 
+                                               Height="20"/>
+                    </Button>
+                    <Button Style="{StaticResource ModernButton}"
+                            Click="CloseWindow_Click"
+                            Width="48"
+                            Height="48">
+                        <materialDesign:PackIcon Kind="Close" 
+                                               Width="20" 
+                                               Height="20"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Контент страницы -->
+            <Frame x:Name="MainContent" 
+                   Grid.Row="1"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>

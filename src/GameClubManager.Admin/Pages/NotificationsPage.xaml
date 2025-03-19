@@ -1,0 +1,103 @@
+<Page x:Class="GameClubManager.Admin.Pages.NotificationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GameClubManager.Admin.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="NotificationsPage">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Уведомления" 
+                   Style="{StaticResource HeaderTextStyle}"
+                   Margin="0,0,0,24"/>
+
+        <!-- Список уведомлений -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Notifications}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,16"
+                                Background="{DynamicResource MaterialDesignPaper}"
+                                CornerRadius="8"
+                                BorderThickness="1"
+                                BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="16">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Заголовок и время -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Title}"
+                                               Style="{StaticResource SubheaderTextStyle}"
+                                               TextWrapping="Wrap"/>
+
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Time, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}"
+                                               Style="{StaticResource BodyTextStyle}"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Сообщение -->
+                                <TextBlock Grid.Row="1"
+                                           Text="{Binding Message}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           TextWrapping="Wrap"
+                                           Margin="0,8,0,0"/>
+
+                                <!-- Кнопки действий -->
+                                <StackPanel Grid.Row="2"
+                                          Orientation="Horizontal"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,16,0,0">
+                                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Command="{Binding DataContext.HandleNotificationCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Margin="0,0,8,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Check" 
+                                                                   Width="20" 
+                                                                   Height="20" 
+                                                                   Margin="0,0,8,0"/>
+                                            <TextBlock Text="Обработать"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Command="{Binding DataContext.IgnoreNotificationCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Close" 
+                                                                   Width="20" 
+                                                                   Height="20" 
+                                                                   Margin="0,0,8,0"/>
+                                            <TextBlock Text="Игнорировать"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page> 
