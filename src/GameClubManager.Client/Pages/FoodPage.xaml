@@ -6,10 +6,97 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
-      Title="Еда">
+      Title="Еда и напитки">
 
-    <Grid Margin="16">
-        <TextBlock Text="Страница еды" 
-                  Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+    <Grid Margin="24">
+        <materialDesign:Card Style="{StaticResource ModernCard}"
+                           Width="600"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top">
+            <Grid Margin="32">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <TextBlock Text="Еда и напитки"
+                         Style="{StaticResource HeaderTextStyle}"
+                         HorizontalAlignment="Center"
+                         Margin="0,0,0,32"/>
+
+                <!-- Список товаров -->
+                <ItemsControl Grid.Row="1" 
+                            ItemsSource="{Binding FoodItems}"
+                            Margin="0,0,0,24">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Style="{StaticResource ModernCard}"
+                                               Margin="0,8">
+                                <Grid Margin="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="{Binding ImageSource}"
+                                           Width="64"
+                                           Height="64"
+                                           Margin="0,0,16,0"/>
+
+                                    <StackPanel Grid.Column="1"
+                                              VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"
+                                                 Style="{StaticResource SubheaderTextStyle}"/>
+                                        <TextBlock Text="{Binding Description}"
+                                                 Style="{StaticResource BodyTextStyle}"
+                                                 TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Price, StringFormat={}{0:C}}"
+                                                 Style="{StaticResource BodyTextStyle}"/>
+                                    </StackPanel>
+
+                                    <Button Grid.Column="2"
+                                            Style="{StaticResource ModernButton}"
+                                            Command="{Binding DataContext.AddToCartCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Width="120">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="CartPlus"
+                                                                   Width="20"
+                                                                   Height="20"
+                                                                   Margin="0,0,8,0"/>
+                                            <TextBlock Text="В корзину"
+                                                     Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Корзина -->
+                <StackPanel Grid.Row="2"
+                          Orientation="Horizontal"
+                          HorizontalAlignment="Center">
+                    <Button Style="{StaticResource ModernButton}"
+                            Command="{Binding ViewCartCommand}"
+                            Margin="8,0"
+                            Width="180">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cart"
+                                                   Width="20"
+                                                   Height="20"
+                                                   Margin="0,0,8,0"/>
+                            <TextBlock Text="Корзина"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Page> 

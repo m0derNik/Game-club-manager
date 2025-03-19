@@ -30,6 +30,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Padding" Value="16,0"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#80008080"/>
         </Style>
         
         <Style x:Key="BookingButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">

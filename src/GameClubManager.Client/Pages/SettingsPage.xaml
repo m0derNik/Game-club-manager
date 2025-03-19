@@ -8,8 +8,50 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="Настройки">
 
-    <Grid Margin="16">
-        <TextBlock Text="Страница настроек" 
-                  Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+    <Grid Margin="24">
+        <materialDesign:Card Style="{StaticResource ModernCard}"
+                           Width="600"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top">
+            <Grid Margin="32">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <TextBlock Text="Настройки"
+                         Style="{StaticResource HeaderTextStyle}"
+                         HorizontalAlignment="Center"
+                         Margin="0,0,0,32"/>
+
+                <!-- Настройки звука -->
+                <StackPanel Grid.Row="1" 
+                          Margin="0,0,0,24">
+                    <TextBlock Text="Громкость"
+                             Style="{StaticResource BodyTextStyle}"
+                             Margin="0,0,0,8"/>
+                    <Slider Value="{Binding Volume}"
+                            Minimum="0"
+                            Maximum="100"
+                            Style="{StaticResource MaterialDesignDiscreteSlider}"
+                            Height="24"/>
+                </StackPanel>
+
+                <!-- Настройки яркости -->
+                <StackPanel Grid.Row="2" 
+                          Margin="0,0,0,24">
+                    <TextBlock Text="Яркость экрана"
+                             Style="{StaticResource BodyTextStyle}"
+                             Margin="0,0,0,8"/>
+                    <Slider Value="{Binding Brightness}"
+                            Minimum="0"
+                            Maximum="100"
+                            Style="{StaticResource MaterialDesignDiscreteSlider}"
+                            Height="24"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Page> 

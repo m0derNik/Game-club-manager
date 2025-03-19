@@ -8,8 +8,70 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="Тарифы">
 
-    <Grid Margin="16">
-        <TextBlock Text="Страница тарифов" 
-                  Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+    <Grid Margin="24">
+        <materialDesign:Card Style="{StaticResource ModernCard}"
+                           Width="600"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top">
+            <Grid Margin="32">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <TextBlock Text="Тарифы"
+                         Style="{StaticResource HeaderTextStyle}"
+                         HorizontalAlignment="Center"
+                         Margin="0,0,0,32"/>
+
+                <!-- Список тарифов -->
+                <ItemsControl Grid.Row="1" 
+                            ItemsSource="{Binding Tariffs}"
+                            Margin="0,0,0,24">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Style="{StaticResource ModernCard}"
+                                               Margin="0,8">
+                                <Grid Margin="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}"
+                                                 Style="{StaticResource SubheaderTextStyle}"/>
+                                        <TextBlock Text="{Binding Description}"
+                                                 Style="{StaticResource BodyTextStyle}"
+                                                 TextWrapping="Wrap"
+                                                 Margin="0,8,0,0"/>
+                                        <TextBlock Text="{Binding Price, StringFormat={}{0:C}}"
+                                                 Style="{StaticResource BodyTextStyle}"
+                                                 Margin="0,8,0,0"/>
+                                    </StackPanel>
+
+                                    <Button Grid.Column="1"
+                                            Style="{StaticResource ModernButton}"
+                                            Command="{Binding DataContext.SelectTariffCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Width="120">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Check"
+                                                                   Width="20"
+                                                                   Height="20"
+                                                                   Margin="0,0,8,0"/>
+                                            <TextBlock Text="Выбрать"
+                                                     Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Page> 

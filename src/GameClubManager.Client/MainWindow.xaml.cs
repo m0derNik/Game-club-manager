@@ -18,7 +18,7 @@ namespace GameClubManager.Client
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainWindowViewModel();
 
             ProfileButton.Click += (s, e) => NavigateToPage(ProfileButton, new ProfilePage());
             ProgramsButton.Click += (s, e) => NavigateToPage(ProgramsButton, new ProgramsPage());
@@ -39,7 +39,7 @@ namespace GameClubManager.Client
             // Сбрасываем подсветку текущей кнопки
             if (currentButton != null)
             {
-                currentButton.Background = Brushes.Transparent;
+                currentButton.Background = (SolidColorBrush)FindResource("PrimaryBrush"); // Возвращаем к фиолетовому цвету из ресурсов
             }
 
             // Подсвечиваем новую кнопку
