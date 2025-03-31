@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LHBMDX/kVfE=",
+  "dgSpecHash": "rHkMS1lOYus=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\GameClubManager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
+  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\проекты\\C# projects\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiril\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.3\\microsoft.entityframeworkcore.9.0.3.nupkg.sha512",
     "C:\\Users\\kiril\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.3\\microsoft.entityframeworkcore.abstractions.9.0.3.nupkg.sha512",

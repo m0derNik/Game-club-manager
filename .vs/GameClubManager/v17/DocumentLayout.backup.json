@@ -1,13 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\",
+  "WorkspaceRootPath": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\gameclubmanager\\src\\gameclubmanager.admin\\viewmodels\\notificationsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|solutionrelative:src\\gameclubmanager.admin\\viewmodels\\notificationsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\c# projects\\game-club-manager\\src\\gameclubmanager.client\\pages\\registerpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|solutionrelative:src\\gameclubmanager.client\\pages\\registerpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\gameclubmanager\\src\\gameclubmanager.admin\\viewmodels\\computersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\c# projects\\game-club-manager\\src\\gameclubmanager.client\\pages\\registerpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|solutionrelative:src\\gameclubmanager.client\\pages\\registerpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\c# projects\\game-club-manager\\src\\gameclubmanager.client\\pages\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|solutionrelative:src\\gameclubmanager.client\\pages\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\c# projects\\game-club-manager\\src\\gameclubmanager.client\\pages\\foodpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|solutionrelative:src\\gameclubmanager.client\\pages\\foodpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\c# projects\\game-club-manager\\src\\gameclubmanager.admin\\viewmodels\\computersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|solutionrelative:src\\gameclubmanager.admin\\viewmodels\\computersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,12 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -39,28 +47,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "NotificationsViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Admin\\ViewModels\\NotificationsViewModel.cs",
-              "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\ViewModels\\NotificationsViewModel.cs",
-              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Admin\\ViewModels\\NotificationsViewModel.cs",
-              "RelativeToolTip": "src\\GameClubManager.Admin\\ViewModels\\NotificationsViewModel.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAgwAYAAAAjAAAAAAAAAA==",
+              "Title": "RegisterPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\RegisterPage.xaml.cs",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Client\\Pages\\RegisterPage.xaml.cs",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\RegisterPage.xaml.cs",
+              "RelativeToolTip": "src\\GameClubManager.Client\\Pages\\RegisterPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T11:58:17.999Z",
+              "WhenOpened": "2025-03-31T20:48:42.875Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "RegisterPage.xaml",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\RegisterPage.xaml",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Client\\Pages\\RegisterPage.xaml",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\RegisterPage.xaml",
+              "RelativeToolTip": "src\\GameClubManager.Client\\Pages\\RegisterPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-31T20:44:20.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Client\\Pages\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\LoginPage.xaml",
+              "RelativeToolTip": "src\\GameClubManager.Client\\Pages\\LoginPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-31T20:42:00.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FoodPage.xaml",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\FoodPage.xaml",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Client\\Pages\\FoodPage.xaml",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\Pages\\FoodPage.xaml",
+              "RelativeToolTip": "src\\GameClubManager.Client\\Pages\\FoodPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-31T20:38:32.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "ComputersViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Admin\\ViewModels\\ComputersViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Admin\\ViewModels\\ComputersViewModel.cs",
               "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\ViewModels\\ComputersViewModel.cs",
-              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\GameClubManager\\src\\GameClubManager.Admin\\ViewModels\\ComputersViewModel.cs",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u043F\u0440\u043E\u0435\u043A\u0442\u044B\\C# projects\\Game-club-manager\\src\\GameClubManager.Admin\\ViewModels\\ComputersViewModel.cs",
               "RelativeToolTip": "src\\GameClubManager.Admin\\ViewModels\\ComputersViewModel.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAYwAUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T11:54:18.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T11:54:18.565Z"
             }
           ]
         }

@@ -1,0 +1,102 @@
+<Page x:Class="GameClubManager.Client.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:GameClubManager.Client.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="LoginPage"
+      Background="{DynamicResource BackgroundBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая часть с изображением -->
+        <Grid Grid.Column="0" Background="{DynamicResource PrimaryBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"
+                        Margin="40">
+                <Image Source="/Resources/logo.svg" 
+                       Width="120" 
+                       Height="120"
+                       Margin="0,0,0,20"/>
+                <TextBlock Text="Game Club Manager"
+                         Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                         Foreground="{DynamicResource TextPrimaryBrush}"
+                         HorizontalAlignment="Center"/>
+                <TextBlock Text="Управление компьютерным клубом"
+                         Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                         Foreground="{DynamicResource TextSecondaryBrush}"
+                         HorizontalAlignment="Center"
+                         Margin="0,8,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Правая часть с формой -->
+        <Grid Grid.Column="1" 
+              Background="{DynamicResource SurfaceBrush}"
+              Margin="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Text="Добро пожаловать!"
+                     Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                     Foreground="{DynamicResource TextPrimaryBrush}"
+                     HorizontalAlignment="Center"
+                     Margin="0,40,0,0"/>
+
+            <!-- Форма -->
+            <StackPanel Grid.Row="1" 
+                        VerticalAlignment="Center"
+                        Margin="40,20">
+                <TextBox x:Name="EmailTextBox"
+                         Style="{StaticResource AuthTextBoxStyle}"
+                         materialDesign:HintAssist.Hint="Email"
+                         Margin="0,0,0,20"/>
+
+                <PasswordBox x:Name="PasswordBox"
+                            Style="{StaticResource AuthPasswordBoxStyle}"
+                            materialDesign:HintAssist.Hint="Пароль"
+                            Margin="0,0,0,30"/>
+
+                <Button x:Name="LoginButton"
+                        Content="Войти"
+                        Style="{StaticResource AuthButtonStyle}"
+                        Margin="0,0,0,20"/>
+
+                <Button x:Name="RegisterButton"
+                        Content="Зарегистрироваться"
+                        Style="{StaticResource AuthSecondaryButtonStyle}"
+                        Margin="0,0,0,20"/>
+
+                <TextBlock Text="Забыли пароль?"
+                         Style="{StaticResource AuthLinkStyle}"
+                         HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Нижняя часть -->
+            <TextBlock Grid.Row="2"
+                     Text="© 2024 Game Club Manager"
+                     Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                     Foreground="{DynamicResource TextSecondaryBrush}"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,20"/>
+        </Grid>
+    </Grid>
+</Page> 

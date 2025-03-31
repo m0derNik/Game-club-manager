@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ll3bNPl3XK0=",
+  "dgSpecHash": "vgtL4zboVI8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\GameClubManager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj",
+  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\проекты\\C# projects\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiril\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.8\\microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512",
     "C:\\Users\\kiril\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

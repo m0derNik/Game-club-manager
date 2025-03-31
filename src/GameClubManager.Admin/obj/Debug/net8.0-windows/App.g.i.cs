@@ -49,7 +49,7 @@ namespace GameClubManager.Admin {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "8.0.8.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.0.0")]
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
@@ -61,7 +61,7 @@ namespace GameClubManager.Admin {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Admin;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Admin;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -75,7 +75,7 @@ namespace GameClubManager.Admin {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "8.0.8.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.0.0")]
         public static void Main() {
             GameClubManager.Admin.App app = new GameClubManager.Admin.App();
             app.InitializeComponent();

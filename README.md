@@ -47,7 +47,7 @@ GameClubManager - это комплексная платформа для упр
 - Entity Framework Core
 - WPF
 - SignalR
-- PostgreSQL
+- SQL Server
 
 ## Установка
 

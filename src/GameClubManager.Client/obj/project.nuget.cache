@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UIZ+c6+D3Ps=",
+  "dgSpecHash": "k4/eYWu8P9Q=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\GameClubManager\\src\\GameClubManager.Client\\GameClubManager.Client.csproj",
+  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\проекты\\C# projects\\Game-club-manager\\src\\GameClubManager.Client\\GameClubManager.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiril\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
     "C:\\Users\\kiril\\.nuget\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",

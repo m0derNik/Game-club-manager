@@ -20,6 +20,20 @@ namespace GameClubManager.Client
             InitializeComponent();
             DataContext = new MainWindowViewModel();
 
+            // Отображаем страницу авторизации
+            AuthFrame.Navigate(new LoginPage());
+
+            // Блокируем Alt+F4 и Alt+Tab
+            PreviewKeyDown += MainWindow_PreviewKeyDown;
+        }
+
+        public void ShowMainContent()
+        {
+            // Показываем основное содержимое
+            MainGrid.Visibility = Visibility.Visible;
+            AuthFrame.Visibility = Visibility.Collapsed;
+
+            // Инициализируем кнопки навигации
             ProfileButton.Click += (s, e) => NavigateToPage(ProfileButton, new ProfilePage());
             ProgramsButton.Click += (s, e) => NavigateToPage(ProgramsButton, new ProgramsPage());
             FoodButton.Click += (s, e) => NavigateToPage(FoodButton, new FoodPage());
@@ -29,9 +43,6 @@ namespace GameClubManager.Client
 
             // Начальная страница
             NavigateToPage(ProfileButton, new ProfilePage());
-
-            // Блокируем Alt+F4 и Alt+Tab
-            PreviewKeyDown += MainWindow_PreviewKeyDown;
         }
 
         private void NavigateToPage(Button button, Page page)
@@ -47,7 +58,7 @@ namespace GameClubManager.Client
             button.Background = new SolidColorBrush(Color.FromArgb(50, 255, 255, 255));
 
             // Загружаем страницу
-            MainContent.Navigate(page);
+            AuthFrame.Navigate(page);
         }
 
         private void ShowAdminHelp()
