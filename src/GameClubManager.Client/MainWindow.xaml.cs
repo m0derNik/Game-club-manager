@@ -50,15 +50,15 @@ namespace GameClubManager.Client
             // Сбрасываем подсветку текущей кнопки
             if (currentButton != null)
             {
-                currentButton.Background = (SolidColorBrush)FindResource("PrimaryBrush"); // Возвращаем к фиолетовому цвету из ресурсов
+                currentButton.Background = (SolidColorBrush)FindResource("PrimaryBrush");
             }
 
             // Подсвечиваем новую кнопку
             currentButton = button;
             button.Background = new SolidColorBrush(Color.FromArgb(50, 255, 255, 255));
 
-            // Загружаем страницу
-            AuthFrame.Navigate(page);
+            // Загружаем страницу в основной контент
+            MainContent.Navigate(page);
         }
 
         private void ShowAdminHelp()
