@@ -1,3 +1,4 @@
+using GameClubManager.Client.Services;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,20 +15,33 @@ namespace GameClubManager.Client.Pages
             RegisterButton.Click += RegisterButton_Click;
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Здесь будет логика авторизации
-            // Пока просто показываем основное окно
-            if (Application.Current.MainWindow is MainWindow mainWindow)
+            var email = EmailTextBox.Text;
+            var password = PasswordBox.Password;
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                mainWindow.ShowMainContent();
+                MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var success = await AuthManager.Instance.LoginAsync(email, password);
+            if (success)
+            {
+                // TODO: Перейти на главную страницу
+                MessageBox.Show("Успешный вход!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.ShowMainContent();
+                }
             }
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход на страницу регистрации
-            NavigationService.Navigate(new RegisterPage());
+            // TODO: Перейти на страницу регистрации
+            NavigationService?.Navigate(new RegisterPage());
         }
     }
 } 

@@ -6,9 +6,9 @@ namespace GameClubManager.Shared.Models
     public class User
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
         public UserRole Role { get; set; }
         public decimal Balance { get; set; }
         public List<Penalty> Penalties { get; set; } = new();
@@ -17,16 +17,16 @@ namespace GameClubManager.Shared.Models
 
     public enum UserRole
     {
-        Client,
-        Administrator,
-        SuperAdmin
+        User,
+        Admin,
+        Manager
     }
 
     public class Penalty
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         public decimal Amount { get; set; }
         public DateTime IssuedAt { get; set; }
         public bool IsPaid { get; set; }
@@ -36,7 +36,7 @@ namespace GameClubManager.Shared.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string GameName { get; set; }
+        public string GameName { get; set; } = string.Empty;
         public int PlayTimeMinutes { get; set; }
         public DateTime LastPlayed { get; set; }
     }

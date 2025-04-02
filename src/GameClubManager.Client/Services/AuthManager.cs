@@ -1,82 +1,87 @@
+using GameClubManager.Client.Models.Auth;
+using GameClubManager.Shared.Models;
+using GameClubManager.Client.Dialogs;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace GameClubManager.Client.Services
+namespace GameClubManager.Client.Services;
+
+public class AuthManager
 {
-    public static class AuthManager
+    private static AuthManager? _instance;
+    private readonly ApiService _apiService;
+    private GameClubManager.Shared.Models.AuthResponse? _currentUser;
+
+    public static AuthManager Instance => _instance ??= new AuthManager();
+
+    private AuthManager()
     {
-        private static string _adminPassword = "admin"; // Временный пароль для демонстрации
+        _apiService = new ApiService();
+    }
 
-        public static void Initialize(string adminPassword)
+    public async Task<bool> RegisterAsync(string username, string email, string password)
+    {
+        try
         {
-            _adminPassword = adminPassword;
-        }
-
-        public static bool VerifyPassword()
-        {
-            var dialog = new PasswordDialog();
-            if (dialog.ShowDialog() == true)
+            var request = new GameClubManager.Shared.Models.RegisterRequest
             {
-                return dialog.Password == _adminPassword;
+                Username = username,
+                Email = email,
+                Password = password
+            };
+
+            var response = await _apiService.RegisterAsync(request);
+            if (response != null)
+            {
+                _currentUser = response;
+                _apiService.SetAuthToken(response.Token);
+                return true;
             }
+            return false;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
 
-    public class PasswordDialog : Window
+    public async Task<bool> LoginAsync(string email, string password)
     {
-        private PasswordBox passwordBox;
-        public string Password => passwordBox.Password;
-
-        public PasswordDialog()
+        try
         {
-            Title = "Введите пароль администратора";
-            Width = 300;
-            Height = 150;
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            ResizeMode = ResizeMode.NoResize;
-            WindowStyle = WindowStyle.ToolWindow;
-
-            var grid = new Grid();
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
-
-            passwordBox = new PasswordBox
+            var request = new GameClubManager.Shared.Models.LoginRequest
             {
-                Margin = new Thickness(10),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            grid.Children.Add(passwordBox);
-
-            var buttonPanel = new StackPanel
-            {
-                Orientation = System.Windows.Controls.Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Margin = new Thickness(10)
-            };
-            Grid.SetRow(buttonPanel, 1);
-
-            var okButton = new Button
-            {
-                Content = "OK",
-                Width = 60,
-                Margin = new Thickness(0, 0, 10, 0),
-                IsDefault = true
-            };
-            okButton.Click += (s, e) => { DialogResult = true; Close(); };
-
-            var cancelButton = new Button
-            {
-                Content = "Отмена",
-                Width = 60,
-                IsCancel = true
+                Email = email,
+                Password = password
             };
 
-            buttonPanel.Children.Add(okButton);
-            buttonPanel.Children.Add(cancelButton);
-            grid.Children.Add(buttonPanel);
-
-            Content = grid;
+            var response = await _apiService.LoginAsync(request);
+            if (response != null)
+            {
+                _currentUser = response;
+                _apiService.SetAuthToken(response.Token);
+                return true;
+            }
+            return false;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
         }
     }
+
+    public static bool VerifyPassword()
+    {
+        var passwordDialog = new PasswordDialog();
+        if (passwordDialog.ShowDialog() == true)
+        {
+            return passwordDialog.Password == "admin"; // TODO: Заменить на реальную проверку
+        }
+        return false;
+    }
+
+    public bool IsAuthenticated => _currentUser != null;
+    public GameClubManager.Shared.Models.UserDto? CurrentUser => _currentUser?.User;
+    public string? Token => _currentUser?.Token;
 } 

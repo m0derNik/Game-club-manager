@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\kiril\OneDrive\Рабочий стол\проекты\C# projects\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\
 GameClubManager.Admin
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\kiril\OneDrive\Рабочий стол\проекты\C# projects\Game-club-manager\src\GameClubManager.Admin\App.xaml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\App.xaml
 6490070158
 
 221221072679
-212-1403499614
+212387535168
 MainWindow.xaml;Pages\ComputersPage.xaml;Pages\NotificationsPage.xaml;Pages\OrdersPage.xaml;Pages\SettingsPage.xaml;Pages\UsersPage.xaml;
 
-False
+True
 

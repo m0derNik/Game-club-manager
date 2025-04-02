@@ -23,3 +23,16 @@ C:\Users\kiril\OneDrive\Рабочий стол\проекты\C# projects\Game-
 C:\Users\kiril\OneDrive\Рабочий стол\проекты\C# projects\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\refint\GameClubManager.Shared.dll
 C:\Users\kiril\OneDrive\Рабочий стол\проекты\C# projects\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\проекты\C# projects\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\ref\GameClubManager.Shared.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\bin\Debug\net8.0\GameClubManager.Shared.deps.json
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\bin\Debug\net8.0\GameClubManager.Shared.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\bin\Debug\net8.0\GameClubManager.Shared.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.csproj.AssemblyReference.cache
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.AssemblyInfoInputs.cache
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.AssemblyInfo.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.csproj.CoreCompileInputs.cache
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.sourcelink.json
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\refint\GameClubManager.Shared.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\GameClubManager.Shared.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Shared\obj\Debug\net8.0\ref\GameClubManager.Shared.dll

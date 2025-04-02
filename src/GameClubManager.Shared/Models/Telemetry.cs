@@ -17,6 +17,8 @@ namespace GameClubManager.Shared.Models
 
     public class ProcessInfo
     {
+        public int Id { get; set; }
+        public int ComputerTelemetryId { get; set; }
         public string Name { get; set; }
         public double CpuUsage { get; set; }
         public double MemoryUsage { get; set; }
