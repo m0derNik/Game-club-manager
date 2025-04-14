@@ -68,14 +68,20 @@ public class AuthService(ApplicationDbContext context, IJwtService jwtService, I
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.Email == request.Email);
 
-        if (user == null || !VerifyPassword(request.Password, user.PasswordHash))
+        if (user == null)
         {
-            _logger.LogWarning("Неудачная попытка входа: {Email}", request.Email);
-            throw new Exception("Неверный email или пароль");
+            _logger.LogWarning("Пользователь не найден: {Email}", request.Email);
+            throw new Exception("Пользователь не найден");
+        }
+
+        if (!VerifyPassword(request.Password, user.PasswordHash))
+        {
+            _logger.LogWarning("Неверный пароль для пользователя: {Email}", request.Email);
+            throw new Exception("Неверный пароль");
         }
 
         var token = _jwtService.GenerateToken(user);
-        _logger.LogInformation("Пользователь успешно вошел: {Email}", request.Email);
+        _logger.LogInformation("Пользователь успешно вошел: {Email}, ID: {UserId}", request.Email, user.Id);
 
         return new AuthResponse
         {

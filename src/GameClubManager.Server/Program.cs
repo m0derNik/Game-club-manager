@@ -9,7 +9,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Настройка URL для сервера
-builder.WebHost.UseUrls("http://localhost:7001");
+builder.WebHost.UseUrls("http://localhost:7001", "https://localhost:7000");
 
 // Добавляем сервисы в контейнер
 builder.Services.AddControllers();
@@ -17,30 +17,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Game Club Manager API", Version = "v1" });
-    
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Description = "JWT Authorization header using the Bearer scheme",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
 });
 
 // Настройка CORS
@@ -58,23 +34,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Настройка аутентификации
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-            ValidAudience = builder.Configuration["JwtSettings:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!))
-        };
-    });
-
 // Регистрация сервисов
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
@@ -91,14 +50,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 
-// Отключаем HTTPS в режиме разработки
-if (!app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-}
-
-app.UseAuthentication();
-app.UseAuthorization();
+// Включаем HTTPS в режиме разработки
+app.UseHttpsRedirection();
 
 app.MapControllers();
 
@@ -109,9 +62,23 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        context.Database.EnsureCreated();
-        var dbLogger = services.GetRequiredService<ILogger<Program>>();
-        dbLogger.LogInformation("База данных успешно создана");
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        
+        logger.LogInformation("Начало инициализации базы данных");
+        
+        // Проверяем существование базы данных
+        if (!context.Database.CanConnect())
+        {
+            logger.LogInformation("База данных не существует, создаем новую");
+            await context.Database.EnsureCreatedAsync();
+        }
+        
+        // Инициализируем данные
+        await context.InitializeDatabaseAsync();
+        
+        // Проверяем наличие пользователей
+        var userCount = await context.Users.CountAsync();
+        logger.LogInformation("База данных успешно создана и инициализирована. Количество пользователей: {UserCount}", userCount);
     }
     catch (Exception ex)
     {

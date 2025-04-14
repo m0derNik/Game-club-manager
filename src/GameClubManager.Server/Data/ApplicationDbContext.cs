@@ -82,4 +82,40 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<SystemAlert>()
             .HasKey(sa => sa.Id);
     }
+
+    public async Task InitializeDatabaseAsync()
+    {
+        // Создаем базу данных, если она не существует
+        await Database.EnsureCreatedAsync();
+        
+        // Проверяем наличие пользователей
+        if (!Users.Any())
+        {
+            // Создаем администратора
+            var admin = new User
+            {
+                Username = "admin",
+                Email = "admin@example.com",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin"),
+                Role = UserRole.Admin,
+                Balance = 1000,
+                RemainingTime = TimeSpan.FromHours(10)
+            };
+
+            // Создаем тестового пользователя
+            var testUser = new User
+            {
+                Username = "test",
+                Email = "v@mail.ru",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("test"),
+                Role = UserRole.User,
+                Balance = 500,
+                RemainingTime = TimeSpan.FromHours(5)
+            };
+
+            Users.Add(admin);
+            Users.Add(testUser);
+            await SaveChangesAsync();
+        }
+    }
 } 

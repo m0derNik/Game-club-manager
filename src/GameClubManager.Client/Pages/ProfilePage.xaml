@@ -18,7 +18,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!-- Аватар и имя -->
@@ -37,57 +36,15 @@
                              HorizontalAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Информация о балансе -->
-                <StackPanel Grid.Row="1" 
-                          Margin="0,0,0,24">
-                    <TextBlock Text="Текущий баланс"
-                             Style="{StaticResource BodyTextStyle}"
-                             HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding Balance, StringFormat={}{0:C}}"
-                             Style="{StaticResource SubheaderTextStyle}"
-                             FontSize="32"
-                             HorizontalAlignment="Center"/>
-                </StackPanel>
-
-                <!-- Информация о времени -->
-                <Grid Grid.Row="2" 
-                     Margin="0,0,0,24">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0"
-                              HorizontalAlignment="Center">
-                        <TextBlock Text="Осталось времени"
-                                 Style="{StaticResource BodyTextStyle}"
-                                 HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding RemainingTime}"
-                                 Style="{StaticResource SubheaderTextStyle}"
-                                 FontSize="24"
-                                 HorizontalAlignment="Center"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1"
-                              HorizontalAlignment="Center">
-                        <TextBlock Text="Тариф"
-                                 Style="{StaticResource BodyTextStyle}"
-                                 HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding CurrentTariff}"
-                                 Style="{StaticResource SubheaderTextStyle}"
-                                 FontSize="24"
-                                 HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Grid>
-
                 <!-- Кнопки действий -->
-                <StackPanel Grid.Row="3"
+                <StackPanel Grid.Row="1"
                           Orientation="Horizontal"
-                          HorizontalAlignment="Center">
+                          HorizontalAlignment="Center"
+                          Margin="0,24,0,32">
                     <Button Style="{StaticResource ModernButton}"
                             Command="{Binding AddBalanceCommand}"
                             Margin="8,0"
-                            Width="180">
+                            Width="220">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Cash" 
                                                    Width="20" 
@@ -97,21 +54,24 @@
                                      Foreground="{DynamicResource TextPrimaryBrush}"/>
                         </StackPanel>
                     </Button>
-
-                    <Button Style="{StaticResource ModernButton}"
-                            Command="{Binding AddTimeCommand}"
-                            Margin="8,0"
-                            Width="180">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Clock" 
-                                                   Width="20" 
-                                                   Height="20"
-                                                   Margin="0,0,8,0"/>
-                            <TextBlock Text="Продлить время"
-                                     Foreground="{DynamicResource TextPrimaryBrush}"/>
-                        </StackPanel>
-                    </Button>
                 </StackPanel>
+
+                <!-- Кнопка выхода -->
+                <Button Grid.Row="2"
+                        Style="{StaticResource ModernButton}"
+                        Command="{Binding LogoutCommand}"
+                        Margin="8,0,8,0"
+                        Width="180"
+                        HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Logout" 
+                                               Width="20" 
+                                               Height="20"
+                                               Margin="0,0,8,0"/>
+                        <TextBlock Text="Выйти"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    </StackPanel>
+                </Button>
             </Grid>
         </materialDesign:Card>
     </Grid>

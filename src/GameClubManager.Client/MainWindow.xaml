@@ -80,22 +80,34 @@
                 </StackPanel>
 
                 <!-- Информация о времени и балансе -->
-                <StackPanel Grid.Row="1" 
-                           Margin="16,0,16,16">
-                    <TextBlock Text="Осталось времени:"
-                              Style="{StaticResource BodyTextStyle}"
-                              HorizontalAlignment="Center"
-                              Margin="0,0,0,4"/>
-                    <TextBlock Text="{Binding RemainingTime}"
-                              Style="{StaticResource SubheaderTextStyle}"
-                              FontSize="24"
-                              HorizontalAlignment="Center"
-                              Margin="0,0,0,16"/>
-                    <TextBlock Text="{Binding Balance, StringFormat={}Баланс: {0:C}}"
-                              Style="{StaticResource BodyTextStyle}"
-                              HorizontalAlignment="Center"
-                              Margin="0,0,0,16"/>
-                </StackPanel>
+                <materialDesign:Card Grid.Row="1" 
+                                   Margin="16,0,16,16"
+                                   Background="{DynamicResource SurfaceBrush}"
+                                   UniformCornerRadius="8">
+                    <StackPanel Margin="16" x:Name="InfoPanel">
+                        <!-- Время -->
+                        <StackPanel Margin="0,0,0,24">
+                            <TextBlock Text="Осталось времени"
+                                     Style="{StaticResource BodyTextStyle}"/>
+                            <TextBlock Text="{Binding RemainingTime, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                     Style="{StaticResource SubheaderTextStyle}"
+                                     FontSize="24"
+                                     SourceUpdated="TextBlock_SourceUpdated"
+                                     TargetUpdated="TextBlock_TargetUpdated"/>
+                        </StackPanel>
+
+                        <!-- Баланс -->
+                        <StackPanel>
+                            <TextBlock Text="Текущий баланс"
+                                     Style="{StaticResource BodyTextStyle}"/>
+                            <TextBlock Text="{Binding Balance, StringFormat={}{0:C}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                     Style="{StaticResource SubheaderTextStyle}"
+                                     FontSize="32"
+                                     SourceUpdated="TextBlock_SourceUpdated"
+                                     TargetUpdated="TextBlock_TargetUpdated"/>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
 
                 <!-- Навигационное меню -->
                 <StackPanel Grid.Row="2" Margin="8,16">

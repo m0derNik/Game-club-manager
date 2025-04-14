@@ -5,28 +5,44 @@ using System.Windows.Media.Imaging;
 using GameClubManager.Client.Services;
 using System.Windows.Input;
 using GameClubManager.Client.Commands;
+using System.Threading.Tasks;
 
 namespace GameClubManager.Client.ViewModels
 {
-    public class ProfileViewModel : INotifyPropertyChanged
+    public class ProfileViewModel : ViewModelBase
     {
+        private readonly AuthManager _authManager;
+        private readonly TimeService _timeService;
         private string _username = "Пользователь";
         private string _currentTariff = "Стандартный";
         private BitmapImage _avatarSource;
-        private readonly TimeService _timeService;
 
-        public string Username
+        public string Username => _authManager.CurrentUser?.Username ?? "Гость";
+        
+        public decimal Balance
         {
-            get => _username;
+            get => _timeService.Balance;
             set
             {
-                _username = value;
-                OnPropertyChanged();
+                if (_timeService.Balance != value)
+                {
+                    _timeService.Balance = value;
+                    OnPropertyChanged();
+                }
             }
         }
-
-        public decimal Balance => _timeService.Balance;
-        public string RemainingTime => _timeService.RemainingTime;
+        
+        public string RemainingTime
+        {
+            get => _timeService.FormattedRemainingTime;
+            set
+            {
+                if (_timeService.FormattedRemainingTime != value)
+                {
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public string CurrentTariff
         {
@@ -49,10 +65,11 @@ namespace GameClubManager.Client.ViewModels
         }
 
         public ICommand AddBalanceCommand { get; }
-        public ICommand AddTimeCommand { get; }
+        public ICommand LogoutCommand { get; }
 
         public ProfileViewModel()
         {
+            _authManager = AuthManager.Instance;
             _timeService = TimeService.Instance;
             
             // Подписываемся на изменения времени
@@ -60,15 +77,20 @@ namespace GameClubManager.Client.ViewModels
 
             // Инициализация команд
             AddBalanceCommand = new RelayCommand(_ => AddBalance());
-            AddTimeCommand = new RelayCommand(_ => AddTime());
+            LogoutCommand = new RelayCommand(async _ => await Logout());
         }
 
         private void TimeService_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(TimeService.RemainingTime))
+            if (e.PropertyName == nameof(TimeService.RemainingTime) || 
+                e.PropertyName == nameof(TimeService.FormattedRemainingTime))
+            {
                 OnPropertyChanged(nameof(RemainingTime));
+            }
             else if (e.PropertyName == nameof(TimeService.Balance))
+            {
                 OnPropertyChanged(nameof(Balance));
+            }
         }
 
         private void AddBalance()
@@ -76,9 +98,9 @@ namespace GameClubManager.Client.ViewModels
             _timeService.AddBalance(100); // Добавляем 100 рублей для теста
         }
 
-        private void AddTime()
+        private async Task Logout()
         {
-            _timeService.AddTime(TimeSpan.FromHours(1)); // Добавляем 1 час для теста
+            await _authManager.Logout();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

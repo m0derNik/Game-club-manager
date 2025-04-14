@@ -1,0 +1,1365 @@
+Приложение запущено: 14.04.2025 14:28:20
+Таймер запущен: 14.04.2025 14:28:21
+TimeService создан: 14.04.2025 14:28:21, баланс: 750, время: 1ч 30м 0с
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:21
+Balance изменен в ViewModel: 750
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:21
+RemainingTime изменен в ViewModel: 1ч 30м 0с
+Данные обновлены в ViewModel: Баланс=750, Время=1ч 30м 0с
+MainWindowViewModel создан: Баланс=750, Время=1ч 30м 0с
+Обновление TextBlock в цели: 1ч 30м 0с, 14.04.2025 14:28:21
+Обновление TextBlock в цели: $750.00, 14.04.2025 14:28:21
+Данные обновлены в ViewModel: Баланс=750, Время=1ч 30м 0с
+MainWindow загружено, данные обновлены
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:21
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:21
+Обновление TextBlock в цели: 1ч 29м 59с, 14.04.2025 14:28:21
+RemainingTime изменен в ViewModel: 1ч 29м 59с
+Обновление из TimeService - Время: 1ч 29м 59с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:21
+Обновление из TimeService - Время: 1ч 29м 59с
+RemainingTime изменено: 1ч 29м 59с
+Таймер тикает: 1ч 29м 59с, время: 14.04.2025 14:28:21
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:21
+Обновление из TimeService - Время: 1ч 29м 59с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:23
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:23
+Обновление TextBlock в цели: 1ч 29м 58с, 14.04.2025 14:28:23
+RemainingTime изменен в ViewModel: 1ч 29м 58с
+Обновление из TimeService - Время: 1ч 29м 58с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:23
+Обновление из TimeService - Время: 1ч 29м 58с
+RemainingTime изменено: 1ч 29м 58с
+Таймер тикает: 1ч 29м 58с, время: 14.04.2025 14:28:23
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:23
+Обновление из TimeService - Время: 1ч 29м 58с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:24
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:24
+Обновление TextBlock в цели: 1ч 29м 57с, 14.04.2025 14:28:24
+RemainingTime изменен в ViewModel: 1ч 29м 57с
+Обновление из TimeService - Время: 1ч 29м 57с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:24
+Обновление из TimeService - Время: 1ч 29м 57с
+RemainingTime изменено: 1ч 29м 57с
+Таймер тикает: 1ч 29м 57с, время: 14.04.2025 14:28:24
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:24
+Обновление из TimeService - Время: 1ч 29м 57с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:25
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:25
+Обновление TextBlock в цели: 1ч 29м 56с, 14.04.2025 14:28:25
+RemainingTime изменен в ViewModel: 1ч 29м 56с
+Обновление из TimeService - Время: 1ч 29м 56с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:25
+Обновление из TimeService - Время: 1ч 29м 56с
+RemainingTime изменено: 1ч 29м 56с
+Таймер тикает: 1ч 29м 56с, время: 14.04.2025 14:28:25
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:25
+Обновление из TimeService - Время: 1ч 29м 56с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:26
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:26
+Обновление TextBlock в цели: 1ч 29м 55с, 14.04.2025 14:28:26
+RemainingTime изменен в ViewModel: 1ч 29м 55с
+Обновление из TimeService - Время: 1ч 29м 55с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:26
+Обновление из TimeService - Время: 1ч 29м 55с
+RemainingTime изменено: 1ч 29м 55с
+Таймер тикает: 1ч 29м 55с, время: 14.04.2025 14:28:26
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:26
+Обновление из TimeService - Время: 1ч 29м 55с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:27
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:27
+Обновление TextBlock в цели: 1ч 29м 54с, 14.04.2025 14:28:27
+RemainingTime изменен в ViewModel: 1ч 29м 54с
+Обновление из TimeService - Время: 1ч 29м 54с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:27
+Обновление из TimeService - Время: 1ч 29м 54с
+RemainingTime изменено: 1ч 29м 54с
+Таймер тикает: 1ч 29м 54с, время: 14.04.2025 14:28:27
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:27
+Обновление из TimeService - Время: 1ч 29м 54с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:28
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:28
+Обновление TextBlock в цели: 1ч 29м 53с, 14.04.2025 14:28:28
+RemainingTime изменен в ViewModel: 1ч 29м 53с
+Обновление из TimeService - Время: 1ч 29м 53с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:28
+Обновление из TimeService - Время: 1ч 29м 53с
+RemainingTime изменено: 1ч 29м 53с
+Таймер тикает: 1ч 29м 53с, время: 14.04.2025 14:28:28
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:28
+Обновление из TimeService - Время: 1ч 29м 53с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:29
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:29
+Обновление TextBlock в цели: 1ч 29м 52с, 14.04.2025 14:28:29
+RemainingTime изменен в ViewModel: 1ч 29м 52с
+Обновление из TimeService - Время: 1ч 29м 52с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:29
+Обновление из TimeService - Время: 1ч 29м 52с
+RemainingTime изменено: 1ч 29м 52с
+Таймер тикает: 1ч 29м 52с, время: 14.04.2025 14:28:29
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:29
+Обновление из TimeService - Время: 1ч 29м 52с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:30
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:30
+Обновление TextBlock в цели: 1ч 29м 51с, 14.04.2025 14:28:30
+RemainingTime изменен в ViewModel: 1ч 29м 51с
+Обновление из TimeService - Время: 1ч 29м 51с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:30
+Обновление из TimeService - Время: 1ч 29м 51с
+RemainingTime изменено: 1ч 29м 51с
+Таймер тикает: 1ч 29м 51с, время: 14.04.2025 14:28:30
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:30
+Обновление из TimeService - Время: 1ч 29м 51с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:31
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:31
+Обновление TextBlock в цели: 1ч 29м 50с, 14.04.2025 14:28:31
+RemainingTime изменен в ViewModel: 1ч 29м 50с
+Обновление из TimeService - Время: 1ч 29м 50с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:31
+Обновление из TimeService - Время: 1ч 29м 50с
+RemainingTime изменено: 1ч 29м 50с
+Таймер тикает: 1ч 29м 50с, время: 14.04.2025 14:28:31
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:31
+Обновление из TimeService - Время: 1ч 29м 50с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:32
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:32
+Обновление TextBlock в цели: 1ч 29м 49с, 14.04.2025 14:28:32
+RemainingTime изменен в ViewModel: 1ч 29м 49с
+Обновление из TimeService - Время: 1ч 29м 49с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:32
+Обновление из TimeService - Время: 1ч 29м 49с
+RemainingTime изменено: 1ч 29м 49с
+Таймер тикает: 1ч 29м 49с, время: 14.04.2025 14:28:32
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:32
+Обновление из TimeService - Время: 1ч 29м 49с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:33
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:33
+Обновление TextBlock в цели: 1ч 29м 48с, 14.04.2025 14:28:33
+RemainingTime изменен в ViewModel: 1ч 29м 48с
+Обновление из TimeService - Время: 1ч 29м 48с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:33
+Обновление из TimeService - Время: 1ч 29м 48с
+RemainingTime изменено: 1ч 29м 48с
+Таймер тикает: 1ч 29м 48с, время: 14.04.2025 14:28:33
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:33
+Обновление из TimeService - Время: 1ч 29м 48с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:34
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:34
+Обновление TextBlock в цели: 1ч 29м 47с, 14.04.2025 14:28:34
+RemainingTime изменен в ViewModel: 1ч 29м 47с
+Обновление из TimeService - Время: 1ч 29м 47с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:34
+Обновление из TimeService - Время: 1ч 29м 47с
+RemainingTime изменено: 1ч 29м 47с
+Таймер тикает: 1ч 29м 47с, время: 14.04.2025 14:28:34
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:34
+Обновление из TimeService - Время: 1ч 29м 47с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:35
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:35
+Обновление TextBlock в цели: 1ч 29м 46с, 14.04.2025 14:28:35
+RemainingTime изменен в ViewModel: 1ч 29м 46с
+Обновление из TimeService - Время: 1ч 29м 46с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:35
+Обновление из TimeService - Время: 1ч 29м 46с
+RemainingTime изменено: 1ч 29м 46с
+Таймер тикает: 1ч 29м 46с, время: 14.04.2025 14:28:35
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:35
+Обновление из TimeService - Время: 1ч 29м 46с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:36
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:36
+Обновление TextBlock в цели: 1ч 29м 45с, 14.04.2025 14:28:36
+RemainingTime изменен в ViewModel: 1ч 29м 45с
+Обновление из TimeService - Время: 1ч 29м 45с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:36
+Обновление из TimeService - Время: 1ч 29м 45с
+RemainingTime изменено: 1ч 29м 45с
+Таймер тикает: 1ч 29м 45с, время: 14.04.2025 14:28:36
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:36
+Обновление из TimeService - Время: 1ч 29м 45с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:37
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:37
+Обновление TextBlock в цели: 1ч 29м 44с, 14.04.2025 14:28:37
+RemainingTime изменен в ViewModel: 1ч 29м 44с
+Обновление из TimeService - Время: 1ч 29м 44с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:37
+Обновление из TimeService - Время: 1ч 29м 44с
+RemainingTime изменено: 1ч 29м 44с
+Таймер тикает: 1ч 29м 44с, время: 14.04.2025 14:28:37
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:37
+Обновление из TimeService - Время: 1ч 29м 44с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:38
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:38
+Обновление TextBlock в цели: 1ч 29м 43с, 14.04.2025 14:28:38
+RemainingTime изменен в ViewModel: 1ч 29м 43с
+Обновление из TimeService - Время: 1ч 29м 43с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:38
+Обновление из TimeService - Время: 1ч 29м 43с
+RemainingTime изменено: 1ч 29м 43с
+Таймер тикает: 1ч 29м 43с, время: 14.04.2025 14:28:38
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:38
+Обновление из TimeService - Время: 1ч 29м 43с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:39
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:39
+Обновление TextBlock в цели: 1ч 29м 42с, 14.04.2025 14:28:39
+RemainingTime изменен в ViewModel: 1ч 29м 42с
+Обновление из TimeService - Время: 1ч 29м 42с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:39
+Обновление из TimeService - Время: 1ч 29м 42с
+RemainingTime изменено: 1ч 29м 42с
+Таймер тикает: 1ч 29м 42с, время: 14.04.2025 14:28:39
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:39
+Обновление из TimeService - Время: 1ч 29м 42с
+Навигация на страницу: ProfilePage
+Показано основное содержимое
+Данные обновлены в ViewModel: Баланс=750, Время=1ч 29м 42с
+Пользователь вошел в систему, данные обновлены
+Загрузка данных пользователя 3 началась: 14.04.2025 14:28:40
+Таймер остановлен: 14.04.2025 14:28:40
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:40
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:40
+Обновление TextBlock в цели: $300.00, 14.04.2025 14:28:40
+Balance изменен в ViewModel: 300,00
+Обновление из TimeService - Баланс: 300,00
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:40
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:40
+Обновление TextBlock в цели: 20ч 52м 0с, 14.04.2025 14:28:40
+RemainingTime изменен в ViewModel: 20ч 52м 0с
+Обновление из TimeService - Время: 20ч 52м 0с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:40
+Обновление из TimeService - Время: 20ч 52м 0с
+RemainingTime изменено: 20ч 52м 0с
+Данные пользователя 3 загружены: баланс 300,00, время 20ч 52м 0с
+Таймер запущен: 14.04.2025 14:28:40
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:40
+Обновление из TimeService - Баланс: 300,00
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:40
+Обновление из TimeService - Время: 20ч 52м 0с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:40
+Обновление из TimeService - Время: 20ч 52м 0с
+События PropertyChanged вызваны принудительно: 14.04.2025 14:28:40
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:41
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:41
+Обновление TextBlock в цели: 20ч 51м 59с, 14.04.2025 14:28:41
+RemainingTime изменен в ViewModel: 20ч 51м 59с
+Обновление из TimeService - Время: 20ч 51м 59с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:41
+Обновление из TimeService - Время: 20ч 51м 59с
+RemainingTime изменено: 20ч 51м 59с
+Таймер тикает: 20ч 51м 59с, время: 14.04.2025 14:28:41
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:41
+Обновление из TimeService - Время: 20ч 51м 59с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:42
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:42
+Обновление TextBlock в цели: 20ч 51м 58с, 14.04.2025 14:28:42
+RemainingTime изменен в ViewModel: 20ч 51м 58с
+Обновление из TimeService - Время: 20ч 51м 58с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:42
+Обновление из TimeService - Время: 20ч 51м 58с
+RemainingTime изменено: 20ч 51м 58с
+Таймер тикает: 20ч 51м 58с, время: 14.04.2025 14:28:42
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:42
+Обновление из TimeService - Время: 20ч 51м 58с
+Навигация на страницу: ProfilePage
+Показано основное содержимое
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:43
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:43
+Обновление TextBlock в цели: 20ч 51м 57с, 14.04.2025 14:28:43
+RemainingTime изменен в ViewModel: 20ч 51м 57с
+Обновление из TimeService - Время: 20ч 51м 57с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:43
+Обновление из TimeService - Время: 20ч 51м 57с
+RemainingTime изменено: 20ч 51м 57с
+Таймер тикает: 20ч 51м 57с, время: 14.04.2025 14:28:43
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:43
+Обновление из TimeService - Время: 20ч 51м 57с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:44
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:44
+Обновление TextBlock в цели: 20ч 51м 56с, 14.04.2025 14:28:44
+RemainingTime изменен в ViewModel: 20ч 51м 56с
+Обновление из TimeService - Время: 20ч 51м 56с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:44
+Обновление из TimeService - Время: 20ч 51м 56с
+RemainingTime изменено: 20ч 51м 56с
+Таймер тикает: 20ч 51м 56с, время: 14.04.2025 14:28:44
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:44
+Обновление из TimeService - Время: 20ч 51м 56с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:45
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:45
+Обновление TextBlock в цели: 20ч 51м 55с, 14.04.2025 14:28:45
+RemainingTime изменен в ViewModel: 20ч 51м 55с
+Обновление из TimeService - Время: 20ч 51м 55с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:45
+Обновление из TimeService - Время: 20ч 51м 55с
+RemainingTime изменено: 20ч 51м 55с
+Таймер тикает: 20ч 51м 55с, время: 14.04.2025 14:28:45
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:45
+Обновление из TimeService - Время: 20ч 51м 55с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:46
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:46
+Обновление TextBlock в цели: 20ч 51м 54с, 14.04.2025 14:28:46
+RemainingTime изменен в ViewModel: 20ч 51м 54с
+Обновление из TimeService - Время: 20ч 51м 54с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:46
+Обновление из TimeService - Время: 20ч 51м 54с
+RemainingTime изменено: 20ч 51м 54с
+Таймер тикает: 20ч 51м 54с, время: 14.04.2025 14:28:46
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:46
+Обновление из TimeService - Время: 20ч 51м 54с
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:46
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:46
+Обновление TextBlock в цели: $400.00, 14.04.2025 14:28:46
+Balance изменен в ViewModel: 400,00
+Обновление из TimeService - Баланс: 400,00
+Данные пользователя 3 сохранены: 14.04.2025 14:28:46
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:47
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:47
+Обновление TextBlock в цели: 20ч 51м 53с, 14.04.2025 14:28:47
+RemainingTime изменен в ViewModel: 20ч 51м 53с
+Обновление из TimeService - Время: 20ч 51м 53с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:47
+Обновление из TimeService - Время: 20ч 51м 53с
+RemainingTime изменено: 20ч 51м 53с
+Таймер тикает: 20ч 51м 53с, время: 14.04.2025 14:28:47
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:47
+Обновление из TimeService - Время: 20ч 51м 53с
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:47
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:47
+Обновление TextBlock в цели: $500.00, 14.04.2025 14:28:47
+Balance изменен в ViewModel: 500,00
+Обновление из TimeService - Баланс: 500,00
+Данные пользователя 3 сохранены: 14.04.2025 14:28:47
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:47
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:47
+Обновление TextBlock в цели: $600.00, 14.04.2025 14:28:47
+Balance изменен в ViewModel: 600,00
+Обновление из TimeService - Баланс: 600,00
+Данные пользователя 3 сохранены: 14.04.2025 14:28:47
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:47
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:47
+Обновление TextBlock в цели: $700.00, 14.04.2025 14:28:47
+Balance изменен в ViewModel: 700,00
+Обновление из TimeService - Баланс: 700,00
+Данные пользователя 3 сохранены: 14.04.2025 14:28:47
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:48
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:48
+Обновление TextBlock в цели: $800.00, 14.04.2025 14:28:48
+Balance изменен в ViewModel: 800,00
+Обновление из TimeService - Баланс: 800,00
+Данные пользователя 3 сохранены: 14.04.2025 14:28:48
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:48
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:48
+Обновление TextBlock в цели: 20ч 51м 52с, 14.04.2025 14:28:48
+RemainingTime изменен в ViewModel: 20ч 51м 52с
+Обновление из TimeService - Время: 20ч 51м 52с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:48
+Обновление из TimeService - Время: 20ч 51м 52с
+RemainingTime изменено: 20ч 51м 52с
+Таймер тикает: 20ч 51м 52с, время: 14.04.2025 14:28:48
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:48
+Обновление из TimeService - Время: 20ч 51м 52с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:49
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:49
+Обновление TextBlock в цели: 20ч 51м 51с, 14.04.2025 14:28:49
+RemainingTime изменен в ViewModel: 20ч 51м 51с
+Обновление из TimeService - Время: 20ч 51м 51с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:49
+Обновление из TimeService - Время: 20ч 51м 51с
+RemainingTime изменено: 20ч 51м 51с
+Таймер тикает: 20ч 51м 51с, время: 14.04.2025 14:28:49
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:49
+Обновление из TimeService - Время: 20ч 51м 51с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:50
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:50
+Обновление TextBlock в цели: 20ч 51м 50с, 14.04.2025 14:28:50
+RemainingTime изменен в ViewModel: 20ч 51м 50с
+Обновление из TimeService - Время: 20ч 51м 50с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:50
+Обновление из TimeService - Время: 20ч 51м 50с
+RemainingTime изменено: 20ч 51м 50с
+Таймер тикает: 20ч 51м 50с, время: 14.04.2025 14:28:50
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:50
+Обновление из TimeService - Время: 20ч 51м 50с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:51
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:51
+Обновление TextBlock в цели: 20ч 51м 49с, 14.04.2025 14:28:51
+RemainingTime изменен в ViewModel: 20ч 51м 49с
+Обновление из TimeService - Время: 20ч 51м 49с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:51
+Обновление из TimeService - Время: 20ч 51м 49с
+RemainingTime изменено: 20ч 51м 49с
+Таймер тикает: 20ч 51м 49с, время: 14.04.2025 14:28:51
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:51
+Обновление из TimeService - Время: 20ч 51м 49с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:52
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:52
+Обновление TextBlock в цели: 20ч 51м 48с, 14.04.2025 14:28:52
+RemainingTime изменен в ViewModel: 20ч 51м 48с
+Обновление из TimeService - Время: 20ч 51м 48с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:52
+Обновление из TimeService - Время: 20ч 51м 48с
+RemainingTime изменено: 20ч 51м 48с
+Таймер тикает: 20ч 51м 48с, время: 14.04.2025 14:28:52
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:52
+Обновление из TimeService - Время: 20ч 51м 48с
+Навигация на страницу: TariffPage
+Навигация на страницу: TariffPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:53
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:53
+Обновление TextBlock в цели: 20ч 51м 47с, 14.04.2025 14:28:53
+RemainingTime изменен в ViewModel: 20ч 51м 47с
+Обновление из TimeService - Время: 20ч 51м 47с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:53
+Обновление из TimeService - Время: 20ч 51м 47с
+RemainingTime изменено: 20ч 51м 47с
+Таймер тикает: 20ч 51м 47с, время: 14.04.2025 14:28:53
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:53
+Обновление из TimeService - Время: 20ч 51м 47с
+OnPropertyChanged вызван для Balance: 14.04.2025 14:28:54
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:28:54
+Обновление TextBlock в цели: $700.00, 14.04.2025 14:28:54
+Balance изменен в ViewModel: 700,00
+Обновление из TimeService - Баланс: 700,00
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:54
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:54
+Обновление TextBlock в цели: 21ч 51м 47с, 14.04.2025 14:28:54
+RemainingTime изменен в ViewModel: 21ч 51м 47с
+Обновление из TimeService - Время: 21ч 51м 47с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:54
+Обновление из TimeService - Время: 21ч 51м 47с
+RemainingTime изменено: 21ч 51м 47с
+Данные пользователя 3 сохранены: 14.04.2025 14:28:54
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:54
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:54
+Обновление TextBlock в цели: 21ч 51м 46с, 14.04.2025 14:28:54
+RemainingTime изменен в ViewModel: 21ч 51м 46с
+Обновление из TimeService - Время: 21ч 51м 46с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:54
+Обновление из TimeService - Время: 21ч 51м 46с
+RemainingTime изменено: 21ч 51м 46с
+Таймер тикает: 21ч 51м 46с, время: 14.04.2025 14:28:54
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:54
+Обновление из TimeService - Время: 21ч 51м 46с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:55
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:55
+Обновление TextBlock в цели: 21ч 51м 45с, 14.04.2025 14:28:55
+RemainingTime изменен в ViewModel: 21ч 51м 45с
+Обновление из TimeService - Время: 21ч 51м 45с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:55
+Обновление из TimeService - Время: 21ч 51м 45с
+RemainingTime изменено: 21ч 51м 45с
+Таймер тикает: 21ч 51м 45с, время: 14.04.2025 14:28:55
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:55
+Обновление из TimeService - Время: 21ч 51м 45с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:56
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:56
+Обновление TextBlock в цели: 21ч 51м 44с, 14.04.2025 14:28:56
+RemainingTime изменен в ViewModel: 21ч 51м 44с
+Обновление из TimeService - Время: 21ч 51м 44с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:56
+Обновление из TimeService - Время: 21ч 51м 44с
+RemainingTime изменено: 21ч 51м 44с
+Таймер тикает: 21ч 51м 44с, время: 14.04.2025 14:28:56
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:56
+Обновление из TimeService - Время: 21ч 51м 44с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:57
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:57
+Обновление TextBlock в цели: 21ч 51м 43с, 14.04.2025 14:28:57
+RemainingTime изменен в ViewModel: 21ч 51м 43с
+Обновление из TimeService - Время: 21ч 51м 43с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:57
+Обновление из TimeService - Время: 21ч 51м 43с
+RemainingTime изменено: 21ч 51м 43с
+Таймер тикает: 21ч 51м 43с, время: 14.04.2025 14:28:57
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:57
+Обновление из TimeService - Время: 21ч 51м 43с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:58
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:58
+Обновление TextBlock в цели: 21ч 51м 42с, 14.04.2025 14:28:58
+RemainingTime изменен в ViewModel: 21ч 51м 42с
+Обновление из TimeService - Время: 21ч 51м 42с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:58
+Обновление из TimeService - Время: 21ч 51м 42с
+RemainingTime изменено: 21ч 51м 42с
+Таймер тикает: 21ч 51м 42с, время: 14.04.2025 14:28:58
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:58
+Обновление из TimeService - Время: 21ч 51м 42с
+Навигация на страницу: ProfilePage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:59
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:28:59
+Обновление TextBlock в цели: 21ч 51м 41с, 14.04.2025 14:28:59
+RemainingTime изменен в ViewModel: 21ч 51м 41с
+Обновление из TimeService - Время: 21ч 51м 41с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:59
+Обновление из TimeService - Время: 21ч 51м 41с
+RemainingTime изменено: 21ч 51м 41с
+Таймер тикает: 21ч 51м 41с, время: 14.04.2025 14:28:59
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:28:59
+Обновление из TimeService - Время: 21ч 51м 41с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:00
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:00
+Обновление TextBlock в цели: 21ч 51м 40с, 14.04.2025 14:29:00
+RemainingTime изменен в ViewModel: 21ч 51м 40с
+Обновление из TimeService - Время: 21ч 51м 40с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:00
+Обновление из TimeService - Время: 21ч 51м 40с
+RemainingTime изменено: 21ч 51м 40с
+Таймер тикает: 21ч 51м 40с, время: 14.04.2025 14:29:00
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:00
+Обновление из TimeService - Время: 21ч 51м 40с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:01
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:01
+Обновление TextBlock в цели: 21ч 51м 39с, 14.04.2025 14:29:01
+RemainingTime изменен в ViewModel: 21ч 51м 39с
+Обновление из TimeService - Время: 21ч 51м 39с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:01
+Обновление из TimeService - Время: 21ч 51м 39с
+RemainingTime изменено: 21ч 51м 39с
+Таймер тикает: 21ч 51м 39с, время: 14.04.2025 14:29:01
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:01
+Обновление из TimeService - Время: 21ч 51м 39с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:02
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:02
+Обновление TextBlock в цели: 21ч 51м 38с, 14.04.2025 14:29:02
+RemainingTime изменен в ViewModel: 21ч 51м 38с
+Обновление из TimeService - Время: 21ч 51м 38с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:02
+Обновление из TimeService - Время: 21ч 51м 38с
+RemainingTime изменено: 21ч 51м 38с
+Таймер тикает: 21ч 51м 38с, время: 14.04.2025 14:29:02
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:02
+Обновление из TimeService - Время: 21ч 51м 38с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:03
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:03
+Обновление TextBlock в цели: 21ч 51м 37с, 14.04.2025 14:29:03
+RemainingTime изменен в ViewModel: 21ч 51м 37с
+Обновление из TimeService - Время: 21ч 51м 37с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:03
+Обновление из TimeService - Время: 21ч 51м 37с
+RemainingTime изменено: 21ч 51м 37с
+Таймер тикает: 21ч 51м 37с, время: 14.04.2025 14:29:03
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:03
+Обновление из TimeService - Время: 21ч 51м 37с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:04
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:04
+Обновление TextBlock в цели: 21ч 51м 36с, 14.04.2025 14:29:04
+RemainingTime изменен в ViewModel: 21ч 51м 36с
+Обновление из TimeService - Время: 21ч 51м 36с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:04
+Обновление из TimeService - Время: 21ч 51м 36с
+RemainingTime изменено: 21ч 51м 36с
+Таймер тикает: 21ч 51м 36с, время: 14.04.2025 14:29:04
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:04
+Обновление из TimeService - Время: 21ч 51м 36с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:05
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:05
+Обновление TextBlock в цели: 21ч 51м 35с, 14.04.2025 14:29:05
+RemainingTime изменен в ViewModel: 21ч 51м 35с
+Обновление из TimeService - Время: 21ч 51м 35с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:05
+Обновление из TimeService - Время: 21ч 51м 35с
+RemainingTime изменено: 21ч 51м 35с
+Таймер тикает: 21ч 51м 35с, время: 14.04.2025 14:29:05
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:05
+Обновление из TimeService - Время: 21ч 51м 35с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:06
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:06
+Обновление TextBlock в цели: 21ч 51м 34с, 14.04.2025 14:29:06
+RemainingTime изменен в ViewModel: 21ч 51м 34с
+Обновление из TimeService - Время: 21ч 51м 34с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:06
+Обновление из TimeService - Время: 21ч 51м 34с
+RemainingTime изменено: 21ч 51м 34с
+Таймер тикает: 21ч 51м 34с, время: 14.04.2025 14:29:06
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:06
+Обновление из TimeService - Время: 21ч 51м 34с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:07
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:07
+Обновление TextBlock в цели: 21ч 51м 33с, 14.04.2025 14:29:07
+RemainingTime изменен в ViewModel: 21ч 51м 33с
+Обновление из TimeService - Время: 21ч 51м 33с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:07
+Обновление из TimeService - Время: 21ч 51м 33с
+RemainingTime изменено: 21ч 51м 33с
+Таймер тикает: 21ч 51м 33с, время: 14.04.2025 14:29:07
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:07
+Обновление из TimeService - Время: 21ч 51м 33с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:08
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:08
+Обновление TextBlock в цели: 21ч 51м 32с, 14.04.2025 14:29:08
+RemainingTime изменен в ViewModel: 21ч 51м 32с
+Обновление из TimeService - Время: 21ч 51м 32с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:08
+Обновление из TimeService - Время: 21ч 51м 32с
+RemainingTime изменено: 21ч 51м 32с
+Таймер тикает: 21ч 51м 32с, время: 14.04.2025 14:29:08
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:08
+Обновление из TimeService - Время: 21ч 51м 32с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:09
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:09
+Обновление TextBlock в цели: 21ч 51м 31с, 14.04.2025 14:29:10
+RemainingTime изменен в ViewModel: 21ч 51м 31с
+Обновление из TimeService - Время: 21ч 51м 31с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:10
+Обновление из TimeService - Время: 21ч 51м 31с
+RemainingTime изменено: 21ч 51м 31с
+Таймер тикает: 21ч 51м 31с, время: 14.04.2025 14:29:10
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:10
+Обновление из TimeService - Время: 21ч 51м 31с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:11
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:11
+Обновление TextBlock в цели: 21ч 51м 30с, 14.04.2025 14:29:11
+RemainingTime изменен в ViewModel: 21ч 51м 30с
+Обновление из TimeService - Время: 21ч 51м 30с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:11
+Обновление из TimeService - Время: 21ч 51м 30с
+RemainingTime изменено: 21ч 51м 30с
+Таймер тикает: 21ч 51м 30с, время: 14.04.2025 14:29:11
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:11
+Обновление из TimeService - Время: 21ч 51м 30с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:12
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:12
+Обновление TextBlock в цели: 21ч 51м 29с, 14.04.2025 14:29:12
+RemainingTime изменен в ViewModel: 21ч 51м 29с
+Обновление из TimeService - Время: 21ч 51м 29с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:12
+Обновление из TimeService - Время: 21ч 51м 29с
+RemainingTime изменено: 21ч 51м 29с
+Таймер тикает: 21ч 51м 29с, время: 14.04.2025 14:29:12
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:12
+Обновление из TimeService - Время: 21ч 51м 29с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:13
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:13
+Обновление TextBlock в цели: 21ч 51м 28с, 14.04.2025 14:29:13
+RemainingTime изменен в ViewModel: 21ч 51м 28с
+Обновление из TimeService - Время: 21ч 51м 28с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:13
+Обновление из TimeService - Время: 21ч 51м 28с
+RemainingTime изменено: 21ч 51м 28с
+Таймер тикает: 21ч 51м 28с, время: 14.04.2025 14:29:13
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:13
+Обновление из TimeService - Время: 21ч 51м 28с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:14
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:14
+Обновление TextBlock в цели: 21ч 51м 27с, 14.04.2025 14:29:14
+RemainingTime изменен в ViewModel: 21ч 51м 27с
+Обновление из TimeService - Время: 21ч 51м 27с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:14
+Обновление из TimeService - Время: 21ч 51м 27с
+RemainingTime изменено: 21ч 51м 27с
+Таймер тикает: 21ч 51м 27с, время: 14.04.2025 14:29:14
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:14
+Обновление из TimeService - Время: 21ч 51м 27с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:15
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:15
+Обновление TextBlock в цели: 21ч 51м 26с, 14.04.2025 14:29:15
+RemainingTime изменен в ViewModel: 21ч 51м 26с
+Обновление из TimeService - Время: 21ч 51м 26с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:15
+Обновление из TimeService - Время: 21ч 51м 26с
+RemainingTime изменено: 21ч 51м 26с
+Таймер тикает: 21ч 51м 26с, время: 14.04.2025 14:29:15
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:15
+Обновление из TimeService - Время: 21ч 51м 26с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:16
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:16
+Обновление TextBlock в цели: 21ч 51м 25с, 14.04.2025 14:29:16
+RemainingTime изменен в ViewModel: 21ч 51м 25с
+Обновление из TimeService - Время: 21ч 51м 25с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:16
+Обновление из TimeService - Время: 21ч 51м 25с
+RemainingTime изменено: 21ч 51м 25с
+Таймер тикает: 21ч 51м 25с, время: 14.04.2025 14:29:16
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:16
+Обновление из TimeService - Время: 21ч 51м 25с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:17
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:17
+Обновление TextBlock в цели: 21ч 51м 24с, 14.04.2025 14:29:17
+RemainingTime изменен в ViewModel: 21ч 51м 24с
+Обновление из TimeService - Время: 21ч 51м 24с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:17
+Обновление из TimeService - Время: 21ч 51м 24с
+RemainingTime изменено: 21ч 51м 24с
+Таймер тикает: 21ч 51м 24с, время: 14.04.2025 14:29:17
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:17
+Обновление из TimeService - Время: 21ч 51м 24с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:18
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:18
+Обновление TextBlock в цели: 21ч 51м 23с, 14.04.2025 14:29:18
+RemainingTime изменен в ViewModel: 21ч 51м 23с
+Обновление из TimeService - Время: 21ч 51м 23с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:18
+Обновление из TimeService - Время: 21ч 51м 23с
+RemainingTime изменено: 21ч 51м 23с
+Таймер тикает: 21ч 51м 23с, время: 14.04.2025 14:29:18
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:18
+Обновление из TimeService - Время: 21ч 51м 23с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:19
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:19
+Обновление TextBlock в цели: 21ч 51м 22с, 14.04.2025 14:29:19
+RemainingTime изменен в ViewModel: 21ч 51м 22с
+Обновление из TimeService - Время: 21ч 51м 22с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:19
+Обновление из TimeService - Время: 21ч 51м 22с
+RemainingTime изменено: 21ч 51м 22с
+Таймер тикает: 21ч 51м 22с, время: 14.04.2025 14:29:19
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:19
+Обновление из TimeService - Время: 21ч 51м 22с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:20
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:20
+Обновление TextBlock в цели: 21ч 51м 21с, 14.04.2025 14:29:20
+RemainingTime изменен в ViewModel: 21ч 51м 21с
+Обновление из TimeService - Время: 21ч 51м 21с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:20
+Обновление из TimeService - Время: 21ч 51м 21с
+RemainingTime изменено: 21ч 51м 21с
+Таймер тикает: 21ч 51м 21с, время: 14.04.2025 14:29:20
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:20
+Обновление из TimeService - Время: 21ч 51м 21с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:21
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:21
+Обновление TextBlock в цели: 21ч 51м 20с, 14.04.2025 14:29:21
+RemainingTime изменен в ViewModel: 21ч 51м 20с
+Обновление из TimeService - Время: 21ч 51м 20с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:21
+Обновление из TimeService - Время: 21ч 51м 20с
+RemainingTime изменено: 21ч 51м 20с
+Таймер тикает: 21ч 51м 20с, время: 14.04.2025 14:29:21
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:21
+Обновление из TimeService - Время: 21ч 51м 20с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:22
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:22
+Обновление TextBlock в цели: 21ч 51м 19с, 14.04.2025 14:29:22
+RemainingTime изменен в ViewModel: 21ч 51м 19с
+Обновление из TimeService - Время: 21ч 51м 19с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:22
+Обновление из TimeService - Время: 21ч 51м 19с
+RemainingTime изменено: 21ч 51м 19с
+Таймер тикает: 21ч 51м 19с, время: 14.04.2025 14:29:22
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:22
+Обновление из TimeService - Время: 21ч 51м 19с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:23
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:29:23
+Обновление TextBlock в цели: 21ч 51м 18с, 14.04.2025 14:29:23
+RemainingTime изменен в ViewModel: 21ч 51м 18с
+Обновление из TimeService - Время: 21ч 51м 18с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:23
+Обновление из TimeService - Время: 21ч 51м 18с
+RemainingTime изменено: 21ч 51м 18с
+Таймер тикает: 21ч 51м 18с, время: 14.04.2025 14:29:23
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:29:23
+Обновление из TimeService - Время: 21ч 51м 18с
+Приложение запущено: 14.04.2025 14:30:46
+Таймер запущен: 14.04.2025 14:30:47
+TimeService создан: 14.04.2025 14:30:47, баланс: 750, время: 1ч 30м 0с
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:30:47
+Balance изменен в ViewModel: 750
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:47
+RemainingTime изменен в ViewModel: 1ч 30м 0с
+Данные обновлены в ViewModel: Баланс=750, Время=1ч 30м 0с
+MainWindowViewModel создан: Баланс=750, Время=1ч 30м 0с
+Обновление TextBlock в цели: 1ч 30м 0с, 14.04.2025 14:30:47
+Обновление TextBlock в цели: $750.00, 14.04.2025 14:30:47
+Данные обновлены в ViewModel: Баланс=750, Время=1ч 30м 0с
+MainWindow загружено, данные обновлены
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:48
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:48
+Обновление TextBlock в цели: 1ч 29м 59с, 14.04.2025 14:30:48
+RemainingTime изменен в ViewModel: 1ч 29м 59с
+Обновление из TimeService - Время: 1ч 29м 59с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:48
+Обновление из TimeService - Время: 1ч 29м 59с
+RemainingTime изменено: 1ч 29м 59с
+Таймер тикает: 1ч 29м 59с, время: 14.04.2025 14:30:48
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:48
+Обновление из TimeService - Время: 1ч 29м 59с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:49
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:49
+Обновление TextBlock в цели: 1ч 29м 58с, 14.04.2025 14:30:49
+RemainingTime изменен в ViewModel: 1ч 29м 58с
+Обновление из TimeService - Время: 1ч 29м 58с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:49
+Обновление из TimeService - Время: 1ч 29м 58с
+RemainingTime изменено: 1ч 29м 58с
+Таймер тикает: 1ч 29м 58с, время: 14.04.2025 14:30:49
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:49
+Обновление из TimeService - Время: 1ч 29м 58с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:50
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:50
+Обновление TextBlock в цели: 1ч 29м 57с, 14.04.2025 14:30:50
+RemainingTime изменен в ViewModel: 1ч 29м 57с
+Обновление из TimeService - Время: 1ч 29м 57с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:50
+Обновление из TimeService - Время: 1ч 29м 57с
+RemainingTime изменено: 1ч 29м 57с
+Таймер тикает: 1ч 29м 57с, время: 14.04.2025 14:30:50
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:50
+Обновление из TimeService - Время: 1ч 29м 57с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:51
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:51
+Обновление TextBlock в цели: 1ч 29м 56с, 14.04.2025 14:30:51
+RemainingTime изменен в ViewModel: 1ч 29м 56с
+Обновление из TimeService - Время: 1ч 29м 56с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:51
+Обновление из TimeService - Время: 1ч 29м 56с
+RemainingTime изменено: 1ч 29м 56с
+Таймер тикает: 1ч 29м 56с, время: 14.04.2025 14:30:51
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:51
+Обновление из TimeService - Время: 1ч 29м 56с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:52
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:52
+Обновление TextBlock в цели: 1ч 29м 55с, 14.04.2025 14:30:52
+RemainingTime изменен в ViewModel: 1ч 29м 55с
+Обновление из TimeService - Время: 1ч 29м 55с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:52
+Обновление из TimeService - Время: 1ч 29м 55с
+RemainingTime изменено: 1ч 29м 55с
+Таймер тикает: 1ч 29м 55с, время: 14.04.2025 14:30:52
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:52
+Обновление из TimeService - Время: 1ч 29м 55с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:53
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:53
+Обновление TextBlock в цели: 1ч 29м 54с, 14.04.2025 14:30:53
+RemainingTime изменен в ViewModel: 1ч 29м 54с
+Обновление из TimeService - Время: 1ч 29м 54с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:53
+Обновление из TimeService - Время: 1ч 29м 54с
+RemainingTime изменено: 1ч 29м 54с
+Таймер тикает: 1ч 29м 54с, время: 14.04.2025 14:30:53
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:53
+Обновление из TimeService - Время: 1ч 29м 54с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:54
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:54
+Обновление TextBlock в цели: 1ч 29м 53с, 14.04.2025 14:30:54
+RemainingTime изменен в ViewModel: 1ч 29м 53с
+Обновление из TimeService - Время: 1ч 29м 53с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:54
+Обновление из TimeService - Время: 1ч 29м 53с
+RemainingTime изменено: 1ч 29м 53с
+Таймер тикает: 1ч 29м 53с, время: 14.04.2025 14:30:54
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:54
+Обновление из TimeService - Время: 1ч 29м 53с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:55
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:55
+Обновление TextBlock в цели: 1ч 29м 52с, 14.04.2025 14:30:55
+RemainingTime изменен в ViewModel: 1ч 29м 52с
+Обновление из TimeService - Время: 1ч 29м 52с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:55
+Обновление из TimeService - Время: 1ч 29м 52с
+RemainingTime изменено: 1ч 29м 52с
+Таймер тикает: 1ч 29м 52с, время: 14.04.2025 14:30:55
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:55
+Обновление из TimeService - Время: 1ч 29м 52с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:56
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:56
+Обновление TextBlock в цели: 1ч 29м 51с, 14.04.2025 14:30:56
+RemainingTime изменен в ViewModel: 1ч 29м 51с
+Обновление из TimeService - Время: 1ч 29м 51с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:56
+Обновление из TimeService - Время: 1ч 29м 51с
+RemainingTime изменено: 1ч 29м 51с
+Таймер тикает: 1ч 29м 51с, время: 14.04.2025 14:30:56
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:56
+Обновление из TimeService - Время: 1ч 29м 51с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:57
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:57
+Обновление TextBlock в цели: 1ч 29м 50с, 14.04.2025 14:30:57
+RemainingTime изменен в ViewModel: 1ч 29м 50с
+Обновление из TimeService - Время: 1ч 29м 50с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:57
+Обновление из TimeService - Время: 1ч 29м 50с
+RemainingTime изменено: 1ч 29м 50с
+Таймер тикает: 1ч 29м 50с, время: 14.04.2025 14:30:58
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:58
+Обновление из TimeService - Время: 1ч 29м 50с
+Навигация на страницу: ProfilePage
+Показано основное содержимое
+Данные обновлены в ViewModel: Баланс=750, Время=1ч 29м 50с
+Пользователь вошел в систему, данные обновлены
+Загрузка данных пользователя 4 началась: 14.04.2025 14:30:58
+Таймер остановлен: 14.04.2025 14:30:58
+OnPropertyChanged вызван для Balance: 14.04.2025 14:30:58
+ViewModel.OnPropertyChanged вызван для Balance: 14.04.2025 14:30:58
+Обновление TextBlock в цели: $100.00, 14.04.2025 14:30:58
+Balance изменен в ViewModel: 100,00
+Обновление из TimeService - Баланс: 100,00
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:58
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:58
+Обновление TextBlock в цели: 12ч 1м 57с, 14.04.2025 14:30:58
+RemainingTime изменен в ViewModel: 12ч 1м 57с
+Обновление из TimeService - Время: 12ч 1м 57с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:58
+Обновление из TimeService - Время: 12ч 1м 57с
+RemainingTime изменено: 12ч 1м 57с
+Данные пользователя 4 загружены: баланс 100,00, время 12ч 1м 57с
+Таймер запущен: 14.04.2025 14:30:58
+OnPropertyChanged вызван для Balance: 14.04.2025 14:30:58
+Обновление из TimeService - Баланс: 100,00
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:58
+Обновление из TimeService - Время: 12ч 1м 57с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:58
+Обновление из TimeService - Время: 12ч 1м 57с
+События PropertyChanged вызваны принудительно: 14.04.2025 14:30:58
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:59
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:30:59
+Обновление TextBlock в цели: 12ч 1м 56с, 14.04.2025 14:30:59
+RemainingTime изменен в ViewModel: 12ч 1м 56с
+Обновление из TimeService - Время: 12ч 1м 56с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:59
+Обновление из TimeService - Время: 12ч 1м 56с
+RemainingTime изменено: 12ч 1м 56с
+Таймер тикает: 12ч 1м 56с, время: 14.04.2025 14:30:59
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:30:59
+Обновление из TimeService - Время: 12ч 1м 56с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:00
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:00
+Обновление TextBlock в цели: 12ч 1м 55с, 14.04.2025 14:31:00
+RemainingTime изменен в ViewModel: 12ч 1м 55с
+Обновление из TimeService - Время: 12ч 1м 55с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:00
+Обновление из TimeService - Время: 12ч 1м 55с
+RemainingTime изменено: 12ч 1м 55с
+Таймер тикает: 12ч 1м 55с, время: 14.04.2025 14:31:00
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:00
+Обновление из TimeService - Время: 12ч 1м 55с
+Навигация на страницу: ProfilePage
+Показано основное содержимое
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:01
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:01
+Обновление TextBlock в цели: 12ч 1м 54с, 14.04.2025 14:31:01
+RemainingTime изменен в ViewModel: 12ч 1м 54с
+Обновление из TimeService - Время: 12ч 1м 54с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:01
+Обновление из TimeService - Время: 12ч 1м 54с
+RemainingTime изменено: 12ч 1м 54с
+Таймер тикает: 12ч 1м 54с, время: 14.04.2025 14:31:01
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:01
+Обновление из TimeService - Время: 12ч 1м 54с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:02
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:02
+Обновление TextBlock в цели: 12ч 1м 53с, 14.04.2025 14:31:02
+RemainingTime изменен в ViewModel: 12ч 1м 53с
+Обновление из TimeService - Время: 12ч 1м 53с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:02
+Обновление из TimeService - Время: 12ч 1м 53с
+RemainingTime изменено: 12ч 1м 53с
+Таймер тикает: 12ч 1м 53с, время: 14.04.2025 14:31:02
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:02
+Обновление из TimeService - Время: 12ч 1м 53с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:03
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:03
+Обновление TextBlock в цели: 12ч 1м 52с, 14.04.2025 14:31:03
+RemainingTime изменен в ViewModel: 12ч 1м 52с
+Обновление из TimeService - Время: 12ч 1м 52с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:03
+Обновление из TimeService - Время: 12ч 1м 52с
+RemainingTime изменено: 12ч 1м 52с
+Таймер тикает: 12ч 1м 52с, время: 14.04.2025 14:31:03
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:03
+Обновление из TimeService - Время: 12ч 1м 52с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:04
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:04
+Обновление TextBlock в цели: 12ч 1м 51с, 14.04.2025 14:31:04
+RemainingTime изменен в ViewModel: 12ч 1м 51с
+Обновление из TimeService - Время: 12ч 1м 51с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:04
+Обновление из TimeService - Время: 12ч 1м 51с
+RemainingTime изменено: 12ч 1м 51с
+Таймер тикает: 12ч 1м 51с, время: 14.04.2025 14:31:04
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:04
+Обновление из TimeService - Время: 12ч 1м 51с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:05
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:05
+Обновление TextBlock в цели: 12ч 1м 50с, 14.04.2025 14:31:05
+RemainingTime изменен в ViewModel: 12ч 1м 50с
+Обновление из TimeService - Время: 12ч 1м 50с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:05
+Обновление из TimeService - Время: 12ч 1м 50с
+RemainingTime изменено: 12ч 1м 50с
+Таймер тикает: 12ч 1м 50с, время: 14.04.2025 14:31:05
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:05
+Обновление из TimeService - Время: 12ч 1м 50с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:06
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:06
+Обновление TextBlock в цели: 12ч 1м 49с, 14.04.2025 14:31:06
+RemainingTime изменен в ViewModel: 12ч 1м 49с
+Обновление из TimeService - Время: 12ч 1м 49с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:06
+Обновление из TimeService - Время: 12ч 1м 49с
+RemainingTime изменено: 12ч 1м 49с
+Таймер тикает: 12ч 1м 49с, время: 14.04.2025 14:31:06
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:06
+Обновление из TimeService - Время: 12ч 1м 49с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:07
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:07
+Обновление TextBlock в цели: 12ч 1м 48с, 14.04.2025 14:31:07
+RemainingTime изменен в ViewModel: 12ч 1м 48с
+Обновление из TimeService - Время: 12ч 1м 48с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:07
+Обновление из TimeService - Время: 12ч 1м 48с
+RemainingTime изменено: 12ч 1м 48с
+Таймер тикает: 12ч 1м 48с, время: 14.04.2025 14:31:07
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:07
+Обновление из TimeService - Время: 12ч 1м 48с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:08
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:08
+Обновление TextBlock в цели: 12ч 1м 47с, 14.04.2025 14:31:08
+RemainingTime изменен в ViewModel: 12ч 1м 47с
+Обновление из TimeService - Время: 12ч 1м 47с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:08
+Обновление из TimeService - Время: 12ч 1м 47с
+RemainingTime изменено: 12ч 1м 47с
+Таймер тикает: 12ч 1м 47с, время: 14.04.2025 14:31:08
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:08
+Обновление из TimeService - Время: 12ч 1м 47с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:09
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:09
+Обновление TextBlock в цели: 12ч 1м 46с, 14.04.2025 14:31:09
+RemainingTime изменен в ViewModel: 12ч 1м 46с
+Обновление из TimeService - Время: 12ч 1м 46с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:09
+Обновление из TimeService - Время: 12ч 1м 46с
+RemainingTime изменено: 12ч 1м 46с
+Таймер тикает: 12ч 1м 46с, время: 14.04.2025 14:31:09
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:09
+Обновление из TimeService - Время: 12ч 1м 46с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:10
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:10
+Обновление TextBlock в цели: 12ч 1м 45с, 14.04.2025 14:31:10
+RemainingTime изменен в ViewModel: 12ч 1м 45с
+Обновление из TimeService - Время: 12ч 1м 45с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:10
+Обновление из TimeService - Время: 12ч 1м 45с
+RemainingTime изменено: 12ч 1м 45с
+Таймер тикает: 12ч 1м 45с, время: 14.04.2025 14:31:10
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:10
+Обновление из TimeService - Время: 12ч 1м 45с
+Данные пользователя 4 сохранены: 14.04.2025 14:31:10
+Пользователь вышел из системы
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:11
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:11
+Обновление TextBlock в цели: 12ч 1м 44с, 14.04.2025 14:31:11
+RemainingTime изменен в ViewModel: 12ч 1м 44с
+Обновление из TimeService - Время: 12ч 1м 44с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:11
+Обновление из TimeService - Время: 12ч 1м 44с
+RemainingTime изменено: 12ч 1м 44с
+Таймер тикает: 12ч 1м 44с, время: 14.04.2025 14:31:11
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:11
+Обновление из TimeService - Время: 12ч 1м 44с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:12
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:12
+Обновление TextBlock в цели: 12ч 1м 43с, 14.04.2025 14:31:12
+RemainingTime изменен в ViewModel: 12ч 1м 43с
+Обновление из TimeService - Время: 12ч 1м 43с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:12
+Обновление из TimeService - Время: 12ч 1м 43с
+RemainingTime изменено: 12ч 1м 43с
+Таймер тикает: 12ч 1м 43с, время: 14.04.2025 14:31:12
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:12
+Обновление из TimeService - Время: 12ч 1м 43с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:13
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:13
+Обновление TextBlock в цели: 12ч 1м 42с, 14.04.2025 14:31:13
+RemainingTime изменен в ViewModel: 12ч 1м 42с
+Обновление из TimeService - Время: 12ч 1м 42с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:13
+Обновление из TimeService - Время: 12ч 1м 42с
+RemainingTime изменено: 12ч 1м 42с
+Таймер тикает: 12ч 1м 42с, время: 14.04.2025 14:31:13
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:13
+Обновление из TimeService - Время: 12ч 1м 42с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:14
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:14
+Обновление TextBlock в цели: 12ч 1м 41с, 14.04.2025 14:31:14
+RemainingTime изменен в ViewModel: 12ч 1м 41с
+Обновление из TimeService - Время: 12ч 1м 41с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:14
+Обновление из TimeService - Время: 12ч 1м 41с
+RemainingTime изменено: 12ч 1м 41с
+Таймер тикает: 12ч 1м 41с, время: 14.04.2025 14:31:14
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:14
+Обновление из TimeService - Время: 12ч 1м 41с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:15
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:15
+Обновление TextBlock в цели: 12ч 1м 40с, 14.04.2025 14:31:15
+RemainingTime изменен в ViewModel: 12ч 1м 40с
+Обновление из TimeService - Время: 12ч 1м 40с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:15
+Обновление из TimeService - Время: 12ч 1м 40с
+RemainingTime изменено: 12ч 1м 40с
+Таймер тикает: 12ч 1м 40с, время: 14.04.2025 14:31:15
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:15
+Обновление из TimeService - Время: 12ч 1м 40с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:16
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:16
+Обновление TextBlock в цели: 12ч 1м 39с, 14.04.2025 14:31:16
+RemainingTime изменен в ViewModel: 12ч 1м 39с
+Обновление из TimeService - Время: 12ч 1м 39с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:16
+Обновление из TimeService - Время: 12ч 1м 39с
+RemainingTime изменено: 12ч 1м 39с
+Таймер тикает: 12ч 1м 39с, время: 14.04.2025 14:31:16
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:16
+Обновление из TimeService - Время: 12ч 1м 39с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:17
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:17
+Обновление TextBlock в цели: 12ч 1м 38с, 14.04.2025 14:31:17
+RemainingTime изменен в ViewModel: 12ч 1м 38с
+Обновление из TimeService - Время: 12ч 1м 38с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:17
+Обновление из TimeService - Время: 12ч 1м 38с
+RemainingTime изменено: 12ч 1м 38с
+Таймер тикает: 12ч 1м 38с, время: 14.04.2025 14:31:17
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:17
+Обновление из TimeService - Время: 12ч 1м 38с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:18
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:18
+Обновление TextBlock в цели: 12ч 1м 37с, 14.04.2025 14:31:18
+RemainingTime изменен в ViewModel: 12ч 1м 37с
+Обновление из TimeService - Время: 12ч 1м 37с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:18
+Обновление из TimeService - Время: 12ч 1м 37с
+RemainingTime изменено: 12ч 1м 37с
+Таймер тикает: 12ч 1м 37с, время: 14.04.2025 14:31:18
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:18
+Обновление из TimeService - Время: 12ч 1м 37с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:19
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:19
+Обновление TextBlock в цели: 12ч 1м 36с, 14.04.2025 14:31:19
+RemainingTime изменен в ViewModel: 12ч 1м 36с
+Обновление из TimeService - Время: 12ч 1м 36с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:19
+Обновление из TimeService - Время: 12ч 1м 36с
+RemainingTime изменено: 12ч 1м 36с
+Таймер тикает: 12ч 1м 36с, время: 14.04.2025 14:31:19
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:19
+Обновление из TimeService - Время: 12ч 1м 36с
+Навигация на страницу: ProfilePage
+Показано основное содержимое
+Данные обновлены в ViewModel: Баланс=100,00, Время=12ч 1м 36с
+Пользователь вошел в систему, данные обновлены
+Загрузка данных пользователя 4 началась: 14.04.2025 14:31:20
+Таймер остановлен: 14.04.2025 14:31:20
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:20
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:20
+Обновление TextBlock в цели: 12ч 1м 45с, 14.04.2025 14:31:20
+RemainingTime изменен в ViewModel: 12ч 1м 45с
+Обновление из TimeService - Время: 12ч 1м 45с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:20
+Обновление из TimeService - Время: 12ч 1м 45с
+RemainingTime изменено: 12ч 1м 45с
+Данные пользователя 4 загружены: баланс 100,00, время 12ч 1м 45с
+Таймер запущен: 14.04.2025 14:31:20
+OnPropertyChanged вызван для Balance: 14.04.2025 14:31:20
+Обновление из TimeService - Баланс: 100,00
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:20
+Обновление из TimeService - Время: 12ч 1м 45с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:20
+Обновление из TimeService - Время: 12ч 1м 45с
+События PropertyChanged вызваны принудительно: 14.04.2025 14:31:20
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:21
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:21
+Обновление TextBlock в цели: 12ч 1м 44с, 14.04.2025 14:31:21
+RemainingTime изменен в ViewModel: 12ч 1м 44с
+Обновление из TimeService - Время: 12ч 1м 44с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:21
+Обновление из TimeService - Время: 12ч 1м 44с
+RemainingTime изменено: 12ч 1м 44с
+Таймер тикает: 12ч 1м 44с, время: 14.04.2025 14:31:21
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:21
+Обновление из TimeService - Время: 12ч 1м 44с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:22
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:22
+Обновление TextBlock в цели: 12ч 1м 43с, 14.04.2025 14:31:22
+RemainingTime изменен в ViewModel: 12ч 1м 43с
+Обновление из TimeService - Время: 12ч 1м 43с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:22
+Обновление из TimeService - Время: 12ч 1м 43с
+RemainingTime изменено: 12ч 1м 43с
+Таймер тикает: 12ч 1м 43с, время: 14.04.2025 14:31:22
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:22
+Обновление из TimeService - Время: 12ч 1м 43с
+Навигация на страницу: ProfilePage
+Показано основное содержимое
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:23
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:23
+Обновление TextBlock в цели: 12ч 1м 42с, 14.04.2025 14:31:23
+RemainingTime изменен в ViewModel: 12ч 1м 42с
+Обновление из TimeService - Время: 12ч 1м 42с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:23
+Обновление из TimeService - Время: 12ч 1м 42с
+RemainingTime изменено: 12ч 1м 42с
+Таймер тикает: 12ч 1м 42с, время: 14.04.2025 14:31:23
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:23
+Обновление из TimeService - Время: 12ч 1м 42с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:24
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:24
+Обновление TextBlock в цели: 12ч 1м 41с, 14.04.2025 14:31:24
+RemainingTime изменен в ViewModel: 12ч 1м 41с
+Обновление из TimeService - Время: 12ч 1м 41с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:24
+Обновление из TimeService - Время: 12ч 1м 41с
+RemainingTime изменено: 12ч 1м 41с
+Таймер тикает: 12ч 1м 41с, время: 14.04.2025 14:31:24
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:24
+Обновление из TimeService - Время: 12ч 1м 41с
+Навигация на страницу: ProgramsPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:25
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:25
+Обновление TextBlock в цели: 12ч 1м 40с, 14.04.2025 14:31:25
+RemainingTime изменен в ViewModel: 12ч 1м 40с
+Обновление из TimeService - Время: 12ч 1м 40с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:25
+Обновление из TimeService - Время: 12ч 1м 40с
+RemainingTime изменено: 12ч 1м 40с
+Таймер тикает: 12ч 1м 40с, время: 14.04.2025 14:31:25
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:25
+Обновление из TimeService - Время: 12ч 1м 40с
+Навигация на страницу: FoodPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:26
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:26
+Обновление TextBlock в цели: 12ч 1м 39с, 14.04.2025 14:31:26
+RemainingTime изменен в ViewModel: 12ч 1м 39с
+Обновление из TimeService - Время: 12ч 1м 39с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:26
+Обновление из TimeService - Время: 12ч 1м 39с
+RemainingTime изменено: 12ч 1м 39с
+Таймер тикает: 12ч 1м 39с, время: 14.04.2025 14:31:26
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:26
+Обновление из TimeService - Время: 12ч 1м 39с
+Навигация на страницу: TariffPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:27
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:27
+Обновление TextBlock в цели: 12ч 1м 38с, 14.04.2025 14:31:27
+RemainingTime изменен в ViewModel: 12ч 1м 38с
+Обновление из TimeService - Время: 12ч 1м 38с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:27
+Обновление из TimeService - Время: 12ч 1м 38с
+RemainingTime изменено: 12ч 1м 38с
+Таймер тикает: 12ч 1м 38с, время: 14.04.2025 14:31:27
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:27
+Обновление из TimeService - Время: 12ч 1м 38с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:28
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:28
+Обновление TextBlock в цели: 12ч 1м 37с, 14.04.2025 14:31:28
+RemainingTime изменен в ViewModel: 12ч 1м 37с
+Обновление из TimeService - Время: 12ч 1м 37с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:28
+Обновление из TimeService - Время: 12ч 1м 37с
+RemainingTime изменено: 12ч 1м 37с
+Таймер тикает: 12ч 1м 37с, время: 14.04.2025 14:31:28
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:28
+Обновление из TimeService - Время: 12ч 1м 37с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:29
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:29
+Обновление TextBlock в цели: 12ч 1м 36с, 14.04.2025 14:31:29
+RemainingTime изменен в ViewModel: 12ч 1м 36с
+Обновление из TimeService - Время: 12ч 1м 36с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:29
+Обновление из TimeService - Время: 12ч 1м 36с
+RemainingTime изменено: 12ч 1м 36с
+Таймер тикает: 12ч 1м 36с, время: 14.04.2025 14:31:29
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:29
+Обновление из TimeService - Время: 12ч 1м 36с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:30
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:30
+Обновление TextBlock в цели: 12ч 1м 35с, 14.04.2025 14:31:30
+RemainingTime изменен в ViewModel: 12ч 1м 35с
+Обновление из TimeService - Время: 12ч 1м 35с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:30
+Обновление из TimeService - Время: 12ч 1м 35с
+RemainingTime изменено: 12ч 1м 35с
+Таймер тикает: 12ч 1м 35с, время: 14.04.2025 14:31:30
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:30
+Обновление из TimeService - Время: 12ч 1м 35с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:31
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:31
+Обновление TextBlock в цели: 12ч 1м 34с, 14.04.2025 14:31:31
+RemainingTime изменен в ViewModel: 12ч 1м 34с
+Обновление из TimeService - Время: 12ч 1м 34с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:31
+Обновление из TimeService - Время: 12ч 1м 34с
+RemainingTime изменено: 12ч 1м 34с
+Таймер тикает: 12ч 1м 34с, время: 14.04.2025 14:31:31
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:31
+Обновление из TimeService - Время: 12ч 1м 34с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:32
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:32
+Обновление TextBlock в цели: 12ч 1м 33с, 14.04.2025 14:31:32
+RemainingTime изменен в ViewModel: 12ч 1м 33с
+Обновление из TimeService - Время: 12ч 1м 33с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:32
+Обновление из TimeService - Время: 12ч 1м 33с
+RemainingTime изменено: 12ч 1м 33с
+Таймер тикает: 12ч 1м 33с, время: 14.04.2025 14:31:32
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:32
+Обновление из TimeService - Время: 12ч 1м 33с
+Навигация на страницу: TariffPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:33
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:33
+Обновление TextBlock в цели: 12ч 1м 32с, 14.04.2025 14:31:33
+RemainingTime изменен в ViewModel: 12ч 1м 32с
+Обновление из TimeService - Время: 12ч 1м 32с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:33
+Обновление из TimeService - Время: 12ч 1м 32с
+RemainingTime изменено: 12ч 1м 32с
+Таймер тикает: 12ч 1м 32с, время: 14.04.2025 14:31:33
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:33
+Обновление из TimeService - Время: 12ч 1м 32с
+Навигация на страницу: SettingsPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:34
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:34
+Обновление TextBlock в цели: 12ч 1м 31с, 14.04.2025 14:31:34
+RemainingTime изменен в ViewModel: 12ч 1м 31с
+Обновление из TimeService - Время: 12ч 1м 31с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:34
+Обновление из TimeService - Время: 12ч 1м 31с
+RemainingTime изменено: 12ч 1м 31с
+Таймер тикает: 12ч 1м 31с, время: 14.04.2025 14:31:34
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:34
+Обновление из TimeService - Время: 12ч 1м 31с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:35
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:36
+Обновление TextBlock в цели: 12ч 1м 30с, 14.04.2025 14:31:36
+RemainingTime изменен в ViewModel: 12ч 1м 30с
+Обновление из TimeService - Время: 12ч 1м 30с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:36
+Обновление из TimeService - Время: 12ч 1м 30с
+RemainingTime изменено: 12ч 1м 30с
+Таймер тикает: 12ч 1м 30с, время: 14.04.2025 14:31:36
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:36
+Обновление из TimeService - Время: 12ч 1м 30с
+Навигация на страницу: TariffPage
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:37
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:37
+Обновление TextBlock в цели: 12ч 1м 29с, 14.04.2025 14:31:37
+RemainingTime изменен в ViewModel: 12ч 1м 29с
+Обновление из TimeService - Время: 12ч 1м 29с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:37
+Обновление из TimeService - Время: 12ч 1м 29с
+RemainingTime изменено: 12ч 1м 29с
+Таймер тикает: 12ч 1м 29с, время: 14.04.2025 14:31:37
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:37
+Обновление из TimeService - Время: 12ч 1м 29с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:38
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:38
+Обновление TextBlock в цели: 12ч 1м 28с, 14.04.2025 14:31:38
+RemainingTime изменен в ViewModel: 12ч 1м 28с
+Обновление из TimeService - Время: 12ч 1м 28с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:38
+Обновление из TimeService - Время: 12ч 1м 28с
+RemainingTime изменено: 12ч 1м 28с
+Таймер тикает: 12ч 1м 28с, время: 14.04.2025 14:31:38
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:38
+Обновление из TimeService - Время: 12ч 1м 28с
+OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:39
+ViewModel.OnPropertyChanged вызван для RemainingTime: 14.04.2025 14:31:39
+Обновление TextBlock в цели: 12ч 1м 27с, 14.04.2025 14:31:39
+RemainingTime изменен в ViewModel: 12ч 1м 27с
+Обновление из TimeService - Время: 12ч 1м 27с
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:39
+Обновление из TimeService - Время: 12ч 1м 27с
+RemainingTime изменено: 12ч 1м 27с
+Таймер тикает: 12ч 1м 27с, время: 14.04.2025 14:31:39
+OnPropertyChanged вызван для FormattedRemainingTime: 14.04.2025 14:31:39
+Обновление из TimeService - Время: 12ч 1м 27с

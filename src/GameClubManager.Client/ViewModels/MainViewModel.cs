@@ -10,6 +10,7 @@ using GameClubManager.Client.Models;
 using GameClubManager.Client.Services;
 using GameClubManager.Client.Commands;
 using GameClubManager.Shared.Models;
+using System.Threading.Tasks;
 
 namespace GameClubManager.Client.ViewModels
 {
@@ -71,11 +72,14 @@ namespace GameClubManager.Client.ViewModels
         private readonly string _configFilePath = "config.json";
         private GameConfig _gameConfig;
 
-        public string RemainingTime => TimeService.Instance.RemainingTime;
-        public decimal Balance => TimeService.Instance.Balance;
+        private readonly AuthManager _authManager;
+        private readonly TimeService _timeService;
 
         public MainViewModel()
         {
+            _authManager = AuthManager.Instance;
+            _timeService = TimeService.Instance;
+
             // Инициализация команд
             ShowComputersCommand = new RelayCommand(ShowComputers);
             ShowBookingsCommand = new RelayCommand(ShowBookings);
@@ -91,7 +95,7 @@ namespace GameClubManager.Client.ViewModels
             LoadConfig();
 
             // Подписываемся на изменения времени
-            TimeService.Instance.PropertyChanged += (s, e) =>
+            _timeService.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == nameof(TimeService.RemainingTime))
                     OnPropertyChanged(nameof(RemainingTime));
@@ -99,6 +103,10 @@ namespace GameClubManager.Client.ViewModels
                     OnPropertyChanged(nameof(Balance));
             };
         }
+
+        public string Username => _authManager.CurrentUser?.Username ?? "Гость";
+        public decimal Balance => _timeService.Balance;
+        public string RemainingTime => _timeService.FormattedRemainingTime;
 
         private void LoadTestData()
         {
