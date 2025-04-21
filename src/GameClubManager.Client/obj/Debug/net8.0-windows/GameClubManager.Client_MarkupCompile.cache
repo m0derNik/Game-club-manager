@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\App.xaml
-9-1973404528
+101442847363
 
-281989489031
+37-1194566286
 2191850910667
-Dialogs\PasswordDialog.xaml;MainWindow.xaml;Pages\FoodPage.xaml;Pages\LoginPage.xaml;Pages\ProfilePage.xaml;Pages\ProgramsPage.xaml;Pages\RegisterPage.xaml;Pages\SettingsPage.xaml;Pages\TariffPage.xaml;
+Dialogs\PasswordDialog.xaml;MainWindow.xaml;Pages\ComputerRegistrationPage.xaml;Pages\FoodPage.xaml;Pages\LoginPage.xaml;Pages\ProfilePage.xaml;Pages\ProgramsPage.xaml;Pages\RegisterPage.xaml;Pages\SettingsPage.xaml;Pages\TariffPage.xaml;
 
 False
 

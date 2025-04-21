@@ -104,7 +104,7 @@ namespace GameClubManager.Client.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;component/pages/registerpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;V1.0.0.0;component/pages/registerpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\RegisterPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

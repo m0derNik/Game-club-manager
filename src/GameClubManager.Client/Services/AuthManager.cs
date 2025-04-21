@@ -124,6 +124,7 @@ public class AuthManager : INotifyPropertyChanged
     public bool IsAuthenticated => _currentUser != null;
     public UserDto? CurrentUser => _currentUser?.User;
     public string? Token => _currentUser?.Token;
+    public int CurrentUserId => _currentUser?.User?.Id ?? 0;
 
     public event PropertyChangedEventHandler PropertyChanged;
 

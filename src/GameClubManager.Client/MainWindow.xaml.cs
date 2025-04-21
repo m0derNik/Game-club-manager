@@ -19,7 +19,8 @@ namespace GameClubManager.Client
     {
         private Button currentButton;
         private readonly TimeService _timeService;
-        private readonly MainWindowViewModel _viewModel;
+        private readonly GameClubManager.Client.ViewModels.MainWindowViewModel _viewModel;
+        private readonly ComputerRegistrationService _computerService;
 
         public MainWindow()
         {
@@ -28,8 +29,11 @@ namespace GameClubManager.Client
             // Инициализируем TimeService
             _timeService = TimeService.Instance;
             
+            // Инициализируем ComputerService
+            _computerService = ComputerRegistrationService.Instance;
+            
             // Создаем ViewModel
-            _viewModel = new MainWindowViewModel();
+            _viewModel = new GameClubManager.Client.ViewModels.MainWindowViewModel();
             DataContext = _viewModel;
             
             // Отображаем страницу авторизации
@@ -78,24 +82,38 @@ namespace GameClubManager.Client
             }
         }
         
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            // Регистрируем компьютер при запуске приложения
+            await _computerService.RegisterComputerAsync();
+            
             // Обновляем данные при загрузке окна
             _viewModel.UpdateDataFromService();
             Trace.WriteLine("MainWindow загружено, данные обновлены");
         }
         
-        private void AuthManager_LoggedIn(object sender, EventArgs e)
+        private async void AuthManager_LoggedIn(object sender, EventArgs e)
         {
             ShowMainContent();
             
             // Вызываем обновление данных
             _viewModel.UpdateDataFromService();
+            
+            // Обновляем статус компьютера - занят текущим пользователем
+            var userId = AuthManager.Instance.CurrentUserId;
+            if (userId > 0)
+            {
+                await _computerService.UpdateStatusOnLoginAsync(userId);
+            }
+            
             Trace.WriteLine("Пользователь вошел в систему, данные обновлены");
         }
         
-        private void AuthManager_LoggedOut(object sender, EventArgs e)
+        private async void AuthManager_LoggedOut(object sender, EventArgs e)
         {
+            // Обновляем статус компьютера - свободен
+            await _computerService.UpdateStatusOnLogoutAsync();
+            
             ShowLoginPage();
             Trace.WriteLine("Пользователь вышел из системы");
         }
@@ -113,6 +131,7 @@ namespace GameClubManager.Client
             TariffButton.Click -= TariffButton_Click;
             SettingsButton.Click -= SettingsButton_Click;
             AdminHelpButton.Click -= AdminHelpButton_Click;
+            RegisterComputerButton.Click -= RegisterComputerButton_Click;
 
             // Инициализируем кнопки навигации
             ProfileButton.Click += ProfileButton_Click;
@@ -121,6 +140,7 @@ namespace GameClubManager.Client
             TariffButton.Click += TariffButton_Click;
             SettingsButton.Click += SettingsButton_Click;
             AdminHelpButton.Click += AdminHelpButton_Click;
+            RegisterComputerButton.Click += RegisterComputerButton_Click;
 
             // Начальная страница
             NavigateToPage(ProfileButton, new ProfilePage());
@@ -134,6 +154,7 @@ namespace GameClubManager.Client
         private void TariffButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(TariffButton, new TariffPage());
         private void SettingsButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(SettingsButton, new SettingsPage());
         private void AdminHelpButton_Click(object sender, RoutedEventArgs e) => ShowAdminHelp();
+        private void RegisterComputerButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(RegisterComputerButton, new ComputerRegistrationPage());
 
         private void NavigateToPage(Button button, Page page)
         {

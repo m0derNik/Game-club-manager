@@ -30,9 +30,22 @@
                         Orientation="Horizontal">
                 <TextBox Width="300"
                          materialDesign:HintAssist.Hint="Поиск пользователя..."
+                         materialDesign:HintAssist.Foreground="LightGray"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="White"
+                         CaretBrush="White"
+                         BorderBrush="Gray"
                          Margin="0,0,16,0"/>
+
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Command="{Binding RefreshCommand}"
+                        Margin="0,0,16,0"
+                        ToolTip="Обновить">
+                    <materialDesign:PackIcon Kind="Refresh" 
+                                           Width="20" 
+                                           Height="20"/>
+                </Button>
 
                 <Button Style="{StaticResource MaterialDesignRaisedButton}"
                         Command="{Binding AddUserCommand}">
@@ -47,41 +60,107 @@
             </StackPanel>
         </Grid>
 
+        <!-- Индикатор загрузки -->
+        <materialDesign:Card Grid.Row="1" 
+                           UniformCornerRadius="8"
+                           Padding="24"
+                           Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" 
+                           Style="{StaticResource MaterialDesignCircularProgressBar}"
+                           Width="50" 
+                           Height="50"
+                           Margin="0,0,0,16"/>
+                <TextBlock Text="Загрузка данных..." 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            </StackPanel>
+        </materialDesign:Card>
+        
+        <!-- Сообщение об отсутствии данных -->
+        <materialDesign:Card Grid.Row="1" 
+                            UniformCornerRadius="8"
+                            Padding="24"
+                            Visibility="{Binding IsEmptyVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center" 
+                      Margin="16">
+                <materialDesign:PackIcon Kind="AccountSearch" 
+                                       Width="32" 
+                                       Height="32" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,16"/>
+                <TextBlock Text="Пользователи не найдены" 
+                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                <TextBlock Text="Попробуйте изменить параметры поиска или обновить список" 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         TextAlignment="Center"
+                         Margin="0,8,0,0"/>
+            </StackPanel>
+        </materialDesign:Card>
+
         <!-- Список пользователей -->
         <DataGrid Grid.Row="1"
                   ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   Style="{StaticResource MaterialDesignDataGrid}"
                   materialDesign:DataGridAssist.CellPadding="13 8 8 8"
-                  materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                  Visibility="{Binding IsDataVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" 
                                   Binding="{Binding Id}" 
-                                  Width="80"/>
+                                  Width="60"/>
                 <DataGridTextColumn Header="Имя" 
                                   Binding="{Binding Name}" 
-                                  Width="150"/>
+                                  Width="140"/>
                 <DataGridTextColumn Header="Логин" 
                                   Binding="{Binding Username}" 
-                                  Width="120"/>
+                                  Width="100"/>
+                <DataGridTextColumn Header="Email" 
+                                  Binding="{Binding Email}" 
+                                  Width="150"/>
                 <DataGridTextColumn Header="Баланс" 
                                   Binding="{Binding Balance, StringFormat='{}{0:C}'}" 
+                                  Width="100"/>
+                <DataGridTextColumn Header="Оставшееся время" 
+                                  Binding="{Binding FormattedRemainingTime}" 
+                                  Width="120"/>
+                <DataGridTextColumn Header="Роль" 
+                                  Binding="{Binding Role}" 
                                   Width="100"/>
                 <DataGridTextColumn Header="Статус" 
                                   Binding="{Binding Status}" 
                                   Width="100"/>
-                <DataGridTextColumn Header="Дата регистрации" 
-                                  Binding="{Binding RegistrationDate, StringFormat='{}{0:dd.MM.yyyy}'}" 
-                                  Width="150"/>
-                <DataGridTemplateColumn Width="120">
+                <DataGridTemplateColumn Width="240">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        Command="{Binding DataContext.AddBalanceCommand, 
+                                                  RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Пополнить баланс">
+                                    <materialDesign:PackIcon Kind="Cash" 
+                                                           Width="20" 
+                                                           Height="20"/>
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        Command="{Binding DataContext.AddTimeCommand, 
+                                                  RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Добавить время">
+                                    <materialDesign:PackIcon Kind="Clock" 
+                                                           Width="20" 
+                                                           Height="20"/>
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignIconButton}"
                                         Command="{Binding DataContext.EditUserCommand, 
                                                   RelativeSource={RelativeSource AncestorType=Page}}"
-                                        CommandParameter="{Binding}">
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Редактировать">
                                     <materialDesign:PackIcon Kind="Pencil" 
                                                            Width="20" 
                                                            Height="20"/>
@@ -89,7 +168,8 @@
                                 <Button Style="{StaticResource MaterialDesignIconButton}"
                                         Command="{Binding DataContext.DeleteUserCommand, 
                                                   RelativeSource={RelativeSource AncestorType=Page}}"
-                                        CommandParameter="{Binding}">
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Удалить">
                                     <materialDesign:PackIcon Kind="Delete" 
                                                            Width="20" 
                                                            Height="20"/>

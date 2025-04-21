@@ -26,17 +26,72 @@
                        Style="{StaticResource HeaderTextStyle}"
                        VerticalAlignment="Center"/>
 
-            <TextBox Grid.Column="1"
-                     Width="300"
-                     materialDesign:HintAssist.Hint="Поиск компьютера..."
-                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Grid.Column="1" 
+                        Orientation="Horizontal">
+                <TextBox Width="300"
+                         materialDesign:HintAssist.Hint="Поиск компьютера..."
+                         materialDesign:HintAssist.Foreground="LightGray"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="White"
+                         CaretBrush="White"
+                         BorderBrush="Gray"
+                         Margin="0,0,16,0"/>
+                         
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Command="{Binding RefreshCommand}"
+                        ToolTip="Обновить">
+                    <materialDesign:PackIcon Kind="Refresh" 
+                                           Width="20" 
+                                           Height="20"/>
+                </Button>
+            </StackPanel>
         </Grid>
+
+        <!-- Индикатор загрузки -->
+        <materialDesign:Card Grid.Row="1" 
+                           UniformCornerRadius="8"
+                           Padding="24"
+                           Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" 
+                           Style="{StaticResource MaterialDesignCircularProgressBar}"
+                           Width="50" 
+                           Height="50"
+                           Margin="0,0,0,16"/>
+                <TextBlock Text="Загрузка компьютеров..." 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            </StackPanel>
+        </materialDesign:Card>
+        
+        <!-- Сообщение об отсутствии данных -->
+        <materialDesign:Card Grid.Row="1" 
+                            UniformCornerRadius="8"
+                            Padding="24"
+                            Visibility="{Binding IsEmptyVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center" 
+                      Margin="16">
+                <materialDesign:PackIcon Kind="Computer" 
+                                       Width="32" 
+                                       Height="32" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,16"/>
+                <TextBlock Text="Компьютеры не найдены" 
+                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                <TextBlock Text="Вход клиентов в систему еще не был выполнен или компьютеры не зарегистрированы" 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         TextAlignment="Center"
+                         Margin="0,8,0,0"/>
+            </StackPanel>
+        </materialDesign:Card>
 
         <!-- Список компьютеров -->
         <ScrollViewer Grid.Row="1" 
                       VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
+                      HorizontalScrollBarVisibility="Disabled"
+                      Visibility="{Binding IsDataVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ItemsControl ItemsSource="{Binding Computers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -68,10 +123,10 @@
                                 <StackPanel Grid.Row="1" Margin="0,16">
                                     <TextBlock Text="{Binding Status}"
                                                Style="{StaticResource BodyTextStyle}"/>
-                                    <TextBlock Text="{Binding CurrentUser}"
+                                    <TextBlock Text="{Binding CurrentUser, StringFormat='Пользователь: {0}'}"
                                                Style="{StaticResource BodyTextStyle}"
                                                Margin="0,8,0,0"/>
-                                    <TextBlock Text="{Binding TimeRemaining}"
+                                    <TextBlock Text="{Binding TimeRemaining, StringFormat='Оставшееся время: {0}'}"
                                                Style="{StaticResource BodyTextStyle}"
                                                Margin="0,8,0,0"/>
                                 </StackPanel>

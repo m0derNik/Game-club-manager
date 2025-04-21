@@ -11,6 +11,7 @@ using GameClubManager.Client.Services;
 using GameClubManager.Client.Commands;
 using GameClubManager.Shared.Models;
 using System.Threading.Tasks;
+using SharedStatus = GameClubManager.Shared.Models.ComputerStatus;
 
 namespace GameClubManager.Client.ViewModels
 {
@@ -119,7 +120,7 @@ namespace GameClubManager.Client.ViewModels
                     Specifications = "RTX 4080, i9-13900K, 32GB RAM",
                     IsAvailable = true,
                     PricePerHour = 200,
-                    Status = ComputerStatus.Available
+                    Status = SharedStatus.Available
                 },
                 new Computer
                 {
@@ -128,7 +129,7 @@ namespace GameClubManager.Client.ViewModels
                     Specifications = "RTX 4090, i9-14900K, 64GB RAM",
                     IsAvailable = true,
                     PricePerHour = 300,
-                    Status = ComputerStatus.Available
+                    Status = SharedStatus.Available
                 },
                 new Computer
                 {
@@ -137,7 +138,7 @@ namespace GameClubManager.Client.ViewModels
                     Specifications = "RTX 3060, i5-13600K, 16GB RAM",
                     IsAvailable = false,
                     PricePerHour = 150,
-                    Status = ComputerStatus.InUse
+                    Status = SharedStatus.InUse
                 }
             };
         }

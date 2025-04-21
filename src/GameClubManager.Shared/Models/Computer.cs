@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GameClubManager.Shared.Models
 {
@@ -10,6 +11,8 @@ namespace GameClubManager.Shared.Models
         public bool IsAvailable { get; set; }
         public decimal PricePerHour { get; set; }
         public ComputerStatus Status { get; set; }
+        public int? CurrentUserId { get; set; }
+        public DateTime LastActivity { get; set; }
         public List<InstalledGame> InstalledGames { get; set; } = new();
     }
 
