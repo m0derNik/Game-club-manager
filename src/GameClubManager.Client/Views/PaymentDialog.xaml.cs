@@ -58,7 +58,7 @@ namespace GameClubManager.Client.Views
             // Проверяем сумму
             if (!decimal.TryParse(AmountTextBox.Text, out decimal amount) || amount <= 0)
             {
-                MessageBox.Show("Пожалуйста, введите корректную сумму", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Пожалуйста, введите корректную сумму", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             
@@ -67,7 +67,7 @@ namespace GameClubManager.Client.Views
                 QiwiRadio.IsChecked == true ? "QIWI Кошелек" : "Яндекс Деньги";
             
             // Эмуляция задержки для реалистичности
-            Mouse.OverrideCursor = Cursors.Wait;
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             
             try
             {
@@ -77,14 +77,14 @@ namespace GameClubManager.Client.Views
                 // Добавляем средства на баланс
                 _timeService.AddBalance(amount);
                 
-                MessageBox.Show($"Баланс успешно пополнен на {amount:C}!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show($"Баланс успешно пополнен на {amount:C}!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 
                 DialogResult = true;
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при пополнении баланса: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при пополнении баланса: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -93,3 +93,5 @@ namespace GameClubManager.Client.Views
         }
     }
 } 
+
+

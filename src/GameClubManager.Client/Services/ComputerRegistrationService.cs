@@ -56,7 +56,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка регистрации компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка регистрации компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -69,7 +69,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка привязки пользователя к компьютеру: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка привязки пользователя к компьютеру: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -82,7 +82,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка отвязки пользователя от компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка отвязки пользователя от компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -245,3 +245,5 @@ namespace GameClubManager.Client.Services
         }
     }
 }
+
+

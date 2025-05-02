@@ -25,3 +25,5 @@ namespace GameClubManager.Client.Models
         OutOfService
     }
 } 
+
+

@@ -85,7 +85,7 @@ namespace GameClubManager.Client.ViewModels
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             // Принудительно обновляем данные каждые 500 мс
-            Application.Current.Dispatcher.Invoke(() => {
+            System.Windows.Application.Current.Dispatcher.Invoke(() => {
                 var currentTime = _timeService.FormattedRemainingTime;
                 if (_formattedRemainingTime != currentTime)
                 {
@@ -106,7 +106,7 @@ namespace GameClubManager.Client.ViewModels
         private void TimeService_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // Выполняем обновление в UI потоке
-            Application.Current.Dispatcher.Invoke(() => {
+            System.Windows.Application.Current.Dispatcher.Invoke(() => {
                 if (e.PropertyName == nameof(TimeService.FormattedRemainingTime) || 
                     e.PropertyName == nameof(TimeService.RemainingTime))
                 {
@@ -128,3 +128,5 @@ namespace GameClubManager.Client.ViewModels
         }
     }
 } 
+
+

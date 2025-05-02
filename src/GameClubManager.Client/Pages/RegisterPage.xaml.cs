@@ -27,21 +27,21 @@ namespace GameClubManager.Client.Pages
                 string.IsNullOrWhiteSpace(password) || 
                 string.IsNullOrWhiteSpace(confirmPassword))
             {
-                MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (password != confirmPassword)
             {
-                MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             var success = await AuthManager.Instance.RegisterAsync(username, email, password);
             if (success)
             {
-                MessageBox.Show("Регистрация успешна!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                if (Application.Current.MainWindow is MainWindow mainWindow)
+                System.Windows.MessageBox.Show("Регистрация успешна!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (System.Windows.Application.Current.MainWindow is MainWindow mainWindow)
                 {
                     mainWindow.ShowMainContent();
                 }
@@ -54,3 +54,5 @@ namespace GameClubManager.Client.Pages
         }
     }
 } 
+
+

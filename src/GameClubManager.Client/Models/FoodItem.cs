@@ -39,3 +39,5 @@ namespace GameClubManager.Client.Models
         Snack
     }
 }
+
+

@@ -24,3 +24,5 @@ namespace GameClubManager.Client.Dialogs
         }
     }
 } 
+
+

@@ -13,3 +13,5 @@ public class GameConfig
     [JsonPropertyName("serverUrl")]
     public string ServerUrl { get; set; } = string.Empty;
 } 
+
+

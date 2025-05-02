@@ -47,7 +47,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при получении списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при получении списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return new List<Models.ComputerDto>();
             }
         }
@@ -73,7 +73,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при получении данных о компьютере: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при получении данных о компьютере: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -96,7 +96,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при бронировании компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при бронировании компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -112,7 +112,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при освобождении компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при освобождении компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -139,9 +139,11 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при обновлении данных о компьютере: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при обновлении данных о компьютере: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
     }
 } 
+
+

@@ -1,0 +1,79 @@
+<Window x:Class="GameClubManager.Admin.Pages.RemoteDesktopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameClubManager.Admin.Pages"
+        mc:Ignorable="d"
+        Title="Удаленное управление" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Верхняя панель с информацией о компьютере -->
+        <Border Grid.Row="0" Background="#1E1E1E" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock x:Name="ComputerNameText" Text="Компьютер: " Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="ConnectionStatusText" Text="Подключение..." Foreground="Yellow" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button x:Name="CtrlAltDelButton" Content="Ctrl+Alt+Del" Width="100" Margin="5,0" Click="CtrlAltDelButton_Click"/>
+                    <Button x:Name="SendFileButton" Content="Отправить файл" Width="120" Margin="5,0" Click="SendFileButton_Click"/>
+                    <Button x:Name="DisconnectButton" Content="Отключиться" Width="100" Margin="5,0" Click="DisconnectButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- Основное содержимое - изображение рабочего стола -->
+        <Border Grid.Row="1" BorderBrush="#333333" BorderThickness="1">
+            <Image x:Name="RemoteDesktopImage" Stretch="Uniform" 
+                   MouseMove="RemoteDesktopImage_MouseMove"
+                   MouseDown="RemoteDesktopImage_MouseDown"
+                   MouseUp="RemoteDesktopImage_MouseUp"
+                   MouseWheel="RemoteDesktopImage_MouseWheel"
+                   KeyDown="RemoteDesktopImage_KeyDown"
+                   KeyUp="RemoteDesktopImage_KeyUp"
+                   Focusable="True"/>
+        </Border>
+        
+        <!-- Нижняя панель - статистика и управление -->
+        <Border Grid.Row="2" Background="#1E1E1E" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Разрешение: " Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="ResolutionText" Text="0x0" Foreground="White" VerticalAlignment="Center"/>
+                    
+                    <TextBlock Text="   FPS: " Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock x:Name="FpsText" Text="0" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <TextBlock Text="Курсор мыши X:" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="MouseXText" Text="0" Foreground="White" VerticalAlignment="Center" Width="40" Margin="5,0"/>
+                    
+                    <TextBlock Text="Y:" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="MouseYText" Text="0" Foreground="White" VerticalAlignment="Center" Width="40" Margin="5,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window> 

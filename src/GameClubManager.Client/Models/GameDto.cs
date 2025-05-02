@@ -17,3 +17,5 @@ namespace GameClubManager.Client.Models
         public DateTime ReleaseDate { get; set; }
     }
 } 
+
+

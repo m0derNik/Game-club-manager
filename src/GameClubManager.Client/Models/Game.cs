@@ -26,3 +26,5 @@ namespace GameClubManager.Client.Models
         public bool IsEnabled { get; set; } = true;
     }
 } 
+
+

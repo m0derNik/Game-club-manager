@@ -16,5 +16,11 @@ namespace GameClubManager.Shared.Interfaces
         Task<IEnumerable<InstalledGame>> GetInstalledGamesAsync(int computerId);
         Task<bool> ActivateGameLicenseAsync(int computerId, int gameId);
         Task<bool> DeactivateGameLicenseAsync(int computerId, int gameId);
+        
+        // Методы для удаленного управления
+        Task<RemoteDesktopData> GetScreenshotAsync(int computerId);
+        Task<bool> SendRemoteInputAsync(RemoteInput input);
+        Task<bool> StartRemoteSessionAsync(int computerId);
+        Task<bool> StopRemoteSessionAsync(int computerId);
     }
 } 

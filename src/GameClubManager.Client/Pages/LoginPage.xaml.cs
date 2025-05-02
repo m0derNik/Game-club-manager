@@ -22,7 +22,7 @@ namespace GameClubManager.Client.Pages
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -30,8 +30,8 @@ namespace GameClubManager.Client.Pages
             if (success)
             {
                 // TODO: Перейти на главную страницу
-                MessageBox.Show("Успешный вход!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                if (Application.Current.MainWindow is MainWindow mainWindow)
+                System.Windows.MessageBox.Show("Успешный вход!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (System.Windows.Application.Current.MainWindow is MainWindow mainWindow)
                 {
                     mainWindow.ShowMainContent();
                 }
@@ -45,3 +45,5 @@ namespace GameClubManager.Client.Pages
         }
     }
 } 
+
+

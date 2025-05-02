@@ -29,7 +29,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при получении списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при получении списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return new List<Models.ComputerDto>();
             }
         }
@@ -41,7 +41,7 @@ namespace GameClubManager.Client.Services
             {
                 if (!_authManager.IsAuthenticated)
                 {
-                    MessageBox.Show("Необходимо авторизоваться для выбора компьютера", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    System.Windows.MessageBox.Show("Необходимо авторизоваться для выбора компьютера", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
                 
@@ -61,7 +61,7 @@ namespace GameClubManager.Client.Services
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Компьютер привязан, но не удалось получить информацию о нем: {ex.Message}", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        System.Windows.MessageBox.Show($"Компьютер привязан, но не удалось получить информацию о нем: {ex.Message}", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return true; // Привязка все равно выполнена успешно
                     }
                 }
@@ -70,7 +70,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при привязке к компьютеру: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при привязке к компьютеру: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -82,13 +82,13 @@ namespace GameClubManager.Client.Services
             {
                 if (!_authManager.IsAuthenticated)
                 {
-                    MessageBox.Show("Необходимо авторизоваться", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    System.Windows.MessageBox.Show("Необходимо авторизоваться", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
                 
                 if (_authManager.CurrentComputer == null)
                 {
-                    MessageBox.Show("Нет привязанного компьютера", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                    System.Windows.MessageBox.Show("Нет привязанного компьютера", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     return false;
                 }
                 
@@ -104,9 +104,11 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при отвязке от компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при отвязке от компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
     }
 } 
+
+

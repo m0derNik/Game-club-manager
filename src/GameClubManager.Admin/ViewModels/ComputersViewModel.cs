@@ -34,6 +34,7 @@ namespace GameClubManager.Admin.ViewModels
             RestartCommand = new RelayCommand<Computer>(ExecuteRestart);
             ShutdownCommand = new RelayCommand<Computer>(ExecuteShutdown);
             RefreshCommand = new RelayCommand(ExecuteRefresh);
+            ConnectCommand = new RelayCommand<Computer>(ExecuteConnect);
             
             // Загружаем компьютеры
             _ = LoadComputersAsync();
@@ -113,6 +114,7 @@ namespace GameClubManager.Admin.ViewModels
         public ICommand RestartCommand { get; }
         public ICommand ShutdownCommand { get; }
         public ICommand RefreshCommand { get; }
+        public ICommand ConnectCommand { get; }
 
         private async Task LoadComputersAsync()
         {
@@ -186,6 +188,23 @@ namespace GameClubManager.Admin.ViewModels
         private void ExecuteRefresh()
         {
             _ = LoadComputersAsync();
+        }
+
+        private void ExecuteConnect(Computer computer)
+        {
+            if (computer == null) return;
+            
+            try
+            {
+                // Создаем и открываем окно удаленного управления
+                var remoteDesktopWindow = new Pages.RemoteDesktopWindow(computer.Id, computer.Name);
+                remoteDesktopWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при подключении к удаленному рабочему столу: {ex.Message}", 
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

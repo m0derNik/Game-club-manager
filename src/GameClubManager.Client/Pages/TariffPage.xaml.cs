@@ -15,3 +15,5 @@ namespace GameClubManager.Client.Pages
         }
     }
 } 
+
+

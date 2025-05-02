@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +17,7 @@ namespace GameClubManager.Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Button currentButton;
+        private System.Windows.Controls.Button currentButton;
         private readonly TimeService _timeService;
         private readonly GameClubManager.Client.ViewModels.MainWindowViewModel _viewModel;
         private readonly ComputerRegistrationService _computerService;
@@ -26,27 +26,27 @@ namespace GameClubManager.Client
         {
             InitializeComponent();
             
-            // Инициализируем TimeService
+            // �������������� TimeService
             _timeService = TimeService.Instance;
             
-            // Инициализируем ComputerService
+            // �������������� ComputerService
             _computerService = ComputerRegistrationService.Instance;
             
-            // Создаем ViewModel
+            // ������� ViewModel
             _viewModel = new GameClubManager.Client.ViewModels.MainWindowViewModel();
             DataContext = _viewModel;
             
-            // Отображаем страницу авторизации
+            // ���������� �������� �����������
             AuthFrame.Navigate(new LoginPage());
 
-            // Подписываемся на события авторизации
+            // ������������� �� ������� �����������
             AuthManager.Instance.LoggedOut += AuthManager_LoggedOut;
             AuthManager.Instance.LoggedIn += AuthManager_LoggedIn;
 
-            // Блокируем Alt+F4 и Alt+Tab
+            // ��������� Alt+F4 � Alt+Tab
             PreviewKeyDown += MainWindow_PreviewKeyDown;
             
-            // Обновляем данные при загрузке
+            // ��������� ������ ��� ��������
             Loaded += MainWindow_Loaded;
         }
         
@@ -54,13 +54,13 @@ namespace GameClubManager.Client
         {
             if (sender is TextBlock textBlock)
             {
-                // Мигание при обновлении
+                // ������� ��� ����������
                 var originalBrush = textBlock.Foreground;
-                textBlock.Foreground = Brushes.LimeGreen;
+                textBlock.Foreground = System.Windows.Media.Brushes.LimeGreen;
                 
-                Trace.WriteLine($"Обновление TextBlock из источника: {textBlock.Text}, {DateTime.Now}");
+                Trace.WriteLine($"���������� TextBlock �� ���������: {textBlock.Text}, {DateTime.Now}");
                 
-                // Возвращаем цвет через 300 мс
+                // ���������� ���� ����� 300 ��
                 var timer = new System.Windows.Threading.DispatcherTimer
                 {
                     Interval = TimeSpan.FromMilliseconds(300)
@@ -78,53 +78,53 @@ namespace GameClubManager.Client
         {
             if (sender is TextBlock textBlock)
             {
-                Trace.WriteLine($"Обновление TextBlock в цели: {textBlock.Text}, {DateTime.Now}");
+                Trace.WriteLine($"���������� TextBlock � ����: {textBlock.Text}, {DateTime.Now}");
             }
         }
         
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Регистрируем компьютер при запуске приложения
+            // ������������ ��������� ��� ������� ����������
             await _computerService.RegisterComputerAsync();
             
-            // Обновляем данные при загрузке окна
+            // ��������� ������ ��� �������� ����
             _viewModel.UpdateDataFromService();
-            Trace.WriteLine("MainWindow загружено, данные обновлены");
+            Trace.WriteLine("MainWindow ���������, ������ ���������");
         }
         
         private async void AuthManager_LoggedIn(object sender, EventArgs e)
         {
             ShowMainContent();
             
-            // Вызываем обновление данных
+            // �������� ���������� ������
             _viewModel.UpdateDataFromService();
             
-            // Обновляем статус компьютера - занят текущим пользователем
+            // ��������� ������ ���������� - ����� ������� �������������
             var userId = AuthManager.Instance.CurrentUserId;
             if (userId > 0)
             {
                 await _computerService.UpdateStatusOnLoginAsync(userId);
             }
             
-            Trace.WriteLine("Пользователь вошел в систему, данные обновлены");
+            Trace.WriteLine("������������ ����� � �������, ������ ���������");
         }
         
         private async void AuthManager_LoggedOut(object sender, EventArgs e)
         {
-            // Обновляем статус компьютера - свободен
+            // ��������� ������ ���������� - ��������
             await _computerService.UpdateStatusOnLogoutAsync();
             
             ShowLoginPage();
-            Trace.WriteLine("Пользователь вышел из системы");
+            Trace.WriteLine("������������ ����� �� �������");
         }
 
         public void ShowMainContent()
         {
-            // Показываем основное содержимое
+            // ���������� �������� ����������
             MainGrid.Visibility = Visibility.Visible;
             AuthFrame.Visibility = Visibility.Collapsed;
 
-            // Очищаем предыдущие обработчики, чтобы избежать дублирования
+            // ������� ���������� �����������, ����� �������� ������������
             ProfileButton.Click -= ProfileButton_Click;
             ProgramsButton.Click -= ProgramsButton_Click;
             FoodButton.Click -= FoodButton_Click;
@@ -132,7 +132,7 @@ namespace GameClubManager.Client
             SettingsButton.Click -= SettingsButton_Click;
             AdminHelpButton.Click -= AdminHelpButton_Click;
 
-            // Инициализируем кнопки навигации
+            // �������������� ������ ���������
             ProfileButton.Click += ProfileButton_Click;
             ProgramsButton.Click += ProgramsButton_Click;
             FoodButton.Click += FoodButton_Click;
@@ -140,10 +140,10 @@ namespace GameClubManager.Client
             SettingsButton.Click += SettingsButton_Click;
             AdminHelpButton.Click += AdminHelpButton_Click;
 
-            // Начальная страница
+            // ��������� ��������
             NavigateToPage(ProfileButton, new ProfilePage());
             
-            Trace.WriteLine("Показано основное содержимое");
+            Trace.WriteLine("�������� �������� ����������");
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(ProfileButton, new ProfilePage());
@@ -153,32 +153,32 @@ namespace GameClubManager.Client
         private void SettingsButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(SettingsButton, new SettingsPage());
         private void AdminHelpButton_Click(object sender, RoutedEventArgs e) => ShowAdminHelp();
 
-        private void NavigateToPage(Button button, Page page)
+        private void NavigateToPage(System.Windows.Controls.Button button, Page page)
         {
-            // Сбрасываем подсветку текущей кнопки
+            // ���������� ��������� ������� ������
             if (currentButton != null)
             {
                 currentButton.Background = (SolidColorBrush)FindResource("PrimaryBrush");
             }
 
-            // Подсвечиваем новую кнопку
+            // ������������ ����� ������
             currentButton = button;
-            button.Background = new SolidColorBrush(Color.FromArgb(50, 255, 255, 255));
+            button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(50, 255, 255, 255));
 
-            // Загружаем страницу в основной контент
+            // ��������� �������� � �������� �������
             MainContent.Navigate(page);
             
-            Trace.WriteLine($"Навигация на страницу: {page.GetType().Name}");
+            Trace.WriteLine($"��������� �� ��������: {page.GetType().Name}");
         }
 
         private void ShowAdminHelp()
         {
-            MessageBox.Show("Админ в пути", "Помощь админа", MessageBoxButton.OK, MessageBoxImage.Information);
+            System.Windows.MessageBox.Show("����� � ����", "������ ������", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void MainWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            // Блокируем Alt+F4 и Alt+Tab
+            // ��������� Alt+F4 � Alt+Tab
             if (e.Key == Key.System && (e.SystemKey == Key.F4 || e.SystemKey == Key.Tab))
             {
                 e.Handled = true;
@@ -187,7 +187,7 @@ namespace GameClubManager.Client
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            // Запрашиваем пароль при закрытии
+            // ����������� ������ ��� ��������
             if (!AuthManager.VerifyPassword())
             {
                 e.Cancel = true;
@@ -210,7 +210,7 @@ namespace GameClubManager.Client
             Close();
         }
 
-        // Обработка перетаскивания окна
+        // ��������� �������������� ����
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -222,12 +222,14 @@ namespace GameClubManager.Client
 
         private void ShowLoginPage()
         {
-            // Скрываем основное содержимое
+            // �������� �������� ����������
             MainGrid.Visibility = Visibility.Collapsed;
             AuthFrame.Visibility = Visibility.Visible;
             
-            // Переходим на страницу авторизации
+            // ��������� �� �������� �����������
             AuthFrame.Navigate(new LoginPage());
         }
     }
 }
+
+

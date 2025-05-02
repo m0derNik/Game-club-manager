@@ -46,14 +46,14 @@ public class AuthManager : INotifyPropertyChanged
                 await _timeService.LoadUserDataAsync(response.User.Id);
                 OnPropertyChanged(nameof(CurrentUser));
                 OnPropertyChanged(nameof(IsAuthenticated));
-                MessageBox.Show($"Успешная регистрация! Токен: {response.Token}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show($"Успешная регистрация! Токен: {response.Token}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
             return false;
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
@@ -88,7 +88,7 @@ public class AuthManager : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
@@ -109,7 +109,7 @@ public class AuthManager : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при выходе: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при выходе: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -146,3 +146,5 @@ public class AuthManager : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 } 
+
+

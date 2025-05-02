@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1B8CD935-08E3-4CD0-8791-923916A85E5A}|src\\GameClubManager.Server\\GameClubManager.Server.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\game-club-manager\\src\\gameclubmanager.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B8CD935-08E3-4CD0-8791-923916A85E5A}|src\\GameClubManager.Server\\GameClubManager.Server.csproj|solutionrelative:src\\gameclubmanager.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\game-club-manager\\src\\gameclubmanager.admin\\services\\remotedesktopservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{495AB503-1B03-41B3-B162-0D8D46703C7E}|src\\GameClubManager.Admin\\GameClubManager.Admin.csproj|solutionrelative:src\\gameclubmanager.admin\\services\\remotedesktopservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|c:\\users\\kiril\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\c#\\game-club-manager\\src\\gameclubmanager.client\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4356936E-B805-4C60-8A1C-9696F24B4B35}|src\\GameClubManager.Client\\GameClubManager.Client.csproj|solutionrelative:src\\gameclubmanager.client\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,19 +63,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\Program.cs",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Server\\Program.cs",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\Program.cs",
+              "RelativeToolTip": "src\\GameClubManager.Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T14:50:49.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RemoteDesktopService.cs",
+              "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Services\\RemoteDesktopService.cs",
+              "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\Services\\RemoteDesktopService.cs",
+              "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Services\\RemoteDesktopService.cs",
+              "RelativeToolTip": "src\\GameClubManager.Admin\\Services\\RemoteDesktopService.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAWwJEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T14:29:24.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ApiService.cs",
               "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Client\\Services\\ApiService.cs",
               "RelativeDocumentMoniker": "src\\GameClubManager.Client\\Services\\ApiService.cs",
               "ToolTip": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Client\\Services\\ApiService.cs",
               "RelativeToolTip": "src\\GameClubManager.Client\\Services\\ApiService.cs",
-              "ViewState": "AgIAABIBAAAAAAAAAAAewFsBAABDAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsBAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-26T10:59:14.135Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "UsersPage.xaml",
               "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Pages\\UsersPage.xaml",
               "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\Pages\\UsersPage.xaml",
@@ -78,7 +112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "SettingsPage.xaml",
               "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Pages\\SettingsPage.xaml",
               "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\Pages\\SettingsPage.xaml",
@@ -89,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "OrdersPage.xaml",
               "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Pages\\OrdersPage.xaml",
               "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\Pages\\OrdersPage.xaml",
@@ -100,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "NotificationsPage.xaml",
               "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Pages\\NotificationsPage.xaml",
               "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\Pages\\NotificationsPage.xaml",
@@ -111,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ComputersPage.xaml",
               "DocumentMoniker": "C:\\Users\\kiril\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\Pages\\ComputersPage.xaml",
               "RelativeDocumentMoniker": "src\\GameClubManager.Admin\\Pages\\ComputersPage.xaml",

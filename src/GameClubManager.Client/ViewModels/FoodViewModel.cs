@@ -143,3 +143,5 @@ namespace GameClubManager.Client.ViewModels
         }
     }
 } 
+
+

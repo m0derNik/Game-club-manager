@@ -39,6 +39,12 @@ namespace GameClubManager.Client.Services
             
             Trace.WriteLine($"TimeService создан: {DateTime.Now}");
         }
+        
+        public void Initialize()
+        {
+            Trace.WriteLine($"TimeService инициализирован: {DateTime.Now}");
+            // Дополнительная логика инициализации, если потребуется
+        }
 
         public decimal Balance
         {
@@ -98,7 +104,7 @@ namespace GameClubManager.Client.Services
                     Trace.WriteLine($"Данные получены: Баланс={userData.Balance}, Время={userData.RemainingTime}");
                     
                     // Обновляем баланс в UI потоке
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    await System.Windows.Application.Current.Dispatcher.InvokeAsync(() =>
                     {
                         Balance = userData.Balance;
                         RemainingTime = userData.RemainingTime;
@@ -119,15 +125,15 @@ namespace GameClubManager.Client.Services
                 else
                 {
                     Trace.WriteLine($"Ошибка: не удалось получить данные пользователя {userId}");
-                    MessageBox.Show($"Не удалось загрузить данные пользователя.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show($"Не удалось загрузить данные пользователя.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
                 Trace.WriteLine($"Исключение при загрузке данных пользователя: {ex.Message}");
-                await Application.Current.Dispatcher.InvokeAsync(() =>
+                await System.Windows.Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    MessageBox.Show($"Произошла ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show($"Произошла ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 });
             }
             finally
@@ -236,7 +242,7 @@ namespace GameClubManager.Client.Services
                 var newRemainingTime = RemainingTime.Subtract(TimeSpan.FromSeconds(1));
                 
                 // Устанавливаем новое значение в потоке UI
-                Application.Current.Dispatcher.Invoke(() => {
+                System.Windows.Application.Current.Dispatcher.Invoke(() => {
                     RemainingTime = newRemainingTime;
                 });
                 
@@ -252,8 +258,8 @@ namespace GameClubManager.Client.Services
             else
             {
                 StopTimer();
-                Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                    MessageBox.Show("Время истекло!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                    System.Windows.MessageBox.Show("Время истекло!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }));
             }
         }
@@ -266,16 +272,18 @@ namespace GameClubManager.Client.Services
             Trace.WriteLine($"NotifyPropertyChanged вызван для {propertyName}: {DateTime.Now}");
             
             // Убедимся, что уведомление отправляется в потоке UI
-            if (Application.Current.Dispatcher.CheckAccess())
+            if (System.Windows.Application.Current.Dispatcher.CheckAccess())
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
             else
             {
-                Application.Current.Dispatcher.Invoke(() => {
+                System.Windows.Application.Current.Dispatcher.Invoke(() => {
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
                 }, DispatcherPriority.Render);
             }
         }
     }
 } 
+
+

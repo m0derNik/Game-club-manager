@@ -52,7 +52,7 @@ namespace GameClubManager.Client.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке продуктов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при загрузке продуктов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 // Используем мок-данные в случае ошибки
                 AvailableFoodItems = GetMockFoodItems();
             }
@@ -116,7 +116,7 @@ namespace GameClubManager.Client.Services
             {
                 if (_cart.Count == 0)
                 {
-                    MessageBox.Show("Корзина пуста", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    System.Windows.MessageBox.Show("Корзина пуста", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
                 
@@ -124,7 +124,7 @@ namespace GameClubManager.Client.Services
                 var total = CartTotal;
                 if (_timeService.Balance < total)
                 {
-                    MessageBox.Show($"Недостаточно средств на счете. Необходимо: {total:C}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    System.Windows.MessageBox.Show($"Недостаточно средств на счете. Необходимо: {total:C}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
                 
@@ -148,7 +148,7 @@ namespace GameClubManager.Client.Services
                 var orderResponse = await _apiService.CreateOrderAsync(orderRequest);
                 if (orderResponse == null)
                 {
-                    MessageBox.Show("Не удалось создать заказ. Повторите попытку позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show("Не удалось создать заказ. Повторите попытку позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 
@@ -158,12 +158,12 @@ namespace GameClubManager.Client.Services
                 // Очищаем корзину
                 _cart.Clear();
                 
-                MessageBox.Show($"Заказ #{orderResponse.Id} оформлен на сумму {total:C}. Ожидайте доставки.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show($"Заказ #{orderResponse.Id} оформлен на сумму {total:C}. Ожидайте доставки.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при оформлении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при оформлении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -246,3 +246,5 @@ namespace GameClubManager.Client.Services
         }
     }
 } 
+
+

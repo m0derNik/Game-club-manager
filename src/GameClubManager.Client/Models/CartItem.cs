@@ -50,3 +50,5 @@ namespace GameClubManager.Client.Models
         }
     }
 } 
+
+

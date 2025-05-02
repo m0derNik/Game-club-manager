@@ -104,7 +104,7 @@ namespace GameClubManager.Client.ViewModels
                     // Добавляем время
                     _timeService.AddTime(tariff.Duration);
                     
-                    MessageBox.Show(
+                    System.Windows.MessageBox.Show(
                         $"Вы успешно приобрели тариф \"{tariff.Name}\".\nДобавлено: {FormatDuration(tariff.Duration)}",
                         "Тариф активирован",
                         MessageBoxButton.OK,
@@ -112,7 +112,7 @@ namespace GameClubManager.Client.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show(
+                    System.Windows.MessageBox.Show(
                         $"Недостаточно средств для покупки тарифа.\nНеобходимо: {tariff.Price:C}, доступно: {_timeService.Balance:C}",
                         "Ошибка покупки",
                         MessageBoxButton.OK,
@@ -139,3 +139,5 @@ namespace GameClubManager.Client.ViewModels
         }
     }
 } 
+
+

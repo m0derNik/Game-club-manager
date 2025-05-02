@@ -8,3 +8,5 @@ namespace GameClubManager.Client.Models
         public int? UserId { get; set; }
     }
 } 
+
+

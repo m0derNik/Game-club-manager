@@ -100,8 +100,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Width="280" 
-                                Height="200" 
+                        <Border Width="320" 
+                                Height="240" 
                                 Margin="0,0,16,16"
                                 Background="{DynamicResource MaterialDesignPaper}"
                                 CornerRadius="8"
@@ -133,33 +133,55 @@
 
                                 <!-- Кнопки управления -->
                                 <StackPanel Grid.Row="2" 
-                                          Orientation="Horizontal" 
-                                          HorizontalAlignment="Right">
+                                          Orientation="Vertical" 
+                                          HorizontalAlignment="Center"
+                                          Margin="0,8,0,0">
                                     <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Command="{Binding DataContext.RestartCommand, 
+                                            Command="{Binding DataContext.ConnectCommand, 
                                                       RelativeSource={RelativeSource AncestorType=Page}}"
                                             CommandParameter="{Binding}"
-                                            Margin="0,0,8,0">
+                                            Margin="0,0,0,8"
+                                            Padding="12,6"
+                                            Width="220">
                                         <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Restart" 
-                                                                   Width="20" 
-                                                                   Height="20" 
+                                            <materialDesign:PackIcon Kind="RemoteDesktop" 
+                                                                   Width="24" 
+                                                                   Height="24" 
                                                                    Margin="0,0,8,0"/>
-                                            <TextBlock Text="Перезапуск"/>
+                                            <TextBlock Text="Подключиться" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Command="{Binding DataContext.ShutdownCommand, 
-                                                      RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Power" 
-                                                                   Width="20" 
-                                                                   Height="20" 
-                                                                   Margin="0,0,8,0"/>
-                                            <TextBlock Text="Выключение"/>
-                                        </StackPanel>
-                                    </Button>
+                                    
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                Command="{Binding DataContext.RestartCommand, 
+                                                          RelativeSource={RelativeSource AncestorType=Page}}"
+                                                CommandParameter="{Binding}"
+                                                Margin="0,0,8,0"
+                                                Padding="8,4">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Restart" 
+                                                                       Width="20" 
+                                                                       Height="20" 
+                                                                       Margin="0,0,8,0"/>
+                                                <TextBlock Text="Перезапуск"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                Command="{Binding DataContext.ShutdownCommand, 
+                                                          RelativeSource={RelativeSource AncestorType=Page}}"
+                                                CommandParameter="{Binding}"
+                                                Padding="8,4">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Power" 
+                                                                       Width="20" 
+                                                                       Height="20" 
+                                                                       Margin="0,0,8,0"/>
+                                                <TextBlock Text="Выключение"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Border>

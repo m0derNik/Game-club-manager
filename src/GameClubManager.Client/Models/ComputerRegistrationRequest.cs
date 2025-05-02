@@ -11,3 +11,5 @@ namespace GameClubManager.Client.Models
         public decimal PricePerHour { get; set; }
     }
 } 
+
+

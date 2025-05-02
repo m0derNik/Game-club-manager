@@ -12,3 +12,5 @@ namespace GameClubManager.Client.Models
         public bool IsPopular { get; set; }
     }
 } 
+
+

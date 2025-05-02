@@ -12,7 +12,7 @@ using GameClubManager.Client.Services;
 
 namespace GameClubManager.Client.UserControls
 {
-    public partial class ComputerSelector : UserControl, INotifyPropertyChanged
+    public partial class ComputerSelector : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
         private readonly ComputerBindingService _computerBindingService;
@@ -83,7 +83,7 @@ namespace GameClubManager.Client.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке списка компьютеров: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при загрузке списка компьютеров: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -99,7 +99,7 @@ namespace GameClubManager.Client.UserControls
                 // Если компьютер занят, показываем сообщение
                 if (computer.Status == ComputerStatus.Occupied)
                 {
-                    MessageBox.Show("Этот компьютер уже занят другим пользователем.", 
+                    System.Windows.MessageBox.Show("Этот компьютер уже занят другим пользователем.", 
                         "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
@@ -134,3 +134,5 @@ namespace GameClubManager.Client.UserControls
         }
     }
 } 
+
+

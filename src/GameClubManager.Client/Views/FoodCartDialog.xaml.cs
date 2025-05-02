@@ -27,3 +27,5 @@ namespace GameClubManager.Client.Views
         }
     }
 } 
+
+

@@ -41,12 +41,12 @@ public class ApiService
         // if (string.IsNullOrEmpty(token))
         // {
         //     _httpClient.DefaultRequestHeaders.Remove("Authorization");
-        //     MessageBox.Show("Токен удален из заголовков", "Отладка", MessageBoxButton.OK, MessageBoxImage.Information);
+        //     System.Windows.MessageBox.Show("Токен удален из заголовков", "Отладка", MessageBoxButton.OK, MessageBoxImage.Information);
         // }
         // else
         // {
         //     _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        //     MessageBox.Show($"Токен установлен: {token}", "Отладка", MessageBoxButton.OK, MessageBoxImage.Information);
+        //     System.Windows.MessageBox.Show($"Токен установлен: {token}", "Отладка", MessageBoxButton.OK, MessageBoxImage.Information);
         // }
     }
 
@@ -60,7 +60,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
@@ -75,7 +75,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
@@ -90,7 +90,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка загрузки данных пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка загрузки данных пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
@@ -105,7 +105,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка обновления данных пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка обновления данных пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
@@ -134,7 +134,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка регистрации компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка регистрации компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
@@ -155,7 +155,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при привязке пользователя к компьютеру: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при привязке пользователя к компьютеру: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
@@ -176,7 +176,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при отвязке пользователя от компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при отвязке пользователя от компьютера: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
@@ -203,7 +203,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка получения списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка получения списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return new List<Models.ComputerDto>();
         }
     }
@@ -230,7 +230,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка получения информации о компьютере: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка получения информации о компьютере: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
@@ -246,7 +246,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при создании заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при создании заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
@@ -263,7 +263,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при получении заказов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при получении заказов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return new List<OrderResponse>();
         }
     }
@@ -279,7 +279,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при отмене заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при отмене заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }
@@ -365,7 +365,7 @@ public class ApiService
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при получении списка продуктов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Ошибка при получении списка продуктов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return new List<GameClubManager.Client.Models.FoodItem>();
         }
     }
@@ -392,3 +392,5 @@ public class UserData
     public decimal Balance { get; set; }
     public TimeSpan RemainingTime { get; set; }
 } 
+
+

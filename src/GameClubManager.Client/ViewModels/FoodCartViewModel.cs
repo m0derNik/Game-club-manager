@@ -101,7 +101,7 @@ namespace GameClubManager.Client.ViewModels
                 
                 if (_foodService.Cart.Count == 0)
                 {
-                    MessageBox.Show("Корзина пуста", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                    System.Windows.MessageBox.Show("Корзина пуста", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
                 
@@ -123,7 +123,7 @@ namespace GameClubManager.Client.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при оформлении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка при оформлении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -144,3 +144,5 @@ namespace GameClubManager.Client.ViewModels
         }
     }
 } 
+
+
