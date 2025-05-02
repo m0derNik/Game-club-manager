@@ -5,85 +5,205 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GameClubManager.Admin.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:models="clr-namespace:GameClubManager.Shared.Models;assembly=GameClubManager.Shared"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1200"
-      Title="OrdersPage">
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Заказы">
 
-    <Grid Margin="24">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActionButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="Margin" Value="4,0"/>
+                <Setter Property="Height" Value="32"/>
+                <Setter Property="Width" Value="32"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+            
+            <!-- Конвертер для отображения статуса заказа -->
+            <local:OrderStatusConverter x:Key="OrderStatusConverter"/>
+            
+            <!-- Конвертер для цвета статуса заказа -->
+            <local:OrderStatusColorConverter x:Key="OrderStatusColorConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- Заголовок и фильтры -->
-        <Grid Grid.Row="0" Margin="0,0,0,24">
+        
+        <!-- Заголовок и кнопки управления -->
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Заказы" 
-                       Style="{StaticResource HeaderTextStyle}"
+            
+            <TextBlock Text="Заказы еды и напитков" 
+                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                       Foreground="White"
                        VerticalAlignment="Center"/>
-
-            <StackPanel Grid.Column="1" 
-                        Orientation="Horizontal">
-                <ComboBox Width="200"
-                          materialDesign:HintAssist.Hint="Статус заказа"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                          ItemsSource="{Binding OrderStatuses}"
-                          SelectedItem="{Binding SelectedStatus}"
-                          Margin="0,0,16,0"/>
-
-                <DatePicker Width="200"
-                            materialDesign:HintAssist.Hint="Дата"
-                            Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-                            SelectedDate="{Binding SelectedDate}"/>
-            </StackPanel>
+            
+            <Button Grid.Column="1" 
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Foreground="White"
+                    BorderBrush="White"
+                    Command="{Binding RefreshOrdersCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Refresh" 
+                                             Margin="0,0,8,0"/>
+                    <TextBlock Text="Обновить"/>
+                </StackPanel>
+            </Button>
         </Grid>
-
-        <!-- Список заказов -->
-        <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding Orders}"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  Style="{StaticResource MaterialDesignDataGrid}"
-                  materialDesign:DataGridAssist.CellPadding="13 8 8 8"
-                  materialDesign:DataGridAssist.ColumnHeaderPadding="8">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" 
-                                  Binding="{Binding Id}" 
-                                  Width="80"/>
-                <DataGridTextColumn Header="Компьютер" 
-                                  Binding="{Binding ComputerName}" 
-                                  Width="120"/>
-                <DataGridTextColumn Header="Пользователь" 
-                                  Binding="{Binding UserName}" 
-                                  Width="150"/>
-                <DataGridTextColumn Header="Сумма" 
-                                  Binding="{Binding TotalAmount, StringFormat='{}{0:C}'}" 
-                                  Width="100"/>
-                <DataGridTextColumn Header="Статус" 
-                                  Binding="{Binding Status}" 
-                                  Width="120"/>
-                <DataGridTextColumn Header="Дата" 
-                                  Binding="{Binding Date, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" 
-                                  Width="150"/>
-                <DataGridTemplateColumn Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource MaterialDesignIconButton}"
-                                    Command="{Binding DataContext.ViewOrderCommand, 
-                                              RelativeSource={RelativeSource AncestorType=Page}}"
-                                    CommandParameter="{Binding}">
-                                <materialDesign:PackIcon Kind="Eye" 
-                                                       Width="20" 
-                                                       Height="20"/>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        
+        <!-- Основной контент -->
+        <Grid Grid.Row="1" Margin="0,16,0,0">
+            <!-- Индикатор загрузки -->
+            <materialDesign:Card Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Center" 
+                                 Padding="24">
+                <StackPanel>
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" 
+                                 Value="0" 
+                                 IsIndeterminate="True" 
+                                 HorizontalAlignment="Center"/>
+                    <TextBlock Text="Загрузка заказов..." 
+                               Margin="0,16,0,0" 
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </materialDesign:Card>
+            
+            <!-- Сообщение об отсутствии заказов -->
+            <materialDesign:Card Visibility="{Binding IsEmptyVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Center" 
+                                 Padding="24">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="FoodOffOutline" 
+                                             Width="48" 
+                                             Height="48" 
+                                             HorizontalAlignment="Center"/>
+                    <TextBlock Text="Нет активных заказов" 
+                               Margin="0,16,0,0" 
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                    <TextBlock Text="Заказы появятся здесь, когда клиенты сделают заказы еды и напитков" 
+                               Margin="0,8,0,0" 
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               MaxWidth="300"/>
+                </StackPanel>
+            </materialDesign:Card>
+            
+            <!-- Таблица заказов -->
+            <DataGrid ItemsSource="{Binding Orders}" 
+                      SelectedItem="{Binding SelectedOrder}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserSortColumns="True"
+                      Visibility="{Binding IsDataVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Background="Transparent"
+                      BorderThickness="1"
+                      BorderBrush="{DynamicResource MaterialDesignDivider}"
+                      Foreground="{DynamicResource MaterialDesignBody}"
+                      materialDesign:DataGridAssist.CellPadding="8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                    </Style>
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60" Foreground="White"/>
+                    <DataGridTextColumn Header="Пользователь" Binding="{Binding UserName}" Width="150" Foreground="White"/>
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding TotalAmount, StringFormat='{}{0:C}'}" Width="100" Foreground="White"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding OrderDate, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" Width="150" Foreground="White"/>
+                    
+                    <!-- Статус заказа -->
+                    <DataGridTemplateColumn Header="Статус" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding Status, Converter={StaticResource OrderStatusColorConverter}}"
+                                        CornerRadius="4"
+                                        Padding="8,4">
+                                    <TextBlock Text="{Binding Status, Converter={StaticResource OrderStatusConverter}}"
+                                               FontWeight="SemiBold"
+                                               HorizontalAlignment="Center"
+                                               Foreground="White"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <!-- Действия -->
+                    <DataGridTemplateColumn Header="Действия" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- Взять в обработку -->
+                                    <Button Style="{StaticResource ActionButtonStyle}"
+                                            Command="{Binding DataContext.ProcessOrderCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="Взять в обработку"
+                                            Visibility="{Binding Status, Converter={StaticResource EnumEqualityToVisibilityConverter}, 
+                                                       ConverterParameter={x:Static models:OrderStatus.Pending}}">
+                                        <materialDesign:PackIcon Kind="PlayCircleOutline" Width="20" Height="20"/>
+                                    </Button>
+                                    
+                                    <!-- Выполнить заказ -->
+                                    <Button Style="{StaticResource ActionButtonStyle}"
+                                            Command="{Binding DataContext.CompleteOrderCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="Выполнить заказ"
+                                            Visibility="{Binding Status, Converter={StaticResource EnumEqualityToVisibilityConverter}, 
+                                                       ConverterParameter={x:Static models:OrderStatus.Processing}}">
+                                        <materialDesign:PackIcon Kind="CheckCircleOutline" Width="20" Height="20" Foreground="Green"/>
+                                    </Button>
+                                    
+                                    <!-- Отменить заказ -->
+                                    <Button Style="{StaticResource ActionButtonStyle}"
+                                            Command="{Binding DataContext.CancelOrderCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="Отменить заказ"
+                                            Visibility="{Binding Status, Converter={StaticResource MultiEnumEqualityToVisibilityConverter}, 
+                                                       ConverterParameter='Pending,Processing'}">
+                                        <materialDesign:PackIcon Kind="CloseCircleOutline" Width="20" Height="20" Foreground="Red"/>
+                                    </Button>
+                                    
+                                    <!-- Просмотр деталей -->
+                                    <Button Style="{StaticResource ActionButtonStyle}"
+                                            Command="{Binding DataContext.ViewOrderDetailsCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="Просмотреть детали">
+                                        <materialDesign:PackIcon Kind="InformationOutline" Width="20" Height="20"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Page> 

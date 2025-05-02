@@ -7,10 +7,17 @@ namespace GameClubManager.Admin.Commands
     {
         private readonly Action _execute;
         private readonly Func<bool> _canExecute;
+        private readonly Action<object> _executeWithParam;
 
         public RelayCommand(Action execute, Func<bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        public RelayCommand(Action<object> executeWithParam, Func<bool> canExecute = null)
+        {
+            _executeWithParam = executeWithParam ?? throw new ArgumentNullException(nameof(executeWithParam));
             _canExecute = canExecute;
         }
 
@@ -27,7 +34,14 @@ namespace GameClubManager.Admin.Commands
 
         public void Execute(object parameter)
         {
-            _execute();
+            if (_executeWithParam != null)
+            {
+                _executeWithParam(parameter);
+            }
+            else
+            {
+                _execute();
+            }
         }
     }
 

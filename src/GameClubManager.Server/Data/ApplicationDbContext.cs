@@ -19,6 +19,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<SystemAlert> SystemAlerts { get; set; }
     public DbSet<Penalty> Penalties { get; set; }
     public DbSet<GamePreference> GamePreferences { get; set; }
+    public DbSet<FoodItem> FoodItems { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,6 +84,21 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<SystemAlert>()
             .HasKey(sa => sa.Id);
+
+        modelBuilder.Entity<Order>()
+            .HasOne(o => o.User)
+            .WithMany(u => u.Orders)
+            .HasForeignKey(o => o.UserId);
+
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(oi => oi.Order)
+            .WithMany(o => o.Items)
+            .HasForeignKey(oi => oi.OrderId);
+
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(oi => oi.FoodItem)
+            .WithMany()
+            .HasForeignKey(oi => oi.FoodItemId);
     }
 
     public async Task InitializeDatabaseAsync()
@@ -115,6 +133,59 @@ public class ApplicationDbContext : DbContext
 
             Users.Add(admin);
             Users.Add(testUser);
+            await SaveChangesAsync();
+        }
+        
+        // Проверяем наличие продуктов питания
+        if (!FoodItems.Any())
+        {
+            var foodItems = new List<FoodItem>
+            {
+                new FoodItem
+                {
+                    Name = "Пицца Пепперони",
+                    Description = "Классическая пицца с колбасой пепперони, сыром и томатным соусом",
+                    Price = 400,
+                    IsAvailable = true
+                },
+                new FoodItem
+                {
+                    Name = "Кола",
+                    Description = "Газированный напиток, 0.5л",
+                    Price = 120,
+                    IsAvailable = true
+                },
+                new FoodItem
+                {
+                    Name = "Чипсы Lays",
+                    Description = "Картофельные чипсы с солью, 80г",
+                    Price = 150,
+                    IsAvailable = true
+                },
+                new FoodItem
+                {
+                    Name = "Энергетический напиток Monster",
+                    Description = "Энергетический напиток, 0.5л",
+                    Price = 180,
+                    IsAvailable = true
+                },
+                new FoodItem
+                {
+                    Name = "Бургер",
+                    Description = "Сочный бургер с говяжьей котлетой, сыром и овощами",
+                    Price = 350,
+                    IsAvailable = true
+                },
+                new FoodItem
+                {
+                    Name = "Шоколадный батончик Snickers",
+                    Description = "Батончик с карамелью, арахисом и нугой, 50г",
+                    Price = 90,
+                    IsAvailable = true
+                }
+            };
+            
+            FoodItems.AddRange(foodItems);
             await SaveChangesAsync();
         }
     }

@@ -13,6 +13,8 @@ namespace GameClubManager.Client.Models
         public ComputerStatus Status { get; set; }
         public DateTime? BookedUntil { get; set; }
         public int? CurrentUserId { get; set; }
+        public string IpAddress { get; set; } = string.Empty;
+        public string MacAddress { get; set; } = string.Empty;
         public List<GameDto> InstalledGames { get; set; } = new List<GameDto>();
     }
     

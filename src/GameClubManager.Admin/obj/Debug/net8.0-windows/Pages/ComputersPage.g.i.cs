@@ -56,7 +56,7 @@ namespace GameClubManager.Admin.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Admin;V1.0.0.0;component/pages/computerspage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Admin;component/pages/computerspage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\ComputersPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

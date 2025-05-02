@@ -4,6 +4,7 @@ using System.Windows;
 using System.ComponentModel;
 using System;
 using System.Threading.Tasks;
+using GameClubManager.Client.Models;
 
 namespace GameClubManager.Client.Services;
 
@@ -13,6 +14,7 @@ public class AuthManager : INotifyPropertyChanged
     private readonly ApiService _apiService;
     private readonly TimeService _timeService;
     private AuthResponse? _currentUser;
+    private ComputerDto? _currentComputer;
 
     public static AuthManager Instance => _instance ??= new AuthManager();
     public ApiService ApiService => _apiService;
@@ -125,6 +127,17 @@ public class AuthManager : INotifyPropertyChanged
     public UserDto? CurrentUser => _currentUser?.User;
     public string? Token => _currentUser?.Token;
     public int CurrentUserId => _currentUser?.User?.Id ?? 0;
+    
+    // Свойство для доступа к текущему компьютеру
+    public ComputerDto? CurrentComputer 
+    { 
+        get => _currentComputer;
+        set
+        {
+            _currentComputer = value;
+            OnPropertyChanged();
+        }
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
 

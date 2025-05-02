@@ -6,6 +6,7 @@ using GameClubManager.Client.Services;
 using System.Windows.Input;
 using GameClubManager.Client.Commands;
 using System.Threading.Tasks;
+using GameClubManager.Client.Views;
 
 namespace GameClubManager.Client.ViewModels
 {
@@ -95,7 +96,10 @@ namespace GameClubManager.Client.ViewModels
 
         private void AddBalance()
         {
-            _timeService.AddBalance(100); // Добавляем 100 рублей для теста
+            var paymentDialog = new PaymentDialog();
+            var result = paymentDialog.ShowDialog();
+            
+            // Обновление баланса происходит внутри диалога через TimeService
         }
 
         private async Task Logout()

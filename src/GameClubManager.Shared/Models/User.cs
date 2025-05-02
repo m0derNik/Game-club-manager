@@ -27,7 +27,9 @@ namespace GameClubManager.Shared.Models
 
         public List<Penalty> Penalties { get; set; } = new();
 
-        public virtual ICollection<GamePreference> GamePreferences { get; set; } = new List<GamePreference>();
+        public List<GamePreference> GamePreferences { get; set; } = new();
+
+        public List<Order> Orders { get; set; } = new();
     }
 
     public enum UserRole

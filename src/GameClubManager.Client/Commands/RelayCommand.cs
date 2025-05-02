@@ -8,6 +8,7 @@ namespace GameClubManager.Client.Commands
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
         private readonly Func<object, Task> _executeAsync;
+        private readonly Action _executeWithoutParam;
 
         public event EventHandler CanExecuteChanged
         {
@@ -18,6 +19,12 @@ namespace GameClubManager.Client.Commands
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        public RelayCommand(Action executeWithoutParam, Func<object, bool> canExecute = null)
+        {
+            _executeWithoutParam = executeWithoutParam ?? throw new ArgumentNullException(nameof(executeWithoutParam));
             _canExecute = canExecute;
         }
 
@@ -38,6 +45,10 @@ namespace GameClubManager.Client.Commands
             {
                 _execute(parameter);
             }
+            else if (_executeWithoutParam != null)
+            {
+                _executeWithoutParam();
+            }
             else if (_executeAsync != null)
             {
                 _executeAsync(parameter).ConfigureAwait(false);
@@ -47,29 +58,34 @@ namespace GameClubManager.Client.Commands
 
     public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
-        private readonly Func<T, bool> _canExecute;
+        private readonly Action<T?> _execute;
+        private readonly Predicate<T?>? _canExecute;
 
-        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
+        public RelayCommand(Action<T?> execute, Predicate<T?>? canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
-            return _canExecute == null || _canExecute((T)parameter);
+            return _canExecute == null || _canExecute(parameter == null ? default : (T)parameter);
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            _execute((T)parameter);
+            _execute(parameter == null ? default : (T)parameter);
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 } 

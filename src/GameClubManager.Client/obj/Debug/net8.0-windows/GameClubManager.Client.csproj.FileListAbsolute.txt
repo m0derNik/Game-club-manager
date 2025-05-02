@@ -163,5 +163,12 @@ C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\sr
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\GameClub.D05313F0.Up2Date
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\GameClubManager.Client.genruntimeconfig.cache
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\ref\GameClubManager.Client.dll
-C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\ComputerRegistrationPage.g.cs
-C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\ComputerRegistrationPage.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Views\PaymentDialog.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Views\PaymentDialog.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Views\FoodCartDialog.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Views\FoodCartDialog.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\UserControls\ComputerSelector.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\ComputerPage.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\UserControls\ComputerSelector.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Pages\ComputerPage.baml

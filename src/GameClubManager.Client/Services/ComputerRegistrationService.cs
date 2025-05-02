@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using GameClubManager.Shared.Models;
 using GameClubManager.Client.Models;
+using System.Net.NetworkInformation;
+using System.Linq;
+using System.Net;
 
 namespace GameClubManager.Client.Services
 {
@@ -16,6 +19,7 @@ namespace GameClubManager.Client.Services
         private static ComputerRegistrationService? _instance;
         private readonly ApiService _apiService;
         private readonly AuthManager _authManager;
+        private int? _cachedComputerId;
 
         public static ComputerRegistrationService Instance => _instance ??= new ComputerRegistrationService(ApiService.Instance, AuthManager.Instance);
         
@@ -43,7 +47,12 @@ namespace GameClubManager.Client.Services
                     PricePerHour = pricePerHour
                 };
 
-                return await _apiService.RegisterComputerAsync(request);
+                var result = await _apiService.RegisterComputerAsync(request);
+                if (result != null)
+                {
+                    _cachedComputerId = result.Id;
+                }
+                return result;
             }
             catch (Exception ex)
             {
@@ -86,15 +95,18 @@ namespace GameClubManager.Client.Services
                 string computerName = Environment.MachineName;
                 string specifications = $"CPU: {Environment.ProcessorCount} cores, OS: {Environment.OSVersion}";
                 
+                // Получаем IP и MAC адреса
+                var (ipAddress, macAddress) = GetNetworkInfo();
+                
                 // Регистрируем компьютер
                 await RegisterComputerAsync(
                     computerName,
-                    "127.0.0.1", // Временно используем локальный IP
-                    "00:00:00:00:00:00", // Заглушка для MAC адреса
+                    ipAddress,
+                    macAddress,
                     specifications,
                     200.0m); // Цена за час по умолчанию
                 
-                Trace.WriteLine($"Компьютер успешно зарегистрирован: {computerName}");
+                Trace.WriteLine($"Компьютер успешно зарегистрирован: {computerName}, IP: {ipAddress}, MAC: {macAddress}");
             }
             catch (Exception ex)
             {
@@ -106,8 +118,12 @@ namespace GameClubManager.Client.Services
         {
             try
             {
-                // Здесь должна быть логика определения ID текущего компьютера
-                int computerId = 1; // Временно используем ID = 1
+                int computerId = await GetCurrentComputerIdAsync();
+                if (computerId == 0)
+                {
+                    Trace.WriteLine("Не удалось определить ID компьютера для обновления статуса.");
+                    return false;
+                }
                 
                 return await BindUserToComputerAsync(computerId, userId);
             }
@@ -122,8 +138,12 @@ namespace GameClubManager.Client.Services
         {
             try
             {
-                // Здесь должна быть логика определения ID текущего компьютера
-                int computerId = 1; // Временно используем ID = 1
+                int computerId = await GetCurrentComputerIdAsync();
+                if (computerId == 0)
+                {
+                    Trace.WriteLine("Не удалось определить ID компьютера для обновления статуса.");
+                    return false;
+                }
                 
                 return await UnbindUserFromComputerAsync(computerId);
             }
@@ -132,6 +152,96 @@ namespace GameClubManager.Client.Services
                 Trace.WriteLine($"Ошибка при обновлении статуса компьютера при выходе: {ex.Message}");
                 return false;
             }
+        }
+        
+        public async Task<int> GetCurrentComputerIdAsync()
+        {
+            // Если ID уже был получен ранее, возвращаем его из кэша
+            if (_cachedComputerId.HasValue)
+            {
+                return _cachedComputerId.Value;
+            }
+            
+            try
+            {
+                // Получаем текущий IP и MAC адрес
+                var (ipAddress, macAddress) = GetNetworkInfo();
+                
+                // Получаем список всех компьютеров
+                var computers = await _apiService.GetComputersAsync();
+                if (computers == null || !computers.Any())
+                {
+                    Trace.WriteLine("Список компьютеров пуст. Возможно, компьютер еще не зарегистрирован.");
+                    return 0;
+                }
+                
+                // Ищем компьютер по MAC-адресу и IP-адресу
+                var computer = computers.FirstOrDefault(c => 
+                    c.MacAddress.Equals(macAddress, StringComparison.OrdinalIgnoreCase) && 
+                    c.IpAddress.Equals(ipAddress, StringComparison.OrdinalIgnoreCase));
+                
+                if (computer != null)
+                {
+                    _cachedComputerId = computer.Id;
+                    return computer.Id;
+                }
+                
+                Trace.WriteLine($"Компьютер с MAC-адресом {macAddress} и IP-адресом {ipAddress} не найден в базе данных.");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"Ошибка при получении ID компьютера: {ex.Message}");
+                return 0;
+            }
+        }
+        
+        private (string ipAddress, string macAddress) GetNetworkInfo()
+        {
+            string ipAddress = "127.0.0.1";
+            string macAddress = "00:00:00:00:00:00";
+            
+            try
+            {
+                // Получаем информацию о сетевых интерфейсах
+                var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces()
+                    .Where(ni => ni.OperationalStatus == OperationalStatus.Up && 
+                                 ni.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                    .ToList();
+                
+                if (networkInterfaces.Any())
+                {
+                    // Берем первый активный интерфейс
+                    var firstInterface = networkInterfaces.First();
+                    
+                    // Получаем MAC-адрес
+                    var physicalAddress = firstInterface.GetPhysicalAddress();
+                    if (physicalAddress != null)
+                    {
+                        byte[] bytes = physicalAddress.GetAddressBytes();
+                        macAddress = string.Join(":", bytes.Select(b => b.ToString("X2")));
+                    }
+                    
+                    // Получаем IP-адрес
+                    var ipProps = firstInterface.GetIPProperties();
+                    var ipAddresses = ipProps.UnicastAddresses
+                        .Where(addr => addr.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        .Select(addr => addr.Address.ToString())
+                        .ToList();
+                    
+                    if (ipAddresses.Any())
+                    {
+                        ipAddress = ipAddresses.First();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"Ошибка при получении сетевой информации: {ex.Message}");
+                // В случае ошибки возвращаем стандартные значения
+            }
+            
+            return (ipAddress, macAddress);
         }
     }
 }

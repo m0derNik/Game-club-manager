@@ -122,6 +122,34 @@ namespace GameClubManager.Server.Migrations
                     b.ToTable("ComputerTelemetries");
                 });
 
+            modelBuilder.Entity("GameClubManager.Shared.Models.FoodItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FoodItems");
+                });
+
             modelBuilder.Entity("GameClubManager.Shared.Models.GamePreference", b =>
                 {
                     b.Property<int>("Id")
@@ -204,6 +232,69 @@ namespace GameClubManager.Server.Migrations
                     b.HasIndex("ComputerId");
 
                     b.ToTable("InstalledGame");
+                });
+
+            modelBuilder.Entity("GameClubManager.Shared.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliveryLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("GameClubManager.Shared.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FoodItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FoodItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("GameClubManager.Shared.Models.Payment", b =>
@@ -400,6 +491,36 @@ namespace GameClubManager.Server.Migrations
                         .HasForeignKey("ComputerId");
                 });
 
+            modelBuilder.Entity("GameClubManager.Shared.Models.Order", b =>
+                {
+                    b.HasOne("GameClubManager.Shared.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GameClubManager.Shared.Models.OrderItem", b =>
+                {
+                    b.HasOne("GameClubManager.Shared.Models.FoodItem", "FoodItem")
+                        .WithMany()
+                        .HasForeignKey("FoodItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameClubManager.Shared.Models.Order", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FoodItem");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("GameClubManager.Shared.Models.Penalty", b =>
                 {
                     b.HasOne("GameClubManager.Shared.Models.User", null)
@@ -444,9 +565,16 @@ namespace GameClubManager.Server.Migrations
                     b.Navigation("RunningProcesses");
                 });
 
+            modelBuilder.Entity("GameClubManager.Shared.Models.Order", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("GameClubManager.Shared.Models.User", b =>
                 {
                     b.Navigation("GamePreferences");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("Penalties");
                 });

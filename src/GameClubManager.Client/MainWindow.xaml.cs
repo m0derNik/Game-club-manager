@@ -131,7 +131,6 @@ namespace GameClubManager.Client
             TariffButton.Click -= TariffButton_Click;
             SettingsButton.Click -= SettingsButton_Click;
             AdminHelpButton.Click -= AdminHelpButton_Click;
-            RegisterComputerButton.Click -= RegisterComputerButton_Click;
 
             // Инициализируем кнопки навигации
             ProfileButton.Click += ProfileButton_Click;
@@ -140,7 +139,6 @@ namespace GameClubManager.Client
             TariffButton.Click += TariffButton_Click;
             SettingsButton.Click += SettingsButton_Click;
             AdminHelpButton.Click += AdminHelpButton_Click;
-            RegisterComputerButton.Click += RegisterComputerButton_Click;
 
             // Начальная страница
             NavigateToPage(ProfileButton, new ProfilePage());
@@ -154,7 +152,6 @@ namespace GameClubManager.Client
         private void TariffButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(TariffButton, new TariffPage());
         private void SettingsButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(SettingsButton, new SettingsPage());
         private void AdminHelpButton_Click(object sender, RoutedEventArgs e) => ShowAdminHelp();
-        private void RegisterComputerButton_Click(object sender, RoutedEventArgs e) => NavigateToPage(RegisterComputerButton, new ComputerRegistrationPage());
 
         private void NavigateToPage(Button button, Page page)
         {

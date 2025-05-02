@@ -26,21 +26,18 @@ namespace GameClubManager.Client.Services
         {
             _apiService = ApiService.Instance;
             
-            // Таймер для отсчета времени - используем более короткий интервал для гарантированного обновления
-            _timer = new DispatcherTimer(DispatcherPriority.Render)
+            // Создаем таймер, который будет срабатывать каждую секунду
+            _timer = new DispatcherTimer(DispatcherPriority.Normal)
             {
-                Interval = TimeSpan.FromMilliseconds(500)
+                Interval = TimeSpan.FromSeconds(1)
             };
             _timer.Tick += Timer_Tick;
             
-            // Устанавливаем тестовые данные с самого начала
-            _balance = 750;
-            _remainingTime = TimeSpan.FromHours(1).Add(TimeSpan.FromMinutes(30));
+            // Инициализируем значения
+            _balance = 0;
+            _remainingTime = TimeSpan.Zero;
             
-            // Запускаем таймер сразу
-            StartTimer();
-            
-            Trace.WriteLine($"TimeService создан: {DateTime.Now}, баланс: {_balance}, время: {FormattedRemainingTime}");
+            Trace.WriteLine($"TimeService создан: {DateTime.Now}");
         }
 
         public decimal Balance
@@ -51,7 +48,8 @@ namespace GameClubManager.Client.Services
                 if (_balance != value)
                 {
                     _balance = value;
-                    OnPropertyChanged(nameof(Balance));
+                    NotifyPropertyChanged(nameof(Balance));
+                    Trace.WriteLine($"Balance изменен: {_balance}, время: {DateTime.Now}");
                 }
             }
         }
@@ -64,10 +62,9 @@ namespace GameClubManager.Client.Services
                 if (_remainingTime != value)
                 {
                     _remainingTime = value;
-                    OnPropertyChanged(nameof(RemainingTime));
-                    OnPropertyChanged(nameof(FormattedRemainingTime));
-                    
-                    Trace.WriteLine($"RemainingTime изменено: {FormattedRemainingTime}");
+                    NotifyPropertyChanged(nameof(RemainingTime));
+                    NotifyPropertyChanged(nameof(FormattedRemainingTime));
+                    Trace.WriteLine($"RemainingTime изменен: {_remainingTime}, время: {DateTime.Now}");
                 }
             }
         }
@@ -76,87 +73,72 @@ namespace GameClubManager.Client.Services
         {
             get
             {
-                if (RemainingTime.TotalHours >= 1)
-                {
-                    return $"{RemainingTime.Hours}ч {RemainingTime.Minutes}м {RemainingTime.Seconds}с";
-                }
-                return $"{RemainingTime.Minutes}м {RemainingTime.Seconds}с";
+                var time = _remainingTime;
+                return time.TotalHours >= 1 
+                    ? $"{time.Hours}:{time.Minutes:D2}:{time.Seconds:D2}" 
+                    : $"{time.Minutes:D2}:{time.Seconds:D2}";
             }
         }
 
         public async Task LoadUserDataAsync(int userId)
         {
-            // Используем семафор для избежания состояния гонки
-            await _semaphore.WaitAsync();
-            
             try
             {
-                Trace.WriteLine($"Загрузка данных пользователя {userId} началась: {DateTime.Now}");
+                // Блокируем параллельные вызовы метода
+                await _semaphore.WaitAsync();
                 
-                // Останавливаем предыдущий таймер
-                StopTimer();
+                _currentUserId = userId;
+                Trace.WriteLine($"Загрузка данных пользователя {userId} начата: {DateTime.Now}");
                 
+                // Получаем данные пользователя
                 var userData = await _apiService.GetUserDataAsync(userId);
+                
                 if (userData != null)
                 {
-                    _currentUserId = userId;
+                    Trace.WriteLine($"Данные получены: Баланс={userData.Balance}, Время={userData.RemainingTime}");
                     
-                    // Устанавливаем значения из БД
-                    Balance = userData.Balance;
-                    RemainingTime = userData.RemainingTime;
+                    // Обновляем баланс в UI потоке
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        Balance = userData.Balance;
+                        RemainingTime = userData.RemainingTime;
+                    });
                     
-                    Trace.WriteLine($"Данные пользователя {userId} загружены: баланс {Balance}, время {FormattedRemainingTime}");
+                    // Если у пользователя есть оставшееся время, запускаем таймер
+                    if (_remainingTime > TimeSpan.Zero)
+                    {
+                        StartTimer();
+                    }
+                    else
+                    {
+                        StopTimer();
+                    }
+                    
+                    Trace.WriteLine($"Загрузка данных пользователя {userId} завершена: {DateTime.Now}");
                 }
                 else
                 {
-                    // Если данные не получены, создаем новые тестовые данные
-                    _currentUserId = userId;
-                    Balance = 750;
-                    RemainingTime = TimeSpan.FromHours(1).Add(TimeSpan.FromMinutes(30));
-                    
-                    // Сохраняем эти данные на сервере
-                    await SaveUserData();
-                    
-                    Trace.WriteLine($"Созданы тестовые данные для пользователя {userId}: баланс {Balance}, время {FormattedRemainingTime}");
-                }
-                
-                // Запускаем таймер снова, если есть оставшееся время
-                if (RemainingTime > TimeSpan.Zero)
-                {
-                    StartTimer();
+                    Trace.WriteLine($"Ошибка: не удалось получить данные пользователя {userId}");
+                    MessageBox.Show($"Не удалось загрузить данные пользователя.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                // В случае ошибки используем тестовые данные
-                _currentUserId = userId;
-                Balance = 750;
-                RemainingTime = TimeSpan.FromHours(1).Add(TimeSpan.FromMinutes(30));
-                
-                // Запускаем таймер
-                StartTimer();
-                
-                Trace.WriteLine($"Ошибка при загрузке данных пользователя {userId}: {ex.Message}");
+                Trace.WriteLine($"Исключение при загрузке данных пользователя: {ex.Message}");
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MessageBox.Show($"Произошла ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                });
             }
             finally
             {
                 _semaphore.Release();
             }
-            
-            // Явно вызываем события изменения для обновления UI
-            Application.Current.Dispatcher.Invoke(() => {
-                OnPropertyChanged(nameof(Balance));
-                OnPropertyChanged(nameof(RemainingTime));
-                OnPropertyChanged(nameof(FormattedRemainingTime));
-                
-                Trace.WriteLine($"События PropertyChanged вызваны принудительно: {DateTime.Now}");
-            });
         }
 
-        // Оставляем старый метод для обратной совместимости
+        // Обертка для обратной совместимости
         public void LoadUserData(int userId)
         {
-            // Просто вызываем асинхронную версию и игнорируем результат
             _ = LoadUserDataAsync(userId);
         }
 
@@ -164,20 +146,42 @@ namespace GameClubManager.Client.Services
         {
             try
             {
-                if (_currentUserId.HasValue)
+                // Если нет ID пользователя, выходим
+                if (!_currentUserId.HasValue)
                 {
-                    var userData = new UserData
-                    {
-                        Balance = Balance,
-                        RemainingTime = RemainingTime
-                    };
-                    await _apiService.UpdateUserDataAsync(_currentUserId.Value, userData);
-                    Trace.WriteLine($"Данные пользователя {_currentUserId.Value} сохранены: {DateTime.Now}");
+                    Trace.WriteLine("Нет текущего пользователя для сохранения данных");
+                    return;
+                }
+                
+                await _semaphore.WaitAsync();
+                
+                Trace.WriteLine($"Сохранение данных пользователя {_currentUserId} начато: {DateTime.Now}");
+                
+                // Отправляем данные на сервер
+                var userDataToUpdate = new UserData
+                {
+                    Balance = _balance,
+                    RemainingTime = _remainingTime
+                };
+                
+                bool success = await _apiService.UpdateUserDataAsync(_currentUserId.Value, userDataToUpdate);
+                
+                if (success)
+                {
+                    Trace.WriteLine($"Данные пользователя успешно сохранены: {DateTime.Now}");
+                }
+                else
+                {
+                    Trace.WriteLine($"Ошибка при сохранении данных пользователя: {DateTime.Now}");
                 }
             }
             catch (Exception ex)
             {
-                Trace.WriteLine($"Ошибка сохранения данных пользователя: {ex.Message}");
+                Trace.WriteLine($"Исключение при сохранении данных: {ex.Message}");
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 
@@ -190,13 +194,7 @@ namespace GameClubManager.Client.Services
         public void AddTime(TimeSpan time)
         {
             RemainingTime += time;
-            
-            // Если таймер не запущен, но появилось время - запускаем
-            if (!_timer.IsEnabled && RemainingTime > TimeSpan.Zero)
-            {
-                StartTimer();
-            }
-            
+            StartTimer();
             _ = SaveUserData();
         }
 
@@ -237,8 +235,10 @@ namespace GameClubManager.Client.Services
                 // Отнимаем секунду
                 var newRemainingTime = RemainingTime.Subtract(TimeSpan.FromSeconds(1));
                 
-                // Устанавливаем новое значение
-                RemainingTime = newRemainingTime;
+                // Устанавливаем новое значение в потоке UI
+                Application.Current.Dispatcher.Invoke(() => {
+                    RemainingTime = newRemainingTime;
+                });
                 
                 // Логгируем изменение
                 Trace.WriteLine($"Таймер тикает: {FormattedRemainingTime}, время: {DateTime.Now}");
@@ -248,11 +248,6 @@ namespace GameClubManager.Client.Services
                 {
                     _ = SaveUserData();
                 }
-                
-                // Принудительно уведомляем об изменении на UI потоке
-                Application.Current.Dispatcher.Invoke(() => {
-                    OnPropertyChanged(nameof(FormattedRemainingTime));
-                });
             }
             else
             {
@@ -265,10 +260,22 @@ namespace GameClubManager.Client.Services
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        // Отправляет уведомление об изменении свойства в потоке UI
+        private void NotifyPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
         {
-            Trace.WriteLine($"OnPropertyChanged вызван для {propertyName}: {DateTime.Now}");
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Trace.WriteLine($"NotifyPropertyChanged вызван для {propertyName}: {DateTime.Now}");
+            
+            // Убедимся, что уведомление отправляется в потоке UI
+            if (Application.Current.Dispatcher.CheckAccess())
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(() => {
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                }, DispatcherPriority.Render);
+            }
         }
     }
 } 

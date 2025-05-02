@@ -1,0 +1,205 @@
+<Page x:Class="GameClubManager.Client.Pages.ComputerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:uc="clr-namespace:GameClubManager.Client.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Компьютеры">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Заголовок и информация о текущем компьютере -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel>
+                <TextBlock Text="Компьютеры" 
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           FontWeight="SemiBold"/>
+                
+                <!-- Информация о текущем компьютере -->
+                <Border Margin="0,16,0,0"
+                        Padding="16,12"
+                        BorderBrush="{DynamicResource PrimaryHueLightBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Background="{DynamicResource MaterialDesignPaper}"
+                        Visibility="{Binding HasCurrentComputer, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <materialDesign:PackIcon Kind="Desktop"
+                                               Width="32"
+                                               Height="32"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,16,0"/>
+                        
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Ваш текущий компьютер:"
+                                     Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+                            <TextBlock Text="{Binding CurrentComputer.Name}"
+                                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            <TextBlock Text="{Binding CurrentComputer.Specifications}"
+                                     Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                     Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            
+            <!-- Кнопки действий -->
+            <StackPanel Grid.Column="1" 
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <!-- Кнопка выбора компьютера (когда компьютер не выбран) -->
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Command="{Binding SelectComputerCommand}"
+                        Visibility="{Binding HasCurrentComputer, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ComputerPlus"
+                                               Width="20"
+                                               Height="20"
+                                               Margin="0,0,8,0"/>
+                        <TextBlock Text="Выбрать компьютер"/>
+                    </StackPanel>
+                </Button>
+                
+                <!-- Кнопка отключения (когда компьютер выбран) -->
+                <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Command="{Binding UnbindComputerCommand}"
+                        Visibility="{Binding HasCurrentComputer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        BorderBrush="#F44336"
+                        Foreground="#F44336">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ComputerOff"
+                                               Width="20"
+                                               Height="20"
+                                               Margin="0,0,8,0"/>
+                        <TextBlock Text="Отключиться"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Основное содержимое -->
+        <Grid Grid.Row="1" Margin="0,16,0,0">
+            <!-- Элемент управления выбора компьютера -->
+            <uc:ComputerSelector x:Name="computerSelector" 
+                               Visibility="{Binding IsComputerSelectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            
+            <!-- Информация о том, что компьютер не выбран -->
+            <materialDesign:Card Visibility="{Binding ShowNoComputerInfo, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="24"
+                                Width="400">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ComputerAlert"
+                                           Width="48"
+                                           Height="48"
+                                           HorizontalAlignment="Center"/>
+                    <TextBlock Text="Компьютер не выбран"
+                             Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                             HorizontalAlignment="Center"
+                             Margin="0,16,0,8"/>
+                    <TextBlock Text="Выберите компьютер, чтобы начать работу. Выбор компьютера позволит привязать ваш аккаунт к физическому устройству в игровом клубе."
+                             Style="{StaticResource MaterialDesignBodyLargeTextBlock}"
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             Margin="0,0,0,16"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                            Command="{Binding SelectComputerCommand}"
+                            HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ComputerPlus"
+                                                   Width="20"
+                                                   Height="20"
+                                                   Margin="0,0,8,0"/>
+                            <TextBlock Text="Выбрать компьютер"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </materialDesign:Card>
+            
+            <!-- Информация о текущем компьютере -->
+            <materialDesign:Card Visibility="{Binding ShowComputerDetails, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Width="500"
+                                UniformCornerRadius="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                <Grid Margin="24">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Заголовок -->
+                    <StackPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,24">
+                        <materialDesign:PackIcon Kind="Desktop"
+                                               Width="32"
+                                               Height="32"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,16,0"/>
+                        <TextBlock Text="{Binding CurrentComputer.Name}"
+                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                    </StackPanel>
+                    
+                    <!-- Спецификации -->
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Спецификации"
+                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                 Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding CurrentComputer.Specifications}"
+                                 Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                 TextWrapping="Wrap"/>
+                    </StackPanel>
+                    
+                    <!-- Цена -->
+                    <StackPanel Grid.Row="2" Margin="0,24,0,0">
+                        <TextBlock Text="Стоимость использования"
+                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                 Margin="0,0,0,8"/>
+                        <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}">
+                            <Run Text="{Binding CurrentComputer.PricePerHour, StringFormat='{}{0:C}'}"/>
+                            <Run Text=" в час"/>
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <!-- Кнопка отключения -->
+                    <Button Grid.Row="3"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Command="{Binding UnbindComputerCommand}"
+                            HorizontalAlignment="Right"
+                            Margin="0,24,0,0"
+                            BorderBrush="#F44336"
+                            Foreground="#F44336">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ComputerOff"
+                                                   Width="20"
+                                                   Height="20"
+                                                   Margin="0,0,8,0"/>
+                            <TextBlock Text="Отключиться"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Page> 

@@ -13,7 +13,7 @@ namespace GameClubManager.Admin.Services
 {
     public class ApiService
     {
-        private static ApiService _instance;
+        private static ApiService? _instance;
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "http://localhost:7001/api";
         private string _authToken;
@@ -75,7 +75,7 @@ namespace GameClubManager.Admin.Services
             }
         }
 
-        public void SetAuthToken(string token)
+        public void SetAuthToken(string? token)
         {
             _authToken = token;
             if (string.IsNullOrEmpty(token))
@@ -212,6 +212,75 @@ namespace GameClubManager.Admin.Services
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка удаления пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        // Метод для получения всех заказов
+        public async Task<List<OrderResponse>> GetOrdersAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{BaseUrl}/orders");
+                response.EnsureSuccessStatusCode();
+                var orders = await response.Content.ReadFromJsonAsync<List<OrderResponse>>();
+                return orders ?? new List<OrderResponse>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при получении заказов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return new List<OrderResponse>();
+            }
+        }
+
+        // Метод для получения заказа по ID
+        public async Task<OrderResponse?> GetOrderAsync(int orderId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{BaseUrl}/orders/{orderId}");
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadFromJsonAsync<OrderResponse>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при получении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        // Методы для обновления статуса заказа
+        public async Task<bool> UpdateOrderStatusAsync(int orderId, OrderStatus status)
+        {
+            try
+            {
+                string endpoint;
+                
+                switch (status)
+                {
+                    case OrderStatus.Processing:
+                        endpoint = $"{BaseUrl}/orders/{orderId}/process";
+                        break;
+                    case OrderStatus.Completed:
+                        endpoint = $"{BaseUrl}/orders/{orderId}/complete";
+                        break;
+                    case OrderStatus.Delivered:
+                        endpoint = $"{BaseUrl}/orders/{orderId}/deliver";
+                        break;
+                    case OrderStatus.Canceled:
+                        endpoint = $"{BaseUrl}/orders/{orderId}/cancel";
+                        break;
+                    default:
+                        throw new ArgumentException($"Неподдерживаемый статус заказа: {status}");
+                }
+                
+                var response = await _httpClient.PostAsync(endpoint, null);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при обновлении статуса заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }

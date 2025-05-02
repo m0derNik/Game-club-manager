@@ -97,3 +97,4 @@ C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\sr
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\GameClubManager.Admin.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\GameClubManager.Admin.genruntimeconfig.cache
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\ref\GameClubManager.Admin.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
