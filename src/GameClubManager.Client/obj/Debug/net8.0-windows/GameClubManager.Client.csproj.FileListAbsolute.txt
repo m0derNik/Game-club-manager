@@ -196,3 +196,5 @@ C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\sr
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\bin\Debug\net8.0-windows\System.Diagnostics.DiagnosticSource.dll
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\bin\Debug\net8.0-windows\System.Net.ServerSentEvents.dll
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\bin\Debug\net8.0-windows\System.Threading.Channels.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Dialogs\AdminHelpDialog.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Client\obj\Debug\net8.0-windows\Dialogs\AdminHelpDialog.g.cs

@@ -37,18 +37,20 @@ namespace GameClubManager.Client.Services
         {
             try
             {
-                var serverFoodItems = await _apiService.GetFoodItemsAsync();
+                // Запрашиваем только доступные продукты для клиента
+                var serverFoodItems = await _apiService.GetFoodItemsAsync(true);
                 
-                // Преобразуем серверные модели в клиентские
-                AvailableFoodItems = serverFoodItems.Select(item => new Client.Models.FoodItem
+                if (serverFoodItems?.Count > 0)
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Description = item.Description ?? "",
-                    Price = item.Price,
-                    ImageUrl = "https://via.placeholder.com/150", // Заглушка для изображения
-                    Category = GetCategoryForFood(item.Name)
-                }).ToList();
+                    AvailableFoodItems = serverFoodItems;
+                }
+                else
+                {
+                    // Если нет доступных продуктов или произошла ошибка, используем мок-данные
+                    System.Windows.MessageBox.Show("Не удалось загрузить список продуктов с сервера. Используются демонстрационные данные.", 
+                        "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    AvailableFoodItems = GetMockFoodItems();
+                }
             }
             catch (Exception ex)
             {
@@ -58,17 +60,17 @@ namespace GameClubManager.Client.Services
             }
         }
         
-        private FoodCategory GetCategoryForFood(string name)
+        private Client.Models.FoodCategory GetCategoryForFood(string name)
         {
             if (name.Contains("пицца", StringComparison.OrdinalIgnoreCase) || 
                 name.Contains("бургер", StringComparison.OrdinalIgnoreCase))
-                return FoodCategory.Food;
+                return Client.Models.FoodCategory.Food;
                 
             if (name.Contains("кола", StringComparison.OrdinalIgnoreCase) || 
                 name.Contains("напиток", StringComparison.OrdinalIgnoreCase))
-                return FoodCategory.Drink;
+                return Client.Models.FoodCategory.Drink;
                 
-            return FoodCategory.Snack;
+            return Client.Models.FoodCategory.Snack;
         }
         
         public void AddToCart(Client.Models.FoodItem foodItem, int quantity = 1)
@@ -195,7 +197,7 @@ namespace GameClubManager.Client.Services
                     Description = "Классическая пицца с колбасой пепперони, сыром и томатным соусом",
                     Price = 400,
                     ImageUrl = "https://via.placeholder.com/150",
-                    Category = FoodCategory.Food
+                    Category = Client.Models.FoodCategory.Food
                 },
                 new Client.Models.FoodItem
                 {
@@ -204,7 +206,7 @@ namespace GameClubManager.Client.Services
                     Description = "Газированный напиток, 0.5л",
                     Price = 120,
                     ImageUrl = "https://via.placeholder.com/150",
-                    Category = FoodCategory.Drink
+                    Category = Client.Models.FoodCategory.Drink
                 },
                 new Client.Models.FoodItem
                 {
@@ -213,7 +215,7 @@ namespace GameClubManager.Client.Services
                     Description = "Картофельные чипсы с солью, 80г",
                     Price = 150,
                     ImageUrl = "https://via.placeholder.com/150",
-                    Category = FoodCategory.Snack
+                    Category = Client.Models.FoodCategory.Snack
                 },
                 new Client.Models.FoodItem
                 {
@@ -222,7 +224,7 @@ namespace GameClubManager.Client.Services
                     Description = "Энергетический напиток, 0.5л",
                     Price = 180,
                     ImageUrl = "https://via.placeholder.com/150",
-                    Category = FoodCategory.Drink
+                    Category = Client.Models.FoodCategory.Drink
                 },
                 new Client.Models.FoodItem
                 {
@@ -231,7 +233,7 @@ namespace GameClubManager.Client.Services
                     Description = "Сочный бургер с говяжьей котлетой, сыром и овощами",
                     Price = 350,
                     ImageUrl = "https://via.placeholder.com/150",
-                    Category = FoodCategory.Food
+                    Category = Client.Models.FoodCategory.Food
                 },
                 new Client.Models.FoodItem
                 {
@@ -240,7 +242,7 @@ namespace GameClubManager.Client.Services
                     Description = "Батончик с карамелью, арахисом и нугой, 50г",
                     Price = 90,
                     ImageUrl = "https://via.placeholder.com/150",
-                    Category = FoodCategory.Snack
+                    Category = Client.Models.FoodCategory.Snack
                 }
             };
         }

@@ -184,6 +184,57 @@ namespace GameClubManager.Server.Controllers
                 return StatusCode(500, "Внутренняя ошибка сервера");
             }
         }
+
+        [HttpPost("auth/auto-login")]
+        [AllowAnonymous]
+        public async Task<ActionResult<AuthResponse>> AutoAdminLogin()
+        {
+            try
+            {
+                // Проверяем наличие заголовка X-Admin-Client
+                if (!Request.Headers.TryGetValue("X-Admin-Client", out var adminClientValues) ||
+                    adminClientValues.FirstOrDefault() != "true")
+                {
+                    _logger.LogWarning("Попытка автоматического входа без специального заголовка");
+                    return Unauthorized("Недостаточно прав для автоматического входа");
+                }
+                
+                _logger.LogInformation("Автоматический вход администратора");
+                
+                // Ищем пользователя с ролью Admin
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Role == UserRole.Admin);
+                
+                if (user == null)
+                {
+                    _logger.LogWarning("Администратор не найден в системе");
+                    return Unauthorized("Администратор не настроен в системе");
+                }
+
+                // Генерируем токен для администратора с расширенным сроком действия
+                var token = _jwtService.GenerateToken(user, 24 * 30); // Токен на 30 дней
+                
+                _logger.LogInformation("Администратор успешно вошел автоматически: ID: {UserId}", user.Id);
+                
+                return Ok(new AuthResponse
+                {
+                    Token = token,
+                    User = new UserDto
+                    {
+                        Id = user.Id,
+                        Username = user.Username,
+                        Email = user.Email,
+                        Role = user.Role,
+                        Balance = user.Balance
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при автоматическом входе администратора");
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
     }
 
     // DTO-объекты для запросов и ответов

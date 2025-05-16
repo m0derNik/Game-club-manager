@@ -7,13 +7,16 @@ using System.Windows.Input;
 using GameClubManager.Client.Commands;
 using GameClubManager.Client.Models;
 using GameClubManager.Client.Services;
+using Timer = System.Threading.Timer;
 
 namespace GameClubManager.Client.ViewModels
 {
     public class TariffViewModel : ViewModelBase
     {
         private readonly TimeService _timeService;
+        private readonly TariffService _tariffService;
         private ObservableCollection<Tariff> _tariffs;
+        private bool _isLoading;
         
         public ObservableCollection<Tariff> Tariffs
         {
@@ -27,69 +30,85 @@ namespace GameClubManager.Client.ViewModels
         
         public decimal Balance => _timeService.Balance;
         
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public ICommand BuyTariffCommand { get; }
+        public ICommand RefreshTariffsCommand { get; }
         
         public TariffViewModel()
         {
             _timeService = TimeService.Instance;
+            _tariffService = TariffService.Instance;
             _timeService.PropertyChanged += TimeService_PropertyChanged;
             
             BuyTariffCommand = new RelayCommand(BuyTariff);
+            RefreshTariffsCommand = new RelayCommand(async _ => await RefreshTariffsAsync());
             
             // Инициализируем набор тарифов
-            InitializeTariffs();
+            LoadTariffs();
+            
+            // Автоматически обновляем тарифы при запуске
+            RefreshTariffsOnStartupAsync();
         }
         
-        private void InitializeTariffs()
+        private async void RefreshTariffsOnStartupAsync()
         {
-            Tariffs = new ObservableCollection<Tariff>
+            // Задержка для инициализации UI
+            await System.Threading.Tasks.Task.Delay(1000);
+            await RefreshTariffsAsync();
+        }
+        
+        private void LoadTariffs()
+        {
+            // Загружаем тарифы из сервиса
+            var serviceTariffs = _tariffService.Tariffs;
+            Tariffs = new ObservableCollection<Tariff>(serviceTariffs);
+            Console.WriteLine($"Загружено {serviceTariffs.Count} тарифов в UI");
+        }
+        
+        public async System.Threading.Tasks.Task RefreshTariffsAsync()
+        {
+            try
             {
-                new Tariff 
-                { 
-                    Id = 1, 
-                    Name = "Базовый", 
-                    Description = "Доступ к основным играм и сервисам",
-                    Price = 100, 
-                    Duration = TimeSpan.FromHours(1),
-                    IsPopular = false
-                },
-                new Tariff 
-                { 
-                    Id = 2, 
-                    Name = "Стандартный", 
-                    Description = "Стандартный доступ к играм и сервисам",
-                    Price = 250, 
-                    Duration = TimeSpan.FromHours(3),
-                    IsPopular = true
-                },
-                new Tariff 
-                { 
-                    Id = 3, 
-                    Name = "Продвинутый", 
-                    Description = "Расширенный доступ с приоритетным обслуживанием",
-                    Price = 400, 
-                    Duration = TimeSpan.FromHours(5),
-                    IsPopular = false
-                },
-                new Tariff 
-                { 
-                    Id = 4, 
-                    Name = "Ночной", 
-                    Description = "Тариф для ночных игровых сессий",
-                    Price = 500, 
-                    Duration = TimeSpan.FromHours(8),
-                    IsPopular = false
-                },
-                new Tariff 
-                { 
-                    Id = 5, 
-                    Name = "Турнирный", 
-                    Description = "Специальный тариф для игроков в турнирах",
-                    Price = 1000, 
-                    Duration = TimeSpan.FromHours(24),
-                    IsPopular = false
+                Console.WriteLine("Обновление тарифов...");
+                IsLoading = true;
+                
+                // Обновляем тарифы через API
+                var success = await _tariffService.RefreshTariffsAsync();
+                
+                // Обновляем коллекцию
+                LoadTariffs();
+                
+                if (success)
+                {
+                    Console.WriteLine("Тарифы успешно обновлены");
                 }
-            };
+                else
+                {
+                    Console.WriteLine("Не удалось обновить тарифы");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при обновлении тарифов: {ex.Message}");
+                System.Windows.MessageBox.Show(
+                    $"Ошибка при обновлении тарифов: {ex.Message}",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
         
         private void BuyTariff(object parameter)

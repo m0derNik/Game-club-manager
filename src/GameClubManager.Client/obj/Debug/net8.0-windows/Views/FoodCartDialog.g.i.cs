@@ -56,7 +56,7 @@ namespace GameClubManager.Client.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;component/views/foodcartdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;V1.0.0.0;component/views/foodcartdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\FoodCartDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

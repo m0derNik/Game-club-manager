@@ -30,9 +30,32 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button x:Name="CtrlAltDelButton" Content="Ctrl+Alt+Del" Width="100" Margin="5,0" Click="CtrlAltDelButton_Click"/>
-                    <Button x:Name="SendFileButton" Content="Отправить файл" Width="120" Margin="5,0" Click="SendFileButton_Click"/>
-                    <Button x:Name="DisconnectButton" Content="Отключиться" Width="100" Margin="5,0" Click="DisconnectButton_Click"/>
+                    <Button x:Name="CtrlAltDelButton" 
+                            Content="Ctrl+Alt+Del" 
+                            Foreground="{DynamicResource TextPrimaryBrush}"
+                            Background="{DynamicResource SurfaceBrush}"
+                            BorderBrush="{DynamicResource MaterialDesignDivider}"
+                            Width="100" 
+                            Margin="5,0" 
+                            Click="CtrlAltDelButton_Click"/>
+                    
+                    <Button x:Name="SendFileButton" 
+                            Content="Отправить файл" 
+                            Foreground="{DynamicResource TextPrimaryBrush}"
+                            Background="{DynamicResource SurfaceBrush}"
+                            BorderBrush="{DynamicResource MaterialDesignDivider}"
+                            Width="120" 
+                            Margin="5,0" 
+                            Click="SendFileButton_Click"/>
+                    
+                    <Button x:Name="DisconnectButton" 
+                            Content="Отключиться" 
+                            Foreground="{DynamicResource TextPrimaryBrush}"
+                            Background="{DynamicResource SurfaceBrush}"
+                            BorderBrush="{DynamicResource MaterialDesignDivider}"
+                            Width="100" 
+                            Margin="5,0" 
+                            Click="DisconnectButton_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

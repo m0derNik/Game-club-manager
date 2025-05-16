@@ -56,7 +56,7 @@ namespace GameClubManager.Admin.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка получения списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка получения списка компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return new List<Computer>();
             }
         }
@@ -64,14 +64,30 @@ namespace GameClubManager.Admin.Services
         // Отправка команд на перезапуск/выключение компьютеров будет добавлена позже
         public async Task<bool> RestartComputerAsync(int computerId)
         {
-            MessageBox.Show("Функция перезапуска компьютера будет доступна в следующей версии", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            System.Windows.MessageBox.Show("Функция перезапуска компьютера будет доступна в следующей версии", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             return false;
         }
 
         public async Task<bool> ShutdownComputerAsync(int computerId)
         {
-            MessageBox.Show("Функция выключения компьютера будет доступна в следующей версии", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            System.Windows.MessageBox.Show("Функция выключения компьютера будет доступна в следующей версии", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             return false;
+        }
+        
+        // Метод для получения компьютера по ID
+        public async Task<ComputerDto> GetComputerByIdAsync(int computerId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{BaseUrl}/computers/{computerId}");
+                response.EnsureSuccessStatusCode();
+                
+                return await response.Content.ReadFromJsonAsync<ComputerDto>();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         // Вспомогательные методы для форматирования информации

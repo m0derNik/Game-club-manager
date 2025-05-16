@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\logo.svg" />
+    <Resource Include="Resources\Images\default_game_icon.png" />
   </ItemGroup>
 
 </Project>

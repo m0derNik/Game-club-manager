@@ -44,37 +44,78 @@ namespace GameClubManager.Server.Controllers
             }
         }
         
-        // Метод для отправки скриншота от клиента
-        [HttpPost("screenshot")]
-        public ActionResult SaveScreenshot([FromBody] RemoteDesktopData screenshotData)
+        // Публичный метод для получения скриншота без авторизации
+        [HttpGet("{computerId}/public-screenshot")]
+        public ActionResult<RemoteDesktopData> GetPublicScreenshot(int computerId)
         {
             try
             {
-                if (screenshotData == null || screenshotData.ScreenData == null)
+                if (_screenshots.TryGetValue(computerId, out var screenshot))
                 {
-                    return BadRequest("Некорректные данные скриншота");
+                    return Ok(screenshot);
                 }
                 
-                // Если сессия неактивна, игнорируем скриншоты
-                if (!_activeSessions.TryGetValue(screenshotData.ComputerId, out var isActive) || !isActive)
-                {
-                    return Ok();
-                }
-                
-                // Сохраняем скриншот
-                _screenshots[screenshotData.ComputerId] = screenshotData;
-                return Ok();
+                return NotFound();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Ошибка при сохранении скриншота");
+                _logger.LogError(ex, "Ошибка при получении публичного скриншота для компьютера {ComputerId}", computerId);
                 return StatusCode(500, "Внутренняя ошибка сервера");
             }
         }
         
-        // Метод для отправки команд на клиент
+        // Метод для отправки скриншота от клиента
+        [HttpPost("screenshot")]
+        public ActionResult UploadScreenshot([FromBody] RemoteDesktopData screenshot)
+        {
+            try
+            {
+                if (screenshot == null)
+                {
+                    return BadRequest("Некорректные данные скриншота");
+                }
+                
+                // Обновляем скриншот для нужного компьютера
+                _screenshots[screenshot.ComputerId] = screenshot;
+                
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при получении скриншота от компьютера {ComputerId}", 
+                    screenshot?.ComputerId ?? 0);
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
+        
+        // Публичный метод для отправки скриншота от клиента
+        [HttpPost("public-screenshot")]
+        public ActionResult UploadPublicScreenshot([FromBody] RemoteDesktopData screenshot)
+        {
+            try
+            {
+                if (screenshot == null)
+                {
+                    return BadRequest("Некорректные данные скриншота");
+                }
+                
+                // Обновляем скриншот для нужного компьютера
+                _screenshots[screenshot.ComputerId] = screenshot;
+                
+                // Уменьшаем частоту логирования для часто вызываемого метода
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при получении публичного скриншота от компьютера {ComputerId}", 
+                    screenshot?.ComputerId ?? 0);
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
+        
+        // Метод для отправки команды удаленного управления
         [HttpPost("{computerId}/command")]
-        public ActionResult SendCommand(int computerId, [FromBody] RemoteInput command)
+        public ActionResult SendRemoteCommand(int computerId, [FromBody] RemoteInput command)
         {
             try
             {
@@ -107,6 +148,43 @@ namespace GameClubManager.Server.Controllers
             }
         }
         
+        // Публичный метод для отправки команды удаленного управления
+        [HttpPost("{computerId}/public-command")]
+        public ActionResult SendPublicRemoteCommand(int computerId, [FromBody] RemoteInput command)
+        {
+            try
+            {
+                _logger.LogInformation("Получена публичная команда для компьютера {ComputerId}", computerId);
+                
+                if (command == null)
+                {
+                    return BadRequest("Некорректные данные команды");
+                }
+                
+                if (!_activeSessions.TryGetValue(computerId, out var isActive) || !isActive)
+                {
+                    return BadRequest("Сессия управления не активна");
+                }
+                
+                // Инициализируем список команд, если его нет
+                if (!_pendingCommands.TryGetValue(computerId, out var commands))
+                {
+                    commands = new List<RemoteInput>();
+                    _pendingCommands[computerId] = commands;
+                }
+                
+                // Добавляем команду
+                commands.Add(command);
+                
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при отправке публичной команды на компьютер {ComputerId}", computerId);
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
+        
         // Метод для получения клиентом ожидающих команд
         [HttpGet("{computerId}/commands")]
         public ActionResult<List<RemoteInput>> GetPendingCommands(int computerId)
@@ -129,6 +207,35 @@ namespace GameClubManager.Server.Controllers
             }
         }
         
+        // Публичный метод для получения команд, который не требует авторизации
+        [HttpGet("{computerId}/public-commands")]
+        public ActionResult<List<RemoteInput>> GetPublicPendingCommands(int computerId)
+        {
+            try
+            {
+                if (_pendingCommands.TryGetValue(computerId, out var commands))
+                {
+                    // Очищаем список команд
+                    _pendingCommands[computerId] = new List<RemoteInput>();
+                    
+                    // Логируем только если есть команды для выполнения (уменьшаем спам)
+                    if (commands.Count > 0)
+                    {
+                        _logger.LogInformation("Возвращено {Count} команд для компьютера {ComputerId}", commands.Count, computerId);
+                    }
+                    
+                    return Ok(commands);
+                }
+                
+                return Ok(new List<RemoteInput>());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при получении публичных команд для компьютера {ComputerId}", computerId);
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
+        
         // Метод для начала сессии удаленного управления
         [HttpPost("{computerId}/start")]
         public ActionResult StartRemoteSession(int computerId)
@@ -146,6 +253,23 @@ namespace GameClubManager.Server.Controllers
             }
         }
         
+        // Публичный метод для начала сессии удаленного управления
+        [HttpPost("{computerId}/public-start")]
+        public ActionResult StartPublicRemoteSession(int computerId)
+        {
+            try
+            {
+                _activeSessions[computerId] = true;
+                _logger.LogInformation("Начата публичная сессия удаленного управления для компьютера {ComputerId}", computerId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при начале публичной сессии удаленного управления для компьютера {ComputerId}", computerId);
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
+        
         // Метод для остановки сессии удаленного управления
         [HttpPost("{computerId}/stop")]
         public ActionResult StopRemoteSession(int computerId)
@@ -159,6 +283,23 @@ namespace GameClubManager.Server.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибка при остановке сессии удаленного управления для компьютера {ComputerId}", computerId);
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
+        }
+        
+        // Публичный метод для остановки сессии удаленного управления
+        [HttpPost("{computerId}/public-stop")]
+        public ActionResult StopPublicRemoteSession(int computerId)
+        {
+            try
+            {
+                _activeSessions[computerId] = false;
+                _logger.LogInformation("Остановлена публичная сессия удаленного управления для компьютера {ComputerId}", computerId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при остановке публичной сессии удаленного управления для компьютера {ComputerId}", computerId);
                 return StatusCode(500, "Внутренняя ошибка сервера");
             }
         }

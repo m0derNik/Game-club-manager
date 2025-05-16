@@ -12,12 +12,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Заголовок и поиск -->
         <Grid Margin="0,0,0,24">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
@@ -25,7 +27,17 @@
                       Style="{StaticResource HeaderTextStyle}"
                       VerticalAlignment="Center"/>
 
-            <TextBox Grid.Column="1"
+            <Button Grid.Column="1"
+                    Command="{Binding RefreshGamesCommand}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    ToolTip="Обновить список игр"
+                    Width="36" Height="36"
+                    Margin="8,0"
+                    Background="{DynamicResource PrimaryBrush}">
+                <materialDesign:PackIcon Kind="Refresh" Width="18" Height="18" />
+            </Button>
+
+            <TextBox Grid.Column="2"
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      materialDesign:HintAssist.Hint="Поиск игр..."
                      materialDesign:TextFieldAssist.HasClearButton="True"
@@ -34,11 +46,35 @@
                      CaretBrush="{DynamicResource TextPrimaryBrush}"/>
         </Grid>
 
+        <!-- Индикатор загрузки -->
+        <Grid Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" 
+                         Width="50" Height="50" 
+                         IsIndeterminate="True"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center"/>
+            <TextBlock Text="Загрузка игр..." 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Margin="0,75,0,0"/>
+        </Grid>
+
+        <!-- Сообщение об ошибке -->
+        <TextBlock Grid.Row="1" 
+                   Text="{Binding ErrorMessage}" 
+                   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"
+                   Foreground="Red"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap"
+                   MaxWidth="400"/>
+
         <!-- Список игр -->
         <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
-                      Padding="0,0,16,0">
+                      Padding="0,0,16,0"
+                      Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
             <ItemsControl ItemsSource="{Binding Games}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -49,14 +85,14 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <materialDesign:Card Style="{StaticResource ModernCard}"
-                                           Width="220"
-                                           Height="300"
-                                           Margin="8,8,16,16"
+                                           Width="280"
+                                           Height="380"
+                                           Margin="12,12,20,20"
                                            materialDesign:ElevationAssist.Elevation="Dp4"
                                            UniformCornerRadius="12">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="160"/>
+                                    <RowDefinition Height="180"/>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -65,10 +101,10 @@
                                 <Border Background="{DynamicResource PrimaryBrush}"
                                         CornerRadius="8"
                                         Margin="0,0,0,16">
-                                    <Image Source="{Binding IconPath}"
+                                    <Image Source="{Binding IconSource}"
                                            RenderOptions.BitmapScalingMode="HighQuality"
                                            Stretch="Uniform"
-                                           Margin="24"/>
+                                           Margin="32"/>
                                 </Border>
 
                                 <!-- Название игры -->
@@ -78,13 +114,15 @@
                                              Style="{StaticResource SubheaderTextStyle}"
                                              TextWrapping="Wrap"
                                              TextAlignment="Center"
+                                             FontSize="18"
+                                             FontWeight="SemiBold"
                                              Margin="8,0"/>
-                                    <TextBlock Text="{Binding ExecutablePath}"
+                                    <TextBlock Text="{Binding Description}"
                                              Style="{StaticResource BodyTextStyle}"
                                              TextWrapping="Wrap"
                                              TextAlignment="Center"
-                                             Margin="8,4,8,0"
-                                             FontSize="12"/>
+                                             Margin="12,8,12,0"
+                                             FontSize="14"/>
                                 </StackPanel>
 
                                 <!-- Кнопка запуска -->
@@ -93,17 +131,18 @@
                                         Command="{Binding DataContext.LaunchGameCommand, 
                                                   RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                         CommandParameter="{Binding}"
-                                        Height="44"
-                                        Margin="8,0,8,8"
-                                        materialDesign:ButtonAssist.CornerRadius="22"
+                                        Height="52"
+                                        Margin="16,0,16,16"
+                                        materialDesign:ButtonAssist.CornerRadius="26"
                                         Background="{DynamicResource PrimaryBrush}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Play"
-                                                               Width="20"
-                                                               Height="20"
+                                                               Width="24"
+                                                               Height="24"
                                                                Margin="0,0,8,0"/>
                                         <TextBlock Text="ЗАПУСТИТЬ"
-                                                 FontWeight="Medium"/>
+                                                 FontWeight="Medium"
+                                                 FontSize="16"/>
                                     </StackPanel>
                                 </Button>
                             </Grid>

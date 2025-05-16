@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
-      Title="NotificationsPage">
+      Title="Уведомления">
 
     <Grid Margin="24">
         <Grid.RowDefinitions>
@@ -15,89 +15,219 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
-        <TextBlock Text="Уведомления" 
-                   Style="{StaticResource HeaderTextStyle}"
-                   Margin="0,0,0,24"/>
+        <!-- Заголовок и кнопки управления -->
+        <Grid Grid.Row="0" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Список уведомлений -->
-        <ScrollViewer Grid.Row="1" 
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding Notifications}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="0,0,0,16"
-                                Background="{DynamicResource MaterialDesignPaper}"
-                                CornerRadius="8"
-                                BorderThickness="1"
-                                BorderBrush="{DynamicResource MaterialDesignDivider}">
-                            <Grid Margin="16">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+            <TextBlock Text="Уведомления" 
+                       Style="{StaticResource HeaderTextStyle}"
+                       VerticalAlignment="Center"/>
 
-                                <!-- Заголовок и время -->
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Command="{Binding RefreshCommand}"
+                    ToolTip="Обновить">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Refresh" 
+                                           Width="20" 
+                                           Height="20"
+                                           Margin="0,0,8,0"/>
+                    <TextBlock Text="Обновить"/>
+                </StackPanel>
+            </Button>
+        </Grid>
 
-                                    <TextBlock Text="{Binding Title}"
-                                               Style="{StaticResource SubheaderTextStyle}"
-                                               TextWrapping="Wrap"/>
+        <!-- Индикатор загрузки -->
+        <materialDesign:Card Grid.Row="1" 
+                           UniformCornerRadius="8"
+                           Padding="24"
+                           Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" 
+                           Style="{StaticResource MaterialDesignCircularProgressBar}"
+                           Width="50" 
+                           Height="50"
+                           Margin="0,0,0,16"/>
+                <TextBlock Text="Загрузка данных..." 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            </StackPanel>
+        </materialDesign:Card>
+        
+        <!-- Сообщение об отсутствии данных -->
+        <materialDesign:Card Grid.Row="1" 
+                           UniformCornerRadius="8"
+                           Padding="24"
+                           Visibility="{Binding IsEmptyVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center" 
+                      Margin="16">
+                <materialDesign:PackIcon Kind="Bell" 
+                                       Width="32" 
+                                       Height="32" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,16"/>
+                <TextBlock Text="Уведомления не найдены" 
+                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                <TextBlock Text="На данный момент нет новых уведомлений" 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         TextAlignment="Center"
+                         Margin="0,8,0,0"/>
+            </StackPanel>
+        </materialDesign:Card>
 
-                                    <TextBlock Grid.Column="1"
-                                               Text="{Binding Time, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}"
-                                               Style="{StaticResource BodyTextStyle}"
-                                               VerticalAlignment="Center"/>
-                                </Grid>
-
-                                <!-- Сообщение -->
-                                <TextBlock Grid.Row="1"
-                                           Text="{Binding Message}"
-                                           Style="{StaticResource BodyTextStyle}"
-                                           TextWrapping="Wrap"
-                                           Margin="0,8,0,0"/>
-
-                                <!-- Кнопки действий -->
-                                <StackPanel Grid.Row="2"
-                                          Orientation="Horizontal"
-                                          HorizontalAlignment="Right"
-                                          Margin="0,16,0,0">
-                                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Command="{Binding DataContext.HandleNotificationCommand, 
-                                                      RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding}"
-                                            Margin="0,0,8,0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Check" 
-                                                                   Width="20" 
-                                                                   Height="20" 
-                                                                   Margin="0,0,8,0"/>
-                                            <TextBlock Text="Обработать"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Command="{Binding DataContext.IgnoreNotificationCommand, 
-                                                      RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Close" 
-                                                                   Width="20" 
-                                                                   Height="20" 
-                                                                   Margin="0,0,8,0"/>
-                                            <TextBlock Text="Игнорировать"/>
-                                        </StackPanel>
-                                    </Button>
+        <!-- Таблица уведомлений -->
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding Notifications}"
+                  SelectedItem="{Binding SelectedNotification}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Style="{StaticResource MaterialDesignDataGrid}"
+                  materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                  Visibility="{Binding IsDataVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" 
+                                  Binding="{Binding Id}" 
+                                  Width="60"/>
+                
+                <!-- Тип уведомления -->
+                <DataGridTemplateColumn Header="Тип" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{DynamicResource PrimaryHueMidBrush}"
+                                    CornerRadius="4"
+                                    Padding="8,4"
+                                    Visibility="{Binding IsTypeAdminCall, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="AlertCircle" 
+                                                           Width="16" 
+                                                           Height="16"
+                                                           Foreground="White"
+                                                           Margin="0,0,4,0"/>
+                                    <TextBlock Text="Вызов" 
+                                             Foreground="White"
+                                             FontWeight="SemiBold"
+                                             VerticalAlignment="Center"/>
                                 </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Заголовок" 
+                                  Binding="{Binding Title}" 
+                                  Width="180"/>
+                                  
+                <DataGridTextColumn Header="Сообщение" 
+                                  Binding="{Binding Message}" 
+                                  Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="TextTrimming" Value="WordEllipsis"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+                <!-- Информация о компьютере -->
+                <DataGridTemplateColumn Header="Компьютер" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                      Visibility="{Binding IsTypeAdminCall, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <materialDesign:PackIcon Kind="Computer" 
+                                                     Width="16" 
+                                                     Height="16"
+                                                     Margin="0,0,4,0"
+                                                     VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding ComputerName}" 
+                                        VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Дата" 
+                                  Binding="{Binding CreatedAt, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" 
+                                  Width="120"/>
+                                  
+                <!-- Статус -->
+                <DataGridTemplateColumn Header="Статус" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border Background="#4CAF50"
+                                        CornerRadius="4"
+                                        Padding="8,4"
+                                        Visibility="{Binding IsRead, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="Обработано" 
+                                            Foreground="White"
+                                            FontWeight="SemiBold"
+                                            HorizontalAlignment="Center"/>
+                                </Border>
+                                <Border Background="#E53935"
+                                        CornerRadius="4"
+                                        Padding="8,4"
+                                        Visibility="{Binding IsRead, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                                    <TextBlock Text="Новое" 
+                                            Foreground="White"
+                                            FontWeight="SemiBold"
+                                            HorizontalAlignment="Center"/>
+                                </Border>
                             </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <!-- Действия -->
+                <DataGridTemplateColumn Header="Действия" Width="160">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Кнопка подключения для вызова администратора -->
+                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        Command="{Binding DataContext.HandleNotificationCommand, 
+                                                  RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Подключиться к компьютеру"
+                                        Visibility="{Binding IsTypeAdminCall, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <materialDesign:PackIcon Kind="Remote" 
+                                                           Width="20" 
+                                                           Height="20"/>
+                                </Button>
+                                
+                                <!-- Кнопка обработки уведомления -->
+                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        Command="{Binding DataContext.HandleNotificationCommand, 
+                                                  RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Обработать"
+                                        Visibility="{Binding IsRead, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                                    <materialDesign:PackIcon Kind="Check" 
+                                                           Width="20" 
+                                                           Height="20"/>
+                                </Button>
+                                
+                                <!-- Кнопка игнорирования уведомления -->
+                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        Command="{Binding DataContext.IgnoreNotificationCommand, 
+                                                  RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip="Игнорировать"
+                                        Visibility="{Binding IsRead, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                                    <materialDesign:PackIcon Kind="Close" 
+                                                           Width="20" 
+                                                           Height="20"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page> 

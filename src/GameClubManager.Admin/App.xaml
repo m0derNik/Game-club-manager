@@ -15,6 +15,13 @@
             <!-- Конвертеры -->
             <converters:EnumEqualityToVisibilityConverter x:Key="EnumEqualityToVisibilityConverter"/>
             <pages:MultiEnumEqualityToVisibilityConverter x:Key="MultiEnumEqualityToVisibilityConverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+            <converters:ZeroToVisibilityConverter x:Key="ZeroToVisibilityConverter"/>
+            <converters:NonZeroToVisibilityConverter x:Key="NonZeroToVisibilityConverter"/>
+            <converters:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+            <converters:InequalityToBooleanConverter x:Key="InequalityToBooleanConverter"/>
+            <converters:BooleanToStringConverter x:Key="BooleanToStringConverter"/>
 
             <!-- Цвета -->
             <Color x:Key="PrimaryColor">#673AB7</Color>

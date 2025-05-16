@@ -1,0 +1,266 @@
+<Page x:Class="GameClubManager.Admin.Pages.GamesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GameClubManager.Admin.Pages"
+      xmlns:viewmodels="clr-namespace:GameClubManager.Admin.ViewModels"
+      xmlns:models="clr-namespace:GameClubManager.Shared.Models"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters="clr-namespace:GameClubManager.Admin.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="Управление играми">
+
+    <Page.Resources>
+        <viewmodels:GamesViewModel x:Key="ViewModel"/>
+        <converters:BooleanToStringConverter x:Key="BoolToStringConverter" 
+                                            TrueValue="Да" 
+                                            FalseValue="Нет"/>
+        <converters:DateTimeToShortDateConverter x:Key="DateConverter"/>
+        <converters:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
+        <converters:ObjectVisibilityConverter x:Key="ObjectVisibilityConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid DataContext="{StaticResource ViewModel}" Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок и кнопки управления -->
+        <Grid Grid.Row="0" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Игры" 
+                       Style="{StaticResource HeaderTextStyle}"
+                       VerticalAlignment="Center"/>
+
+            <Button Grid.Column="1"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Command="{Binding AddCommand}"
+                    ToolTip="Добавить новую игру">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Add" 
+                                           Width="20" 
+                                           Height="20"
+                                           Margin="0,0,8,0"/>
+                    <TextBlock Text="Добавить игру"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Основное содержимое -->
+        <Grid Grid.Row="1">
+            <!-- Таблица игр (видима, когда не в режиме редактирования) -->
+            <DataGrid ItemsSource="{Binding Games}"
+                      SelectedItem="{Binding SelectedGame}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Style="{StaticResource MaterialDesignDataGrid}"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                      Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" 
+                                      Binding="{Binding Id}" 
+                                      Width="50"/>
+                    
+                    <DataGridTextColumn Header="Название" 
+                                      Binding="{Binding Name}" 
+                                      Width="180"/>
+                    
+                    <DataGridTextColumn Header="Описание" 
+                                      Binding="{Binding Description}" 
+                                      Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextTrimming" Value="WordEllipsis"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    
+                    <DataGridTextColumn Header="Жанр" 
+                                      Binding="{Binding Genre}" 
+                                      Width="100"/>
+                    
+                    <DataGridTextColumn Header="Путь запуска" 
+                                      Binding="{Binding ExecutablePath}" 
+                                      Width="200"/>
+                    
+                    <DataGridTemplateColumn Header="Доступна" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsAvailable, Mode=OneWay}" 
+                                          IsEnabled="False" 
+                                          HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Header="Действия" Width="140">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                            Command="{Binding DataContext.EditCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            ToolTip="Редактировать">
+                                        <materialDesign:PackIcon Kind="Edit" 
+                                                              Width="20" 
+                                                              Height="20"
+                                                              Foreground="DodgerBlue"/>
+                                    </Button>
+                                    
+                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                            Command="{Binding DataContext.ToggleAvailabilityCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding Id}"
+                                            ToolTip="{Binding IsAvailable, Converter={StaticResource BoolToStringConverter}, 
+                                                    ConverterParameter='Скрыть;Показать'}">
+                                        <materialDesign:PackIcon Kind="{Binding IsAvailable, Converter={StaticResource BoolToStringConverter}, 
+                                                                ConverterParameter='EyeOff;Eye'}" 
+                                                              Width="20" 
+                                                              Height="20"
+                                                              Foreground="Orange"/>
+                                    </Button>
+                                    
+                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                            Command="{Binding DataContext.DeleteCommand, 
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding Id}"
+                                            ToolTip="Удалить игру">
+                                        <materialDesign:PackIcon Kind="Delete" 
+                                                              Width="24" 
+                                                              Height="24"
+                                                              Foreground="Firebrick"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <!-- Форма редактирования игры (видима только в режиме редактирования) -->
+            <materialDesign:Card Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                               UniformCornerRadius="8" 
+                               Padding="24"
+                               Background="{DynamicResource SurfaceBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Заголовок формы -->
+                    <TextBlock Grid.Row="0" 
+                             Text="{Binding IsAdding, Converter={StaticResource BoolToStringConverter}, ConverterParameter='Добавление игры;Редактирование игры'}" 
+                             Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             Margin="0,0,0,24"/>
+                    
+                    <!-- Поля формы -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <!-- Название -->
+                            <TextBox Grid.Row="0"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    materialDesign:HintAssist.Hint="Название игры"
+                                    Text="{Binding EditingGame.Name}"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    CaretBrush="{DynamicResource TextPrimaryBrush}"
+                                    Margin="0,8"/>
+                            
+                            <!-- Описание -->
+                            <TextBox Grid.Row="1"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    materialDesign:HintAssist.Hint="Описание"
+                                    Text="{Binding EditingGame.Description}"
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    MinHeight="80"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    CaretBrush="{DynamicResource TextPrimaryBrush}"
+                                    Margin="0,8"/>
+                            
+                            <!-- Путь к исполняемому файлу -->
+                            <TextBox Grid.Row="2"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    materialDesign:HintAssist.Hint="Путь к исполняемому файлу"
+                                    Text="{Binding EditingGame.ExecutablePath}"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    CaretBrush="{DynamicResource TextPrimaryBrush}"
+                                    Margin="0,8"/>
+
+                            <!-- Жанр -->
+                            <ComboBox Grid.Row="3"
+                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                    materialDesign:HintAssist.Hint="Жанр"
+                                    ItemsSource="{Binding GameGenres}"
+                                    SelectedItem="{Binding EditingGame.Genre}"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    Margin="0,8"/>
+
+                            <!-- Доступность -->
+                            <CheckBox Grid.Row="4"
+                                    Style="{StaticResource MaterialDesignCheckBox}"
+                                    Content="Доступна для пользователей"
+                                    IsChecked="{Binding EditingGame.IsAvailable}"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    Margin="0,16,0,8"/>
+                        </Grid>
+                    </ScrollViewer>
+                    
+                    <!-- Кнопки действий -->
+                    <StackPanel Grid.Row="2" 
+                              Orientation="Horizontal" 
+                              HorizontalAlignment="Right" 
+                              Margin="0,24,0,0">
+                        <!-- Сообщение об ошибке -->
+                        <TextBlock Text="{Binding ErrorMessage}" 
+                                 Foreground="Red" 
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,16,0"
+                                 Visibility="{Binding ErrorMessage, Converter={StaticResource StringVisibilityConverter}}"/>
+                        
+                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Command="{Binding CancelCommand}"
+                                Content="Отмена"
+                                Foreground="{DynamicResource TextPrimaryBrush}"
+                                Margin="8,0"/>
+                        
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                Command="{Binding SaveCommand}"
+                                Content="Сохранить"/>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+            
+            <!-- Индикатор загрузки -->
+            <Grid Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Background="#80000000">
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" 
+                           Value="0"
+                           IsIndeterminate="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page> 

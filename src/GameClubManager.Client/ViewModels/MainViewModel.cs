@@ -28,8 +28,8 @@ namespace GameClubManager.Client.ViewModels
             }
         }
 
-        private ObservableCollection<Game> _games;
-        public ObservableCollection<Game> Games
+        private ObservableCollection<Client.Models.Game> _games;
+        public ObservableCollection<Client.Models.Game> Games
         {
             get => _games;
             set
@@ -87,7 +87,7 @@ namespace GameClubManager.Client.ViewModels
             ShowGamesCommand = new RelayCommand(ShowGames);
             ShowProfileCommand = new RelayCommand(ShowProfile);
             BookComputerCommand = new RelayCommand<Computer>(BookComputer);
-            LaunchGameCommand = new RelayCommand<Game>(LaunchGame);
+            LaunchGameCommand = new RelayCommand<Client.Models.Game>(LaunchGame);
             ShowAdminPanelCommand = new RelayCommand(ShowAdminPanel);
             ConfirmAdminPasswordCommand = new RelayCommand<string>(ConfirmAdminPassword);
 
@@ -149,12 +149,12 @@ namespace GameClubManager.Client.ViewModels
             {
                 var json = File.ReadAllText(_configFilePath);
                 _gameConfig = JsonSerializer.Deserialize<GameConfig>(json);
-                Games = new ObservableCollection<Game>(_gameConfig.Games);
+                Games = new ObservableCollection<Client.Models.Game>(_gameConfig.Games);
             }
             else
             {
                 // Обработка отсутствия файла конфигурации
-                Games = new ObservableCollection<Game>();
+                Games = new ObservableCollection<Client.Models.Game>();
             }
         }
 
@@ -186,18 +186,24 @@ namespace GameClubManager.Client.ViewModels
             }
         }
 
-        private void LaunchGame(Game game)
+        private void LaunchGame(Client.Models.Game game)
         {
-            if (game != null && game.IsEnabled)
+            if (game != null && game.IsAvailable)
             {
-                var startInfo = new ProcessStartInfo
+                try
                 {
-                    FileName = game.ExecutablePath,
-                    Arguments = game.Arguments,
-                    WorkingDirectory = game.WorkingDirectory,
-                    UseShellExecute = false
-                };
-                Process.Start(startInfo);
+                    var startInfo = new ProcessStartInfo
+                    {
+                        FileName = game.ExecutablePath,
+                        UseShellExecute = true
+                    };
+                    Process.Start(startInfo);
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show($"Ошибка при запуске игры: {ex.Message}", 
+                        "Ошибка", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
             }
         }
 

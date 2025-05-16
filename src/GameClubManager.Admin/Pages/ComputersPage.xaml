@@ -117,17 +117,21 @@
                                 <!-- Заголовок -->
                                 <TextBlock Text="{Binding Name}"
                                            Style="{StaticResource SubheaderTextStyle}"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"
                                            TextWrapping="Wrap"/>
 
                                 <!-- Информация -->
                                 <StackPanel Grid.Row="1" Margin="0,16">
                                     <TextBlock Text="{Binding Status}"
-                                               Style="{StaticResource BodyTextStyle}"/>
+                                               Style="{StaticResource BodyTextStyle}"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
                                     <TextBlock Text="{Binding CurrentUser, StringFormat='Пользователь: {0}'}"
                                                Style="{StaticResource BodyTextStyle}"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"
                                                Margin="0,8,0,0"/>
                                     <TextBlock Text="{Binding TimeRemaining, StringFormat='Оставшееся время: {0}'}"
                                                Style="{StaticResource BodyTextStyle}"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"
                                                Margin="0,8,0,0"/>
                                 </StackPanel>
 
@@ -142,13 +146,15 @@
                                             CommandParameter="{Binding}"
                                             Margin="0,0,0,8"
                                             Padding="12,6"
+                                            Foreground="{DynamicResource TextPrimaryBrush}"
                                             Width="220">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="RemoteDesktop" 
                                                                    Width="24" 
                                                                    Height="24" 
+                                                                   Foreground="{DynamicResource TextPrimaryBrush}"
                                                                    Margin="0,0,8,0"/>
-                                            <TextBlock Text="Подключиться" FontSize="14"/>
+                                            <TextBlock Text="Подключиться" FontSize="14" Foreground="{DynamicResource TextPrimaryBrush}"/>
                                         </StackPanel>
                                     </Button>
                                     
@@ -159,26 +165,30 @@
                                                           RelativeSource={RelativeSource AncestorType=Page}}"
                                                 CommandParameter="{Binding}"
                                                 Margin="0,0,8,0"
+                                                Foreground="{DynamicResource TextPrimaryBrush}"
                                                 Padding="8,4">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Restart" 
                                                                        Width="20" 
                                                                        Height="20" 
+                                                                       Foreground="{DynamicResource TextPrimaryBrush}"
                                                                        Margin="0,0,8,0"/>
-                                                <TextBlock Text="Перезапуск"/>
+                                                <TextBlock Text="Перезапуск" Foreground="{DynamicResource TextPrimaryBrush}"/>
                                             </StackPanel>
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                                                 Command="{Binding DataContext.ShutdownCommand, 
                                                           RelativeSource={RelativeSource AncestorType=Page}}"
                                                 CommandParameter="{Binding}"
+                                                Foreground="{DynamicResource TextPrimaryBrush}"
                                                 Padding="8,4">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Power" 
                                                                        Width="20" 
                                                                        Height="20" 
+                                                                       Foreground="{DynamicResource TextPrimaryBrush}"
                                                                        Margin="0,0,8,0"/>
-                                                <TextBlock Text="Выключение"/>
+                                                <TextBlock Text="Выключение" Foreground="{DynamicResource TextPrimaryBrush}"/>
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>

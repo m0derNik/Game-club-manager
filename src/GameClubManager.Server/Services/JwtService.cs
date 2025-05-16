@@ -10,6 +10,7 @@ namespace GameClubManager.Server.Services;
 public interface IJwtService
 {
     string GenerateToken(User user);
+    string GenerateToken(User user, int expirationHours);
 }
 
 public class JwtService : IJwtService
@@ -22,6 +23,18 @@ public class JwtService : IJwtService
     }
 
     public string GenerateToken(User user)
+    {
+        // Получаем время жизни токена из конфигурации
+        var expirationMinutes = int.Parse(_configuration["JwtSettings:ExpirationInMinutes"] ?? "60");
+        return GenerateTokenWithExpiration(user, DateTime.Now.AddMinutes(expirationMinutes));
+    }
+
+    public string GenerateToken(User user, int expirationHours)
+    {
+        return GenerateTokenWithExpiration(user, DateTime.Now.AddHours(expirationHours));
+    }
+
+    private string GenerateTokenWithExpiration(User user, DateTime expiration)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]!));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -38,7 +51,7 @@ public class JwtService : IJwtService
             issuer: _configuration["JwtSettings:Issuer"],
             audience: _configuration["JwtSettings:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddMinutes(int.Parse(_configuration["JwtSettings:ExpirationInMinutes"]!)),
+            expires: expiration,
             signingCredentials: credentials
         );
 

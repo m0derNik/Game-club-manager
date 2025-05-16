@@ -48,13 +48,4 @@ namespace GameClubManager.Shared.Models
         public DateTime IssuedAt { get; set; }
         public bool IsPaid { get; set; }
     }
-
-    public class GamePreference
-    {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public string GameName { get; set; } = string.Empty;
-        public int PlayTimeMinutes { get; set; }
-        public DateTime LastPlayed { get; set; }
-    }
 } 

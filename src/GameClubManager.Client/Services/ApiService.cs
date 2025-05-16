@@ -11,6 +11,7 @@ using ClientComputerStatus = GameClubManager.Client.Models.ComputerStatus;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Net.Http.Headers;
 
 namespace GameClubManager.Client.Services;
 
@@ -37,17 +38,17 @@ public class ApiService
 
     public void SetAuthToken(string? token)
     {
-        // Временно отключаем аутентификацию
-        // if (string.IsNullOrEmpty(token))
-        // {
-        //     _httpClient.DefaultRequestHeaders.Remove("Authorization");
-        //     System.Windows.MessageBox.Show("Токен удален из заголовков", "Отладка", MessageBoxButton.OK, MessageBoxImage.Information);
-        // }
-        // else
-        // {
-        //     _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        //     System.Windows.MessageBox.Show($"Токен установлен: {token}", "Отладка", MessageBoxButton.OK, MessageBoxImage.Information);
-        // }
+        if (string.IsNullOrEmpty(token))
+        {
+            if (_httpClient.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _httpClient.DefaultRequestHeaders.Remove("Authorization");
+            }
+        }
+        else
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        }
     }
 
     public async Task<AuthResponse?> RegisterAsync(RegisterRequest request)
@@ -345,7 +346,7 @@ public class ApiService
     }
 
     // Метод для получения списка продуктов питания
-    public async Task<List<GameClubManager.Client.Models.FoodItem>> GetFoodItemsAsync()
+    public async Task<List<GameClubManager.Client.Models.FoodItem>> GetFoodItemsAsync(bool onlyAvailable = true)
     {
         try
         {
@@ -354,19 +355,118 @@ public class ApiService
             var sharedFoodItems = await response.Content.ReadFromJsonAsync<List<GameClubManager.Shared.Models.FoodItem>>();
             
             // Конвертируем из Shared.Models.FoodItem в Client.Models.FoodItem
-            return sharedFoodItems?.Select(item => new GameClubManager.Client.Models.FoodItem
+            var foodItems = sharedFoodItems?.Select(item => new GameClubManager.Client.Models.FoodItem
             {
                 Id = item.Id,
                 Name = item.Name,
                 Description = item.Description ?? string.Empty,
                 Price = item.Price,
-                Category = GameClubManager.Client.Models.FoodCategory.Food // Устанавливаем категорию по умолчанию
+                ImageUrl = item.ImageUrl,
+                Category = (GameClubManager.Client.Models.FoodCategory)item.Category
             }).ToList() ?? new List<GameClubManager.Client.Models.FoodItem>();
+            
+            // Если нужно фильтровать только доступные
+            if (onlyAvailable)
+            {
+                foodItems = foodItems.Where(item => sharedFoodItems
+                    .FirstOrDefault(si => si.Id == item.Id)?.IsAvailable == true).ToList();
+            }
+            
+            return foodItems;
         }
         catch (Exception ex)
         {
             System.Windows.MessageBox.Show($"Ошибка при получении списка продуктов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             return new List<GameClubManager.Client.Models.FoodItem>();
+        }
+    }
+
+    public async Task<bool> CallAdminAsync(string reason)
+    {
+        try
+        {
+            // Получаем имя компьютера из сервиса регистрации компьютеров
+            var computerName = ComputerRegistrationService.Instance.ComputerName;
+            if (string.IsNullOrEmpty(computerName))
+            {
+                System.Windows.MessageBox.Show("Невозможно вызвать администратора: компьютер не зарегистрирован", 
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            // Проверяем, что имя компьютера не пустое
+            if (string.IsNullOrWhiteSpace(reason))
+            {
+                System.Windows.MessageBox.Show("Невозможно вызвать администратора: необходимо указать причину", 
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            // Используем класс AdminCallRequest из Shared.Models
+            var request = new GameClubManager.Shared.Models.AdminCallRequest
+            {
+                ComputerName = computerName,
+                Reason = reason
+            };
+
+            // Логируем параметры запроса для отладки
+            System.Diagnostics.Debug.WriteLine($"Отправка запроса на вызов администратора: " +
+                $"Компьютер={request.ComputerName}, Причина={request.Reason}");
+
+            // URL должен точно соответствовать маршруту на сервере:
+            // Контроллер: NotificationsController с маршрутом "api/[controller]"
+            // Действие: [HttpPost("call-admin")]
+            var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/notifications/call-admin", request);
+            
+            // Для диагностики выводим статус код ответа при ошибке
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Код: {response.StatusCode}, Сообщение: {errorContent}");
+            }
+            
+            return true;
+        }
+        catch (HttpRequestException ex)
+        {
+            // Обработка ошибок сети и запросов
+            string message = $"Ошибка сети при вызове администратора: {ex.Message}";
+            if (ex.InnerException != null)
+            {
+                message += $"\nДетали: {ex.InnerException.Message}";
+            }
+            System.Windows.MessageBox.Show(message, "Ошибка сети", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+        }
+        catch (Exception ex)
+        {
+            // Обработка прочих ошибок
+            System.Windows.MessageBox.Show($"Ошибка при вызове администратора: {ex.Message}", 
+                "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+        }
+    }
+
+    // Добавляем метод для получения игр для пользователя
+    public async Task<List<GameClubManager.Client.Models.Game>> GetGamesForUserAsync()
+    {
+        try
+        {
+            // Используем публичный эндпоинт, который не требует авторизации
+            var response = await _httpClient.GetAsync($"{BaseUrl}/games/public");
+            response.EnsureSuccessStatusCode();
+            
+            var games = await JsonSerializer.DeserializeAsync<List<GameClubManager.Client.Models.Game>>(
+                await response.Content.ReadAsStreamAsync(),
+                _jsonOptions);
+            
+            return games ?? new List<GameClubManager.Client.Models.Game>();
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show($"Ошибка при получении списка игр: {ex.Message}", 
+                "Ошибка", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            return new List<GameClubManager.Client.Models.Game>();
         }
     }
 }

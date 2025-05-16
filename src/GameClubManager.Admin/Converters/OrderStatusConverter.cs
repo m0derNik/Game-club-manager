@@ -41,15 +41,15 @@ namespace GameClubManager.Admin.Pages
             {
                 return status switch
                 {
-                    OrderStatus.Pending => new SolidColorBrush(Color.FromRgb(33, 150, 243)),    // Синий
-                    OrderStatus.Processing => new SolidColorBrush(Color.FromRgb(255, 152, 0)),  // Оранжевый
-                    OrderStatus.Delivered => new SolidColorBrush(Color.FromRgb(76, 175, 80)),   // Зеленый
-                    OrderStatus.Canceled => new SolidColorBrush(Color.FromRgb(244, 67, 54)),    // Красный
-                    _ => new SolidColorBrush(Color.FromRgb(158, 158, 158))                      // Серый
+                    OrderStatus.Pending => new SolidColorBrush(System.Windows.Media.Color.FromRgb(33, 150, 243)),    // Синий
+                    OrderStatus.Processing => new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 152, 0)),  // Оранжевый
+                    OrderStatus.Delivered => new SolidColorBrush(System.Windows.Media.Color.FromRgb(76, 175, 80)),   // Зеленый
+                    OrderStatus.Canceled => new SolidColorBrush(System.Windows.Media.Color.FromRgb(244, 67, 54)),    // Красный
+                    _ => new SolidColorBrush(System.Windows.Media.Color.FromRgb(158, 158, 158))                      // Серый
                 };
             }
             
-            return new SolidColorBrush(Color.FromRgb(158, 158, 158));
+            return new SolidColorBrush(System.Windows.Media.Color.FromRgb(158, 158, 158));
         }
         
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

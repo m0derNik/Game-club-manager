@@ -29,6 +29,9 @@ public partial class MainWindow : Window
         ComputersButton.Click += ComputersButton_Click;
         OrdersButton.Click += OrdersButton_Click;
         UsersButton.Click += UsersButton_Click;
+        TariffsButton.Click += TariffsButton_Click;
+        FoodButton.Click += FoodButton_Click;
+        GamesButton.Click += GamesButton_Click;
         NotificationsButton.Click += NotificationsButton_Click;
         SettingsButton.Click += SettingsButton_Click;
         LogoutButton.Click += LogoutButton_Click;
@@ -55,6 +58,24 @@ public partial class MainWindow : Window
         _viewModel.CurrentPageTitle = "Пользователи";
     }
 
+    private void TariffsButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigateToPage(new Pages.TariffsPage());
+        _viewModel.CurrentPageTitle = "Тарифы";
+    }
+
+    private void FoodButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigateToPage(new Pages.FoodPage());
+        _viewModel.CurrentPageTitle = "Управление меню";
+    }
+
+    private void GamesButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigateToPage(new Pages.GamesPage());
+        _viewModel.CurrentPageTitle = "Управление играми";
+    }
+
     private void NotificationsButton_Click(object sender, RoutedEventArgs e)
     {
         NavigateToPage(new Pages.NotificationsPage());
@@ -69,7 +90,7 @@ public partial class MainWindow : Window
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
-        var result = MessageBox.Show(
+        var result = System.Windows.MessageBox.Show(
             "Вы уверены, что хотите выйти?",
             "Подтверждение выхода",
             MessageBoxButton.YesNo,

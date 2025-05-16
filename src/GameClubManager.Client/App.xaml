@@ -15,6 +15,7 @@
             <converters:BooleanConverter x:Key="BooleanConverter"/>
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
 
             <!-- Глобальные цвета -->
             <Color x:Key="PrimaryColor">#673AB7</Color>
@@ -41,13 +42,15 @@
             <SolidColorBrush x:Key="TextDisabledBrush" Color="{StaticResource TextDisabledColor}"/>
 
             <!-- Стили кнопок -->
-            <Style x:Key="ModernButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
-                <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-                <Setter Property="BorderThickness" Value="0"/>
+            <Style x:Key="ModernButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                <Setter Property="Foreground" Value="White"/>
                 <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="8"/>
-                <Setter Property="Height" Value="40"/>
+                <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp2"/>
+                <Setter Property="Height" Value="48"/>
                 <Setter Property="Padding" Value="16,0"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="materialDesign:RippleAssist.Feedback" Value="#22FFFFFF"/>
+                <Setter Property="FontSize" Value="14"/>
             </Style>
 
             <!-- Стили карточек -->

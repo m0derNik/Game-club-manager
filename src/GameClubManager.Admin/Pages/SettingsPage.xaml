@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
-      Title="SettingsPage">
+      Title="Настройки">
 
     <Grid Margin="24">
         <Grid.RowDefinitions>
@@ -18,7 +18,8 @@
         <!-- Заголовок -->
         <TextBlock Text="Настройки" 
                    Style="{StaticResource HeaderTextStyle}"
-                   Margin="0,0,0,24"/>
+                   Margin="0,0,0,24"
+                   Foreground="{DynamicResource TextPrimaryBrush}"/>
 
         <!-- Содержимое -->
         <ScrollViewer Grid.Row="1" 
@@ -34,53 +35,27 @@
                     <StackPanel Margin="16">
                         <TextBlock Text="Общие настройки"
                                    Style="{StaticResource SubheaderTextStyle}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
                                    Margin="0,0,0,16"/>
 
                         <TextBox Width="300"
                                  materialDesign:HintAssist.Hint="Название клуба"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Text="{Binding ClubName}"/>
+                                 Text="{Binding ClubName}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"/>
 
                         <TextBox Width="300"
                                  materialDesign:HintAssist.Hint="Адрес"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                  Text="{Binding Address}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
                                  Margin="0,16,0,0"/>
 
                         <TextBox Width="300"
                                  materialDesign:HintAssist.Hint="Телефон"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                  Text="{Binding Phone}"
-                                 Margin="0,16,0,0"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Настройки тарифов -->
-                <Border Background="{DynamicResource MaterialDesignPaper}"
-                        CornerRadius="8"
-                        BorderThickness="1"
-                        BorderBrush="{DynamicResource MaterialDesignDivider}"
-                        Margin="0,0,0,24">
-                    <StackPanel Margin="16">
-                        <TextBlock Text="Настройки тарифов"
-                                   Style="{StaticResource SubheaderTextStyle}"
-                                   Margin="0,0,0,16"/>
-
-                        <TextBox Width="300"
-                                 materialDesign:HintAssist.Hint="Стоимость часа (руб.)"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Text="{Binding HourlyRate}"/>
-
-                        <TextBox Width="300"
-                                 materialDesign:HintAssist.Hint="Минимальное время (мин.)"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Text="{Binding MinimumTime}"
-                                 Margin="0,16,0,0"/>
-
-                        <TextBox Width="300"
-                                 materialDesign:HintAssist.Hint="Максимальное время (час.)"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Text="{Binding MaximumTime}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
                                  Margin="0,16,0,0"/>
                     </StackPanel>
                 </Border>
@@ -94,21 +69,119 @@
                     <StackPanel Margin="16">
                         <TextBlock Text="Настройки уведомлений"
                                    Style="{StaticResource SubheaderTextStyle}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
                                    Margin="0,0,0,16"/>
 
                         <CheckBox Content="Включить звуковые уведомления"
                                   IsChecked="{Binding SoundNotificationsEnabled}"
-                                  Style="{StaticResource MaterialDesignCheckBox}"/>
+                                  Style="{StaticResource MaterialDesignCheckBox}"
+                                  Foreground="{DynamicResource TextPrimaryBrush}"/>
 
                         <CheckBox Content="Включить всплывающие уведомления"
                                   IsChecked="{Binding PopupNotificationsEnabled}"
                                   Style="{StaticResource MaterialDesignCheckBox}"
+                                  Foreground="{DynamicResource TextPrimaryBrush}"
                                   Margin="0,8,0,0"/>
 
                         <CheckBox Content="Уведомлять о низком балансе"
                                   IsChecked="{Binding LowBalanceNotificationsEnabled}"
                                   Style="{StaticResource MaterialDesignCheckBox}"
+                                  Foreground="{DynamicResource TextPrimaryBrush}"
                                   Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Настройки сервера -->
+                <Border Background="{DynamicResource MaterialDesignPaper}"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        Margin="0,0,0,24">
+                    <StackPanel Margin="16">
+                        <TextBlock Text="Настройки сервера"
+                                   Style="{StaticResource SubheaderTextStyle}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                   Margin="0,0,0,16"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Width="200"
+                                     materialDesign:HintAssist.Hint="Адрес сервера"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     Text="{Binding ServerAddress}"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"
+                                     Grid.Column="0"/>
+                                     
+                            <TextBox Width="90"
+                                     materialDesign:HintAssist.Hint="Порт"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     Text="{Binding ServerPort}"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"
+                                     Grid.Column="1"
+                                     Margin="10,0,0,0"/>
+                        </Grid>
+                        
+                        <TextBlock Text="Для применения настроек сервера требуется перезапуск программы"
+                                   Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                   Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Настройки резервного копирования -->
+                <Border Background="{DynamicResource MaterialDesignPaper}"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        Margin="0,0,0,24">
+                    <StackPanel Margin="16">
+                        <TextBlock Text="Настройки резервного копирования"
+                                   Style="{StaticResource SubheaderTextStyle}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                   Margin="0,0,0,16"/>
+
+                        <CheckBox Content="Включить автоматическое резервное копирование"
+                                  IsChecked="{Binding AutoBackupEnabled}"
+                                  Style="{StaticResource MaterialDesignCheckBox}"
+                                  Foreground="{DynamicResource TextPrimaryBrush}"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                            <TextBlock Text="Интервал копирования:" 
+                                     VerticalAlignment="Center"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            <TextBox Width="60"
+                                     materialDesign:HintAssist.Hint="Часы"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     Text="{Binding BackupIntervalHours}"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"
+                                     Margin="16,0,0,0"/>
+                            <TextBlock Text="часов" 
+                                     VerticalAlignment="Center" 
+                                     Margin="8,0,0,0"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                            <TextBox Width="350"
+                                     materialDesign:HintAssist.Hint="Путь для сохранения резервных копий"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     Text="{Binding BackupPath}"
+                                     Foreground="{DynamicResource TextPrimaryBrush}"
+                                     IsReadOnly="True"/>
+                                     
+                            <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    Command="{Binding BrowseBackupPathCommand}"
+                                    Margin="8,0,0,0"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    Background="{DynamicResource SurfaceBrush}"
+                                    ToolTip="Выбрать путь">
+                                <materialDesign:PackIcon Kind="FolderOpen" Width="24" Height="24"/>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
@@ -117,6 +190,8 @@
                             HorizontalAlignment="Right">
                     <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                             Command="{Binding ResetSettingsCommand}"
+                            Foreground="{DynamicResource TextPrimaryBrush}"
+                            Background="{DynamicResource SurfaceBrush}"
                             Margin="0,0,16,0">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Restore" 
@@ -128,7 +203,9 @@
                     </Button>
 
                     <Button Style="{StaticResource MaterialDesignRaisedButton}"
-                            Command="{Binding SaveSettingsCommand}">
+                            Command="{Binding SaveSettingsCommand}"
+                            Foreground="{DynamicResource TextPrimaryBrush}"
+                            Background="{DynamicResource SurfaceBrush}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentSave" 
                                                    Width="20" 
@@ -140,5 +217,22 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        
+        <!-- Индикатор сохранения -->
+        <Grid Grid.Row="0" Grid.RowSpan="2" 
+              Background="#80000000" 
+              Visibility="{Binding IsSaving, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" 
+                           Style="{StaticResource MaterialDesignCircularProgressBar}"
+                           Width="48" 
+                           Height="48"
+                           Margin="0,0,0,16"/>
+                <TextBlock Text="Сохранение настроек..." 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         Foreground="{DynamicResource TextPrimaryBrush}"
+                         HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page> 

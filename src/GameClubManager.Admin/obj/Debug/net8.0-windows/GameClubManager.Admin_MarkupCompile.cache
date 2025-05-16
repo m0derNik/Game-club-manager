@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\App.xaml
-71879601787
+10310223895
 
-26636491870
-2261422495100
-MainWindow.xaml;Pages\ComputersPage.xaml;Pages\NotificationsPage.xaml;Pages\OrdersPage.xaml;Pages\RemoteDesktopWindow.xaml;Pages\SettingsPage.xaml;Pages\UsersPage.xaml;
+52-793390420
+235-1545532661
+MainWindow.xaml;Pages\ComputersPage.xaml;Pages\FoodPage.xaml;Pages\GamesPage.xaml;Pages\NotificationsPage.xaml;Pages\OrdersPage.xaml;Pages\RemoteDesktopWindow.xaml;Pages\SettingsPage.xaml;Pages\TariffsPage.xaml;Pages\UsersPage.xaml;
 
 False
 

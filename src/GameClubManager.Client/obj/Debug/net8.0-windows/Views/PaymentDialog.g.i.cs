@@ -120,7 +120,7 @@ namespace GameClubManager.Client.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;component/views/paymentdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;V1.0.0.0;component/views/paymentdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\PaymentDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

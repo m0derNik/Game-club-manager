@@ -22,6 +22,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<FoodItem> FoodItems { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<AdminNotification> AdminNotifications { get; set; }
+    public DbSet<Game> Games { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -99,6 +101,77 @@ public class ApplicationDbContext : DbContext
             .HasOne(oi => oi.FoodItem)
             .WithMany()
             .HasForeignKey(oi => oi.FoodItemId);
+
+        // Конфигурация для модели AdminNotification
+        modelBuilder.Entity<AdminNotification>()
+            .Property(a => a.Title)
+            .HasMaxLength(100)
+            .IsRequired();
+        
+        modelBuilder.Entity<AdminNotification>()
+            .Property(a => a.Message)
+            .HasMaxLength(500)
+            .IsRequired();
+        
+        modelBuilder.Entity<AdminNotification>()
+            .Property(a => a.Type)
+            .HasMaxLength(50)
+            .IsRequired();
+        
+        // Связи для таблицы AdminNotifications
+        modelBuilder.Entity<AdminNotification>()
+            .HasOne<Computer>()
+            .WithMany()
+            .HasForeignKey(a => a.ComputerId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.SetNull);
+        
+        modelBuilder.Entity<AdminNotification>()
+            .HasOne<User>()
+            .WithMany()
+            .HasForeignKey(a => a.UserId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.SetNull);
+        
+        // Конфигурация для модели FoodItem
+        modelBuilder.Entity<FoodItem>()
+            .Property(f => f.Price)
+            .HasPrecision(18, 2);
+        
+        // Конфигурация для модели Order
+        modelBuilder.Entity<Order>()
+            .Property(o => o.TotalAmount)
+            .HasPrecision(18, 2);
+        
+        // Конфигурация для модели OrderItem
+        modelBuilder.Entity<OrderItem>()
+            .Property(oi => oi.Price)
+            .HasPrecision(18, 2);
+        
+        // Конфигурация для модели Game
+        modelBuilder.Entity<Game>()
+            .Property(g => g.Name)
+            .HasMaxLength(100)
+            .IsRequired();
+            
+        modelBuilder.Entity<Game>()
+            .Property(g => g.Description)
+            .HasMaxLength(500);
+            
+        modelBuilder.Entity<Game>()
+            .Property(g => g.Developer)
+            .HasMaxLength(50);
+            
+        modelBuilder.Entity<Game>()
+            .Property(g => g.Publisher)
+            .HasMaxLength(50);
+            
+        // Связь между GamePreference и Game
+        modelBuilder.Entity<GamePreference>()
+            .HasOne<Game>()
+            .WithMany()
+            .HasForeignKey(gp => gp.GameId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 
     public async Task InitializeDatabaseAsync()

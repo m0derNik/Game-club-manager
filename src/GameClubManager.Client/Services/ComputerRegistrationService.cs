@@ -196,6 +196,11 @@ namespace GameClubManager.Client.Services
             }
         }
         
+        /// <summary>
+        /// Получает имя текущего компьютера
+        /// </summary>
+        public string ComputerName => Environment.MachineName;
+        
         private (string ipAddress, string macAddress) GetNetworkInfo()
         {
             string ipAddress = "127.0.0.1";

@@ -1,39 +1,62 @@
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using GameClubManager.Admin.Commands;
+using GameClubManager.Admin.Models;
+using GameClubManager.Admin.Services;
+using Microsoft.Win32;
+using MessageBox = System.Windows.MessageBox;
 
 namespace GameClubManager.Admin.ViewModels
 {
     public class SettingsViewModel : INotifyPropertyChanged
     {
-        private string _clubName;
-        private string _address;
-        private string _phone;
-        private decimal _hourlyRate;
-        private int _minimumTime;
-        private int _maximumTime;
-        private bool _soundNotificationsEnabled;
-        private bool _popupNotificationsEnabled;
-        private bool _lowBalanceNotificationsEnabled;
+        private readonly SettingsService _settingsService;
+        private Settings _settings;
+        private bool _isSaving;
 
         public SettingsViewModel()
         {
-            // Временные данные для демонстрации UI
-            ClubName = "Game Club";
-            Address = "ул. Примерная, 123";
-            Phone = "+7 (999) 123-45-67";
-            HourlyRate = 100;
-            MinimumTime = 30;
-            MaximumTime = 24;
-            SoundNotificationsEnabled = true;
-            PopupNotificationsEnabled = true;
-            LowBalanceNotificationsEnabled = true;
+            _settingsService = SettingsService.Instance;
+            _settings = new Settings();
+            
+            // Загружаем настройки
+            LoadSettings();
 
-            SaveSettingsCommand = new RelayCommand(ExecuteSaveSettings);
+            // Инициализируем команды
+            SaveSettingsCommand = new RelayCommand(ExecuteSaveSettings, CanExecuteSaveSettings);
             ResetSettingsCommand = new RelayCommand(ExecuteResetSettings);
+            BrowseBackupPathCommand = new RelayCommand(ExecuteBrowseBackupPath);
         }
 
+        private void LoadSettings()
+        {
+            var currentSettings = _settingsService.CurrentSettings;
+            
+            // Копируем значения в локальные свойства
+            ClubName = currentSettings.ClubName;
+            Address = currentSettings.Address;
+            Phone = currentSettings.Phone;
+            HourlyRate = currentSettings.HourlyRate;
+            MinimumTime = currentSettings.MinimumTime;
+            MaximumTime = currentSettings.MaximumTime;
+            SoundNotificationsEnabled = currentSettings.SoundNotificationsEnabled;
+            PopupNotificationsEnabled = currentSettings.PopupNotificationsEnabled;
+            LowBalanceNotificationsEnabled = currentSettings.LowBalanceNotificationsEnabled;
+            ServerAddress = currentSettings.ServerAddress;
+            ServerPort = currentSettings.ServerPort;
+            AutoBackupEnabled = currentSettings.AutoBackupEnabled;
+            BackupIntervalHours = currentSettings.BackupIntervalHours;
+            BackupPath = currentSettings.BackupPath;
+        }
+
+        #region Свойства
+
+        // Общие настройки
+        private string _clubName;
         public string ClubName
         {
             get => _clubName;
@@ -44,6 +67,7 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        private string _address;
         public string Address
         {
             get => _address;
@@ -54,6 +78,7 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        private string _phone;
         public string Phone
         {
             get => _phone;
@@ -64,6 +89,8 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        // Настройки тарифов
+        private decimal _hourlyRate;
         public decimal HourlyRate
         {
             get => _hourlyRate;
@@ -74,6 +101,7 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        private int _minimumTime;
         public int MinimumTime
         {
             get => _minimumTime;
@@ -84,6 +112,7 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        private int _maximumTime;
         public int MaximumTime
         {
             get => _maximumTime;
@@ -94,6 +123,8 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        // Настройки уведомлений
+        private bool _soundNotificationsEnabled;
         public bool SoundNotificationsEnabled
         {
             get => _soundNotificationsEnabled;
@@ -104,6 +135,7 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        private bool _popupNotificationsEnabled;
         public bool PopupNotificationsEnabled
         {
             get => _popupNotificationsEnabled;
@@ -114,6 +146,7 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        private bool _lowBalanceNotificationsEnabled;
         public bool LowBalanceNotificationsEnabled
         {
             get => _lowBalanceNotificationsEnabled;
@@ -124,18 +157,154 @@ namespace GameClubManager.Admin.ViewModels
             }
         }
 
+        // Настройки сервера
+        private string _serverAddress;
+        public string ServerAddress
+        {
+            get => _serverAddress;
+            set
+            {
+                _serverAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _serverPort;
+        public int ServerPort
+        {
+            get => _serverPort;
+            set
+            {
+                _serverPort = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Настройки резервного копирования
+        private bool _autoBackupEnabled;
+        public bool AutoBackupEnabled
+        {
+            get => _autoBackupEnabled;
+            set
+            {
+                _autoBackupEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _backupIntervalHours;
+        public int BackupIntervalHours
+        {
+            get => _backupIntervalHours;
+            set
+            {
+                _backupIntervalHours = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _backupPath;
+        public string BackupPath
+        {
+            get => _backupPath;
+            set
+            {
+                _backupPath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsSaving
+        {
+            get => _isSaving;
+            set
+            {
+                _isSaving = value;
+                OnPropertyChanged();
+                (SaveSettingsCommand as RelayCommand)?.RaiseCanExecuteChanged();
+            }
+        }
+
+        #endregion
+
+        #region Команды
+
         public ICommand SaveSettingsCommand { get; }
         public ICommand ResetSettingsCommand { get; }
+        public ICommand BrowseBackupPathCommand { get; }
 
-        private void ExecuteSaveSettings()
+        private async void ExecuteSaveSettings()
         {
-            // Здесь будет логика сохранения настроек
+            try
+            {
+                IsSaving = true;
+                
+                // Создаем новый объект настроек
+                var settings = new Settings
+                {
+                    ClubName = ClubName,
+                    Address = Address,
+                    Phone = Phone,
+                    HourlyRate = HourlyRate,
+                    MinimumTime = MinimumTime,
+                    MaximumTime = MaximumTime,
+                    SoundNotificationsEnabled = SoundNotificationsEnabled,
+                    PopupNotificationsEnabled = PopupNotificationsEnabled,
+                    LowBalanceNotificationsEnabled = LowBalanceNotificationsEnabled,
+                    ServerAddress = ServerAddress,
+                    ServerPort = ServerPort,
+                    AutoBackupEnabled = AutoBackupEnabled,
+                    BackupIntervalHours = BackupIntervalHours,
+                    BackupPath = BackupPath
+                };
+                
+                // Сохраняем настройки
+                bool success = await _settingsService.SaveSettingsAsync(settings);
+                
+                if (success)
+                {
+                    // Обновляем настройки резервного копирования
+                    BackupService.Instance.UpdateSettings();
+                    
+                    MessageBox.Show("Настройки успешно сохранены", "Сохранение настроек", 
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            finally
+            {
+                IsSaving = false;
+            }
         }
 
-        private void ExecuteResetSettings()
+        private bool CanExecuteSaveSettings() => !IsSaving;
+
+        private async void ExecuteResetSettings()
         {
-            // Здесь будет логика сброса настроек
+            if (MessageBox.Show("Вы уверены, что хотите сбросить все настройки до значений по умолчанию?", 
+                "Сброс настроек", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                await _settingsService.ResetSettingsAsync();
+                LoadSettings();
+                MessageBox.Show("Настройки сброшены до значений по умолчанию", "Сброс настроек", 
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
+
+        private void ExecuteBrowseBackupPath()
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = "Выберите папку для резервных копий",
+                ShowNewFolderButton = true
+            };
+            
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                BackupPath = dialog.SelectedPath;
+            }
+        }
+
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 

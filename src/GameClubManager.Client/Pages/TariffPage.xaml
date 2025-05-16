@@ -27,6 +27,19 @@
                      VerticalAlignment="Center"/>
             
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource ModernButton}"
+                        Command="{Binding RefreshTariffsCommand}"
+                        Margin="0,0,16,0"
+                        ToolTip="Обновить список тарифов">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Refresh"
+                                               Width="20"
+                                               Height="20"
+                                               Margin="0,0,8,0"/>
+                        <TextBlock Text="Обновить"/>
+                    </StackPanel>
+                </Button>
+                
                 <TextBlock Text="Ваш баланс: "
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
                          Foreground="{DynamicResource TextPrimaryBrush}"
@@ -36,6 +49,23 @@
                          Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                          Foreground="{DynamicResource PrimaryBrush}"
                          VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Индикатор загрузки -->
+        <Grid Grid.Row="1" 
+              Background="#80000000"
+              Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" 
+                      VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" 
+                           Style="{StaticResource MaterialDesignCircularProgressBar}"
+                           Width="48" 
+                           Height="48"
+                           Margin="0,0,0,16"/>
+                <TextBlock Text="Загрузка тарифов..." 
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         Foreground="White"/>
             </StackPanel>
         </Grid>
 

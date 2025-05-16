@@ -11,21 +11,32 @@ using LZ4;
 
 namespace GameClubManager.Admin.Services
 {
+    // Класс для передачи данных о скриншоте через событие
+    public class ScreenshotEventArgs : EventArgs
+    {
+        public BitmapSource Screenshot { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public DateTime Timestamp { get; set; }
+    }
+    
     public class RemoteDesktopService
     {
         private static RemoteDesktopService _instance;
         private readonly HttpClient _httpClient;
         private CancellationTokenSource _cancellationTokenSource;
-        private Timer _refreshTimer;
+        private System.Threading.Timer _refreshTimer;
         private int _computerId;
         private bool _isConnected;
         
         private const string BaseUrl = "http://localhost:7001/api";
         private const int RefreshInterval = 100; // 10 кадров в секунду
         
-        // Делегат для обновления изображения
-        public delegate void ScreenshotUpdatedEventHandler(BitmapImage screenshot);
-        public event ScreenshotUpdatedEventHandler ScreenshotUpdated;
+        // Событие для оповещения об обновлении скриншота
+        public event EventHandler<ScreenshotEventArgs> ScreenshotUpdated;
+        
+        // Событие для оповещения об отключении
+        public event EventHandler OnDisconnected;
         
         // Статический экземпляр для паттерна Singleton
         public static RemoteDesktopService Instance => _instance ??= new RemoteDesktopService();
@@ -59,10 +70,10 @@ namespace GameClubManager.Admin.Services
                 _computerId = computerId;
                 
                 // Начинаем сессию удаленного управления
-                var response = await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{computerId}/start", null);
+                var response = await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{computerId}/public-start", null);
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"Ошибка при подключении к компьютеру: {response.StatusCode}", 
+                    System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {response.StatusCode}", 
                         "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
@@ -75,7 +86,7 @@ namespace GameClubManager.Admin.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при подключении к компьютеру: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
@@ -84,33 +95,91 @@ namespace GameClubManager.Admin.Services
         // Отключение от удаленного компьютера
         public async Task DisconnectAsync()
         {
+            if (!_isConnected)
+                return;
+            
             try
             {
-                if (!_isConnected)
-                    return;
-                
+                // Останавливаем обновление скриншотов
                 StopScreenshotUpdates();
                 
-                // Останавливаем сессию удаленного управления
-                await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{_computerId}/stop", null);
+                // Отправляем запрос на остановку сессии
+                await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{_computerId}/public-stop", null);
                 
                 _isConnected = false;
+                
+                // Оповещаем об отключении
+                OnDisconnected?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при отключении от компьютера: {ex.Message}", 
-                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.WriteLine($"Ошибка при отключении от компьютера: {ex.Message}");
             }
         }
         
-        // Запуск таймера обновления скриншотов
+        // Подключение к удаленному компьютеру по имени
+        public async Task<bool> ConnectToComputerAsync(string computerName)
+        {
+            try
+            {
+                // Получаем информацию о компьютере по имени
+                var computerService = ComputerService.Instance;
+                var computers = await computerService.GetAllComputersAsync();
+                var computer = computers.Find(c => c.Name == computerName);
+                
+                if (computer == null)
+                {
+                    System.Windows.MessageBox.Show($"Компьютер с именем '{computerName}' не найден", 
+                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                
+                // Подключаемся к найденному компьютеру
+                return await ConnectAsync(computer.Id);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {ex.Message}", 
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+        
+        // Запуск обновления скриншотов
         private void StartScreenshotUpdates()
         {
-            _cancellationTokenSource = new CancellationTokenSource();
+            _refreshTimer?.Dispose();
             
-            // Запускаем таймер обновлений
-            _refreshTimer = new Timer(async _ => await UpdateScreenshotAsync(), 
-                null, 0, RefreshInterval);
+            // Создаем таймер для периодического запроса скриншотов
+            _refreshTimer = new System.Threading.Timer(async _ =>
+            {
+                try
+                {
+                    var response = await _httpClient.GetAsync($"{BaseUrl}/remotecontrol/{_computerId}/public-screenshot");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var screenshotData = await response.Content.ReadFromJsonAsync<RemoteDesktopData>();
+                        if (screenshotData != null)
+                        {
+                            var bitmap = DecodeScreenshot(screenshotData);
+                            
+                            // Передаем скриншот через событие
+                            ScreenshotUpdated?.Invoke(this, new ScreenshotEventArgs
+                            {
+                                Screenshot = bitmap,
+                                Width = screenshotData.Width,
+                                Height = screenshotData.Height,
+                                Timestamp = screenshotData.Timestamp
+                            });
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Игнорируем ошибки сети для бесперебойной работы
+                    Console.WriteLine($"Ошибка при получении скриншота: {ex.Message}");
+                }
+            }, null, 0, RefreshInterval);
         }
         
         // Остановка таймера обновления скриншотов
@@ -118,39 +187,6 @@ namespace GameClubManager.Admin.Services
         {
             _refreshTimer?.Dispose();
             _cancellationTokenSource?.Cancel();
-        }
-        
-        // Получение и обработка скриншота
-        private async Task UpdateScreenshotAsync()
-        {
-            try
-            {
-                if (!_isConnected)
-                    return;
-                
-                var response = await _httpClient.GetAsync($"{BaseUrl}/remotecontrol/{_computerId}/screenshot");
-                if (response.IsSuccessStatusCode)
-                {
-                    var screenshotData = await response.Content.ReadFromJsonAsync<RemoteDesktopData>();
-                    if (screenshotData != null && screenshotData.ScreenData != null)
-                    {
-                        var bitmap = DecodeScreenshot(screenshotData);
-                        if (bitmap != null)
-                        {
-                            // Вызываем событие с новым скриншотом
-                            ScreenshotUpdated?.Invoke(bitmap);
-                        }
-                    }
-                }
-            }
-            catch (TaskCanceledException)
-            {
-                // Игнорируем отмененные задачи
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка при обновлении скриншота: {ex.Message}");
-            }
         }
         
         // Декодирование данных скриншота в изображение
@@ -261,7 +297,7 @@ namespace GameClubManager.Admin.Services
         {
             try
             {
-                await _httpClient.PostAsJsonAsync($"{BaseUrl}/remotecontrol/{_computerId}/command", command);
+                await _httpClient.PostAsJsonAsync($"{BaseUrl}/remotecontrol/{_computerId}/public-command", command);
             }
             catch (Exception ex)
             {

@@ -171,9 +171,29 @@ namespace GameClubManager.Client
             Trace.WriteLine($"��������� �� ��������: {page.GetType().Name}");
         }
 
-        private void ShowAdminHelp()
+        private async void ShowAdminHelp()
         {
-            System.Windows.MessageBox.Show("����� � ����", "������ ������", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Создаем диалоговое окно для ввода причины вызова администратора
+            var dialog = new GameClubManager.Client.Dialogs.AdminHelpDialog();
+            var result = dialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                string reason = dialog.Reason;
+                
+                // Вызываем API для отправки уведомления
+                var apiService = GameClubManager.Client.Services.ApiService.Instance;
+                bool success = await apiService.CallAdminAsync(reason);
+                
+                if (success)
+                {
+                    System.Windows.MessageBox.Show(
+                        "Администратор был уведомлен и скоро подойдет к вам", 
+                        "Вызов администратора", 
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Information);
+                }
+            }
         }
 
         private void MainWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)

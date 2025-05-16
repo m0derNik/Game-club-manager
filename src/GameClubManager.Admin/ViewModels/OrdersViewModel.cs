@@ -121,7 +121,7 @@ namespace GameClubManager.Admin.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке заказов: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при загрузке заказов: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -143,13 +143,13 @@ namespace GameClubManager.Admin.ViewModels
                 {
                     order.Status = OrderStatus.Processing;
                     OnPropertyChanged(nameof(Orders));
-                    MessageBox.Show($"Заказ #{order.Id} взят в обработку", 
+                    System.Windows.MessageBox.Show($"Заказ #{order.Id} взят в обработку", 
                         "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при обработке заказа: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при обработке заказа: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -172,13 +172,13 @@ namespace GameClubManager.Admin.ViewModels
                     Orders.Remove(order);
                     OnPropertyChanged(nameof(Orders));
                     UpdateVisibility();
-                    MessageBox.Show($"Заказ #{order.Id} выполнен и удален из списка", 
+                    System.Windows.MessageBox.Show($"Заказ #{order.Id} выполнен и удален из списка", 
                         "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при выполнении заказа: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при выполнении заказа: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -191,7 +191,7 @@ namespace GameClubManager.Admin.ViewModels
         {
             if (order == null) return;
             
-            var result = MessageBox.Show($"Вы действительно хотите отменить заказ #{order.Id}?", 
+            var result = System.Windows.MessageBox.Show($"Вы действительно хотите отменить заказ #{order.Id}?", 
                 "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             
             if (result != MessageBoxResult.Yes)
@@ -207,13 +207,13 @@ namespace GameClubManager.Admin.ViewModels
                     Orders.Remove(order);
                     OnPropertyChanged(nameof(Orders));
                     UpdateVisibility();
-                    MessageBox.Show($"Заказ #{order.Id} отменен и удален из списка", 
+                    System.Windows.MessageBox.Show($"Заказ #{order.Id} отменен и удален из списка", 
                         "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при отмене заказа: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при отмене заказа: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -228,7 +228,7 @@ namespace GameClubManager.Admin.ViewModels
             SelectedOrder = order;
             
             // В реальном приложении здесь может быть код для открытия диалога с деталями
-            MessageBox.Show($"Заказ #{order.Id}\n" +
+            System.Windows.MessageBox.Show($"Заказ #{order.Id}\n" +
                 $"Пользователь: {order.UserName}\n" +
                 $"Сумма: {order.TotalAmount:C}\n" +
                 $"Дата: {order.OrderDate}\n" +

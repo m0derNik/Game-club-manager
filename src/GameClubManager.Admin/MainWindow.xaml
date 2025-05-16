@@ -106,6 +106,51 @@
                     </StackPanel>
                 </Button>
 
+                <Button x:Name="TariffsButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="CashMultiple" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Тарифы"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="FoodButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="RestaurantMenu" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Меню"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="GamesButton"
+                        Style="{StaticResource ModernButton}"
+                        Margin="8,4">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="GamepadVariant" 
+                                               Width="24" 
+                                               Height="24"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Игры"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
                 <Button x:Name="NotificationsButton"
                         Style="{StaticResource ModernButton}"
                         Margin="8,4">

@@ -188,7 +188,7 @@ namespace GameClubManager.Admin.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка загрузки пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -210,18 +210,18 @@ namespace GameClubManager.Admin.ViewModels
         private void ExecuteAddUser()
         {
             // В будущем здесь будет логика добавления пользователя через диалоговое окно
-            MessageBox.Show("Функция добавления пользователя будет доступна в следующей версии", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            System.Windows.MessageBox.Show("Функция добавления пользователя будет доступна в следующей версии", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ExecuteEditUser(User user)
         {
             // В будущем здесь будет логика редактирования пользователя через диалоговое окно
-            MessageBox.Show($"Редактирование пользователя: {user.Name}", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            System.Windows.MessageBox.Show($"Редактирование пользователя: {user.Name}", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private async void ExecuteDeleteUser(User user)
         {
-            var result = MessageBox.Show(
+            var result = System.Windows.MessageBox.Show(
                 $"Вы действительно хотите удалить пользователя {user.Name}?", 
                 "Подтверждение удаления", 
                 MessageBoxButton.YesNo, 
@@ -239,12 +239,12 @@ namespace GameClubManager.Admin.ViewModels
                     {
                         _allUsers.Remove(user);
                         Users.Remove(user);
-                        MessageBox.Show($"Пользователь {user.Name} успешно удален", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        System.Windows.MessageBox.Show($"Пользователь {user.Name} успешно удален", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при удалении пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show($"Ошибка при удалении пользователя: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
                 {
@@ -255,263 +255,416 @@ namespace GameClubManager.Admin.ViewModels
         
         private void ExecuteAddBalance(User user)
         {
-            // Создаем простой диалог для ввода суммы
+            if (user == null || BalanceToAdd <= 0)
+                return;
+            
+            // Создаем диалоговое окно для ввода суммы
             var dialog = new Window
             {
                 Title = $"Пополнить баланс - {user.Name}",
                 Width = 400,
-                Height = 200,
-                ResizeMode = ResizeMode.NoResize,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Background = (Brush)Application.Current.Resources["BackgroundBrush"]
+                Height = 250,
+                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen,
+                ResizeMode = System.Windows.ResizeMode.NoResize,
+                Icon = System.Windows.Application.Current.MainWindow.Icon
             };
             
-            var grid = new Grid { Margin = new Thickness(20) };
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            // Создаем Grid с 2 колонками
+            var grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.Margin = new Thickness(20);
             
-            var label = new TextBlock
+            // Добавляем элементы для текущего баланса
+            var currentBalanceLabel = new TextBlock
             {
-                Text = "Введите сумму для пополнения:",
-                Margin = new Thickness(0, 0, 0, 10),
-                Style = (Style)Application.Current.Resources["BodyTextStyle"],
-                Foreground = Brushes.White
+                Text = "Текущий баланс:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
             };
             
-            var textBox = new TextBox
+            var currentBalanceValue = new TextBlock
+            {
+                Text = $"{user.Balance:C}",
+                VerticalAlignment = VerticalAlignment.Center,
+                FontWeight = FontWeights.Bold,
+                Foreground = System.Windows.Media.Brushes.Green
+            };
+            
+            // Добавляем элементы для ввода суммы пополнения
+            var amountLabel = new TextBlock
+            {
+                Text = "Сумма пополнения:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
+            };
+            
+            var amountTextBox = new System.Windows.Controls.TextBox
             {
                 Text = BalanceToAdd.ToString(),
-                Margin = new Thickness(0, 0, 0, 20),
-                HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
-                Foreground = Brushes.White,
-                CaretBrush = Brushes.White
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 5, 0, 5),
+                Padding = new Thickness(5)
             };
             
-            var buttonsPanel = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
-            
-            var cancelButton = new Button
+            // Добавляем элементы для отображения нового баланса
+            var newBalanceLabel = new TextBlock
             {
-                Content = "Отмена",
-                Margin = new Thickness(0, 0, 10, 0),
-                Style = (Style)Application.Current.Resources["MaterialDesignOutlinedButton"],
-                Foreground = Brushes.White
+                Text = "Новый баланс:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
             };
             
-            var confirmButton = new Button
+            var newBalanceValue = new TextBlock
+            {
+                Text = $"{user.Balance + BalanceToAdd:C}",
+                VerticalAlignment = VerticalAlignment.Center,
+                FontWeight = FontWeights.Bold,
+                Foreground = System.Windows.Media.Brushes.Blue
+            };
+            
+            // Обновляем новый баланс при изменении суммы
+            amountTextBox.TextChanged += (s, e) =>
+            {
+                if (decimal.TryParse(amountTextBox.Text, out decimal amount))
+                {
+                    newBalanceValue.Text = $"{user.Balance + amount:C}";
+                    newBalanceValue.Foreground = amount > 0 ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Red;
+                }
+            };
+            
+            // Добавляем кнопки
+            var buttonsPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center
+            };
+            
+            var confirmButton = new System.Windows.Controls.Button
             {
                 Content = "Пополнить",
-                Style = (Style)Application.Current.Resources["MaterialDesignRaisedButton"],
-                Foreground = Brushes.White
+                Padding = new Thickness(15, 5, 15, 5),
+                Margin = new Thickness(10),
+                Background = System.Windows.Media.Brushes.Green,
+                Foreground = System.Windows.Media.Brushes.White
             };
             
-            cancelButton.Click += (s, e) => dialog.DialogResult = false;
+            var cancelButton = new System.Windows.Controls.Button
+            {
+                Content = "Отмена",
+                Padding = new Thickness(15, 5, 15, 5),
+                Margin = new Thickness(10)
+            };
+            
+            // Добавляем обработчики для кнопок
             confirmButton.Click += async (s, e) =>
             {
-                if (decimal.TryParse(textBox.Text, out decimal amount) && amount > 0)
+                if (decimal.TryParse(amountTextBox.Text, out decimal amount) && amount > 0)
                 {
                     try
                     {
-                        confirmButton.IsEnabled = false;
-                        cancelButton.IsEnabled = false;
-                        
+                        // Вызываем API для пополнения баланса
                         bool success = await _apiService.AddUserBalanceAsync(user.Id, amount);
                         
                         if (success)
                         {
+                            // Обновляем баланс пользователя
                             user.Balance += amount;
-                            OnPropertyChanged(nameof(Users));
+                            
+                            System.Windows.MessageBox.Show($"Баланс пользователя {user.Name} успешно пополнен на {amount:C}", 
+                                "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                                
                             dialog.DialogResult = true;
-                        }
-                        else
-                        {
-                            dialog.DialogResult = false;
+                            dialog.Close();
                         }
                     }
-                    finally
+                    catch (Exception ex)
                     {
-                        confirmButton.IsEnabled = true;
-                        cancelButton.IsEnabled = true;
+                        System.Windows.MessageBox.Show($"Ошибка при пополнении баланса: {ex.Message}", 
+                            "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Введите корректную сумму", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show("Пожалуйста, введите корректную сумму пополнения", 
+                        "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             };
             
-            buttonsPanel.Children.Add(cancelButton);
+            cancelButton.Click += (s, e) =>
+            {
+                dialog.DialogResult = false;
+                dialog.Close();
+            };
+            
+            // Добавляем элементы в Grid
+            Grid.SetRow(currentBalanceLabel, 0);
+            Grid.SetColumn(currentBalanceLabel, 0);
+            grid.Children.Add(currentBalanceLabel);
+            
+            Grid.SetRow(currentBalanceValue, 0);
+            Grid.SetColumn(currentBalanceValue, 1);
+            grid.Children.Add(currentBalanceValue);
+            
+            Grid.SetRow(amountLabel, 1);
+            Grid.SetColumn(amountLabel, 0);
+            grid.Children.Add(amountLabel);
+            
+            Grid.SetRow(amountTextBox, 1);
+            Grid.SetColumn(amountTextBox, 1);
+            grid.Children.Add(amountTextBox);
+            
+            Grid.SetRow(newBalanceLabel, 2);
+            Grid.SetColumn(newBalanceLabel, 0);
+            grid.Children.Add(newBalanceLabel);
+            
+            Grid.SetRow(newBalanceValue, 2);
+            Grid.SetColumn(newBalanceValue, 1);
+            grid.Children.Add(newBalanceValue);
+            
             buttonsPanel.Children.Add(confirmButton);
+            buttonsPanel.Children.Add(cancelButton);
             
-            Grid.SetRow(label, 0);
-            Grid.SetRow(textBox, 1);
-            Grid.SetRow(buttonsPanel, 2);
-            
-            grid.Children.Add(label);
-            grid.Children.Add(textBox);
+            Grid.SetRow(buttonsPanel, 3);
+            Grid.SetColumnSpan(buttonsPanel, 2);
             grid.Children.Add(buttonsPanel);
             
+            // Устанавливаем содержимое диалога
             dialog.Content = grid;
             
-            var result = dialog.ShowDialog();
-            
-            if (result == true)
-            {
-                MessageBox.Show($"Баланс пользователя {user.Name} успешно пополнен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            // Показываем диалог
+            dialog.ShowDialog();
         }
         
         private void ExecuteAddTime(User user)
         {
-            // Создаем диалог для ввода времени
+            if (user == null || (HoursToAdd == 0 && MinutesToAdd == 0))
+                return;
+            
+            // Создаем диалоговое окно для ввода времени
             var dialog = new Window
             {
                 Title = $"Добавить время - {user.Name}",
                 Width = 400,
-                Height = 250,
-                ResizeMode = ResizeMode.NoResize,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Background = (Brush)Application.Current.Resources["BackgroundBrush"]
+                Height = 280,
+                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen,
+                ResizeMode = System.Windows.ResizeMode.NoResize,
+                Icon = System.Windows.Application.Current.MainWindow.Icon
             };
             
-            var grid = new Grid { Margin = new Thickness(20) };
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            // Создаем Grid с 2 колонками
+            var grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            grid.Margin = new Thickness(20);
             
-            var label = new TextBlock
-            {
-                Text = "Введите время для добавления:",
-                Margin = new Thickness(0, 0, 0, 10),
-                Style = (Style)Application.Current.Resources["BodyTextStyle"],
-                Foreground = Brushes.White
-            };
-            
-            var timePanel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 20) };
-            
-            var hoursPanel = new StackPanel { Margin = new Thickness(0, 0, 20, 0) };
-            var hoursLabel = new TextBlock { 
-                Text = "Часы:", 
-                Margin = new Thickness(0, 0, 0, 5),
-                Foreground = Brushes.White
-            };
-            var hoursBox = new TextBox { 
-                Text = HoursToAdd.ToString(), 
-                Width = 100,
-                Foreground = Brushes.White,
-                CaretBrush = Brushes.White
-            };
-            hoursPanel.Children.Add(hoursLabel);
-            hoursPanel.Children.Add(hoursBox);
-            
-            var minutesPanel = new StackPanel();
-            var minutesLabel = new TextBlock { 
-                Text = "Минуты:", 
-                Margin = new Thickness(0, 0, 0, 5),
-                Foreground = Brushes.White
-            };
-            var minutesBox = new TextBox { 
-                Text = MinutesToAdd.ToString(), 
-                Width = 100,
-                Foreground = Brushes.White,
-                CaretBrush = Brushes.White
-            };
-            minutesPanel.Children.Add(minutesLabel);
-            minutesPanel.Children.Add(minutesBox);
-            
-            timePanel.Children.Add(hoursPanel);
-            timePanel.Children.Add(minutesPanel);
-            
+            // Добавляем элементы для текущего времени
             var currentTimeLabel = new TextBlock
             {
-                Text = $"Текущее время: {user.FormattedRemainingTime}",
-                Margin = new Thickness(0, 0, 0, 20),
-                Style = (Style)Application.Current.Resources["BodyTextStyle"],
-                Foreground = Brushes.White
+                Text = "Текущее время:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
             };
             
-            var buttonsPanel = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
-            
-            var cancelButton = new Button
+            var currentTimeValue = new TextBlock
             {
-                Content = "Отмена",
-                Margin = new Thickness(0, 0, 10, 0),
-                Style = (Style)Application.Current.Resources["MaterialDesignOutlinedButton"],
-                Foreground = Brushes.White
+                Text = $"{user.RemainingTime.Hours:D2}:{user.RemainingTime.Minutes:D2}:{user.RemainingTime.Seconds:D2}",
+                VerticalAlignment = VerticalAlignment.Center,
+                FontWeight = FontWeights.Bold,
+                Foreground = System.Windows.Media.Brushes.Green
             };
             
-            var confirmButton = new Button
+            // Добавляем элементы для ввода часов
+            var hoursLabel = new TextBlock
+            {
+                Text = "Часы:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
+            };
+            
+            var hoursTextBox = new System.Windows.Controls.TextBox
+            {
+                Text = HoursToAdd.ToString(),
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 5, 0, 5),
+                Padding = new Thickness(5)
+            };
+            
+            // Добавляем элементы для ввода минут
+            var minutesLabel = new TextBlock
+            {
+                Text = "Минуты:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
+            };
+            
+            var minutesTextBox = new System.Windows.Controls.TextBox
+            {
+                Text = MinutesToAdd.ToString(),
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 5, 0, 5),
+                Padding = new Thickness(5)
+            };
+            
+            // Добавляем элементы для отображения нового времени
+            var newTimeLabel = new TextBlock
+            {
+                Text = "Новое время:",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 10, 0)
+            };
+            
+            var newTime = user.RemainingTime.Add(new TimeSpan(HoursToAdd, MinutesToAdd, 0));
+            var newTimeValue = new TextBlock
+            {
+                Text = $"{newTime.Hours:D2}:{newTime.Minutes:D2}:{newTime.Seconds:D2}",
+                VerticalAlignment = VerticalAlignment.Center,
+                FontWeight = FontWeights.Bold,
+                Foreground = System.Windows.Media.Brushes.Blue
+            };
+            
+            // Обновляем новое время при изменении значений
+            void UpdateNewTime()
+            {
+                if (int.TryParse(hoursTextBox.Text, out int hours) && int.TryParse(minutesTextBox.Text, out int minutes))
+                {
+                    var additionalTime = new TimeSpan(hours, minutes, 0);
+                    var newTime = user.RemainingTime.Add(additionalTime);
+                    newTimeValue.Text = $"{newTime.Hours:D2}:{newTime.Minutes:D2}:{newTime.Seconds:D2}";
+                    newTimeValue.Foreground = additionalTime.TotalMinutes > 0 ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Red;
+                }
+            }
+            
+            hoursTextBox.TextChanged += (s, e) => UpdateNewTime();
+            minutesTextBox.TextChanged += (s, e) => UpdateNewTime();
+            
+            // Добавляем кнопки
+            var buttonsPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center
+            };
+            
+            var confirmButton = new System.Windows.Controls.Button
             {
                 Content = "Добавить время",
-                Style = (Style)Application.Current.Resources["MaterialDesignRaisedButton"],
-                Foreground = Brushes.White
+                Padding = new Thickness(15, 5, 15, 5),
+                Margin = new Thickness(10),
+                Background = System.Windows.Media.Brushes.Green,
+                Foreground = System.Windows.Media.Brushes.White
             };
             
-            cancelButton.Click += (s, e) => dialog.DialogResult = false;
+            var cancelButton = new System.Windows.Controls.Button
+            {
+                Content = "Отмена",
+                Padding = new Thickness(15, 5, 15, 5),
+                Margin = new Thickness(10)
+            };
+            
+            // Добавляем обработчики для кнопок
             confirmButton.Click += async (s, e) =>
             {
-                if (int.TryParse(hoursBox.Text, out int hours) && int.TryParse(minutesBox.Text, out int minutes))
+                if (int.TryParse(hoursTextBox.Text, out int hours) && int.TryParse(minutesTextBox.Text, out int minutes))
                 {
-                    if (hours >= 0 && minutes >= 0 && minutes < 60 && (hours > 0 || minutes > 0))
+                    var timeToAdd = new TimeSpan(hours, minutes, 0);
+                    if (timeToAdd.TotalMinutes > 0)
                     {
                         try
                         {
-                            confirmButton.IsEnabled = false;
-                            cancelButton.IsEnabled = false;
-                            
-                            var timeToAdd = TimeSpan.FromHours(hours).Add(TimeSpan.FromMinutes(minutes));
+                            // Вызываем API для добавления времени
                             bool success = await _apiService.AddUserTimeAsync(user.Id, timeToAdd);
                             
                             if (success)
                             {
+                                // Обновляем время пользователя
                                 user.RemainingTime = user.RemainingTime.Add(timeToAdd);
-                                OnPropertyChanged(nameof(Users));
+                                
+                                System.Windows.MessageBox.Show($"Время пользователя {user.Name} успешно увеличено на {timeToAdd.Hours}ч {timeToAdd.Minutes}м", 
+                                    "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    
                                 dialog.DialogResult = true;
-                            }
-                            else
-                            {
-                                dialog.DialogResult = false;
+                                dialog.Close();
                             }
                         }
-                        finally
+                        catch (Exception ex)
                         {
-                            confirmButton.IsEnabled = true;
-                            cancelButton.IsEnabled = true;
+                            System.Windows.MessageBox.Show($"Ошибка при добавлении времени: {ex.Message}", 
+                                "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Введите корректное время", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        System.Windows.MessageBox.Show("Время должно быть положительным", 
+                            "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Введите корректное время", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show("Пожалуйста, введите корректные значения времени", 
+                        "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             };
             
-            buttonsPanel.Children.Add(cancelButton);
-            buttonsPanel.Children.Add(confirmButton);
+            cancelButton.Click += (s, e) =>
+            {
+                dialog.DialogResult = false;
+                dialog.Close();
+            };
             
-            Grid.SetRow(label, 0);
-            Grid.SetRow(timePanel, 1);
-            Grid.SetRow(currentTimeLabel, 2);
-            Grid.SetRow(buttonsPanel, 3);
-            
-            grid.Children.Add(label);
-            grid.Children.Add(timePanel);
+            // Добавляем элементы в Grid
+            Grid.SetRow(currentTimeLabel, 0);
+            Grid.SetColumn(currentTimeLabel, 0);
             grid.Children.Add(currentTimeLabel);
+            
+            Grid.SetRow(currentTimeValue, 0);
+            Grid.SetColumn(currentTimeValue, 1);
+            grid.Children.Add(currentTimeValue);
+            
+            Grid.SetRow(hoursLabel, 1);
+            Grid.SetColumn(hoursLabel, 0);
+            grid.Children.Add(hoursLabel);
+            
+            Grid.SetRow(hoursTextBox, 1);
+            Grid.SetColumn(hoursTextBox, 1);
+            grid.Children.Add(hoursTextBox);
+            
+            Grid.SetRow(minutesLabel, 2);
+            Grid.SetColumn(minutesLabel, 0);
+            grid.Children.Add(minutesLabel);
+            
+            Grid.SetRow(minutesTextBox, 2);
+            Grid.SetColumn(minutesTextBox, 1);
+            grid.Children.Add(minutesTextBox);
+            
+            Grid.SetRow(newTimeLabel, 3);
+            Grid.SetColumn(newTimeLabel, 0);
+            grid.Children.Add(newTimeLabel);
+            
+            Grid.SetRow(newTimeValue, 3);
+            Grid.SetColumn(newTimeValue, 1);
+            grid.Children.Add(newTimeValue);
+            
+            buttonsPanel.Children.Add(confirmButton);
+            buttonsPanel.Children.Add(cancelButton);
+            
+            Grid.SetRow(buttonsPanel, 4);
+            Grid.SetColumnSpan(buttonsPanel, 2);
             grid.Children.Add(buttonsPanel);
             
+            // Устанавливаем содержимое диалога
             dialog.Content = grid;
             
-            var result = dialog.ShowDialog();
-            
-            if (result == true)
-            {
-                MessageBox.Show($"Время пользователя {user.Name} успешно добавлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            // Показываем диалог
+            dialog.ShowDialog();
         }
         
         private void ShowSearchResults()
@@ -519,7 +672,7 @@ namespace GameClubManager.Admin.ViewModels
             // Если был применен поиск и нет результатов, показываем сообщение
             if (!string.IsNullOrWhiteSpace(SearchText) && Users.Count == 0)
             {
-                MessageBox.Show($"По запросу \"{SearchText}\" не найдено ни одного пользователя.", 
+                System.Windows.MessageBox.Show($"По запросу \"{SearchText}\" не найдено ни одного пользователя.", 
                               "Результаты поиска", 
                               MessageBoxButton.OK, 
                               MessageBoxImage.Information);
@@ -528,7 +681,7 @@ namespace GameClubManager.Admin.ViewModels
             else if (!string.IsNullOrWhiteSpace(SearchText) && Users.Count > 10)
             {
                 var pluralEnding = "ей";
-                MessageBox.Show($"Найдено {Users.Count} пользовател{pluralEnding} по запросу: \"{SearchText}\"\nПопробуйте уточнить запрос для получения более точных результатов.", 
+                System.Windows.MessageBox.Show($"Найдено {Users.Count} пользовател{pluralEnding} по запросу: \"{SearchText}\"\nПопробуйте уточнить запрос для получения более точных результатов.", 
                               "Большое количество результатов", 
                               MessageBoxButton.OK, 
                               MessageBoxImage.Information);

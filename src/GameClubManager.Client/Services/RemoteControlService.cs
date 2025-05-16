@@ -194,68 +194,93 @@ namespace GameClubManager.Client.Services
         {
             try
             {
-                var screenshot = CaptureScreen();
-                if (screenshot != null)
+                // Создаем скриншот экрана
+                using var bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                using var graphics = Graphics.FromImage(bitmap);
+                graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
+                
+                // Конвертируем в байты и сжимаем
+                using var stream = new MemoryStream();
+                bitmap.Save(stream, ImageFormat.Jpeg);
+                byte[] imageBytes = stream.ToArray();
+                
+                // Сжимаем с помощью LZ4
+                byte[] compressedBytes = LZ4Codec.Encode(imageBytes, 0, imageBytes.Length);
+                
+                // Создаем объект для отправки
+                var desktopData = new RemoteDesktopData
                 {
-                    await _httpClient.PostAsJsonAsync($"{BaseUrl}/remotecontrol/screenshot", screenshot);
-                }
+                    ComputerId = _computerId,
+                    ScreenData = compressedBytes,
+                    IsCompressed = true,
+                    Width = bitmap.Width,
+                    Height = bitmap.Height,
+                    Timestamp = DateTime.UtcNow
+                };
+                
+                // Отправляем на сервер
+                await _httpClient.PostAsJsonAsync($"{BaseUrl}/remotecontrol/public-screenshot", desktopData);
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Ошибка отправки скриншота: {ex.Message}", 
-                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.WriteLine($"Ошибка при отправке скриншота: {ex.Message}");
             }
         }
 
         // Начало прослушивания команд удаленного управления
         private async Task StartListeningForRemoteCommands()
         {
-            _cancellationTokenSource = new CancellationTokenSource();
-            
-            // Запускаем периодическую отправку скриншотов
-            _screenshotTimer = new System.Threading.Timer(async _ => await SendScreenshotAsync(), 
-                null, 0, ScreenshotInterval);
-            
-            // В отдельном потоке слушаем команды от сервера
-            await Task.Run(async () =>
+            try
             {
-                while (!_cancellationTokenSource.Token.IsCancellationRequested)
+                // Отправляем запрос на начало сессии
+                await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{_computerId}/public-start", null);
+                _isSessionActive = true;
+                
+                _cancellationTokenSource = new CancellationTokenSource();
+                
+                // Запускаем периодическую отправку скриншотов
+                _screenshotTimer = new System.Threading.Timer(async _ => await SendScreenshotAsync(), 
+                    null, 0, ScreenshotInterval);
+                
+                // В отдельном потоке слушаем команды от сервера
+                await Task.Run(async () =>
                 {
-                    try
+                    while (!_cancellationTokenSource.Token.IsCancellationRequested)
                     {
-                        // Запрашиваем новые команды с сервера
-                        var response = await _httpClient.GetAsync(
-                            $"{BaseUrl}/remotecontrol/{_computerId}/commands");
-                        
-                        if (response.IsSuccessStatusCode)
+                        try
                         {
-                            var commands = await response.Content.ReadFromJsonAsync<List<RemoteInput>>();
-                            if (commands != null && commands.Count > 0)
+                            // Запрашиваем новые команды с сервера
+                            var response = await _httpClient.GetAsync(
+                                $"{BaseUrl}/remotecontrol/{_computerId}/public-commands");
+                            
+                            if (response.IsSuccessStatusCode)
                             {
-                                // Обрабатываем полученные команды
-                                foreach (var command in commands)
+                                var commands = await response.Content.ReadFromJsonAsync<List<RemoteInput>>();
+                                if (commands != null && commands.Count > 0)
                                 {
-                                    ProcessRemoteCommand(command);
+                                    // Обрабатываем полученные команды
+                                    foreach (var command in commands)
+                                    {
+                                        ProcessRemoteCommand(command);
+                                    }
                                 }
                             }
+                            
+                            // Небольшая задержка перед следующим запросом
+                            await Task.Delay(50, _cancellationTokenSource.Token);
                         }
-                        
-                        // Небольшая задержка перед следующим запросом
-                        await Task.Delay(50, _cancellationTokenSource.Token);
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Ошибка получения команд: {ex.Message}");
+                            await Task.Delay(1000, _cancellationTokenSource.Token);
+                        }
                     }
-                    catch (TaskCanceledException)
-                    {
-                        // Игнорируем отмененные задачи
-                        break;
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show($"Ошибка при получении команд: {ex.Message}", 
-                            "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        await Task.Delay(1000, _cancellationTokenSource.Token);
-                    }
-                }
-            }, _cancellationTokenSource.Token);
+                }, _cancellationTokenSource.Token);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка запуска удаленного управления: {ex.Message}");
+            }
         }
 
         // Обработка команды удаленного управления
@@ -324,11 +349,24 @@ namespace GameClubManager.Client.Services
         }
 
         // Остановка удаленного управления
-        public void StopRemoteControl()
+        public async Task StopRemoteControl()
         {
-            _screenshotTimer?.Dispose();
-            _cancellationTokenSource?.Cancel();
-            _isSessionActive = false;
+            try
+            {
+                // Отправляем запрос на остановку сессии
+                if (_isSessionActive)
+                {
+                    await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{_computerId}/public-stop", null);
+                    _isSessionActive = false;
+                }
+                
+                _screenshotTimer?.Dispose();
+                _cancellationTokenSource?.Cancel();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при остановке удаленного управления: {ex.Message}");
+            }
         }
 
         // Запрос на сервер о статусе сессии
@@ -357,7 +395,7 @@ namespace GameClubManager.Client.Services
                         else
                         {
                             // Останавливаем отправку скриншотов
-                            StopRemoteControl();
+                            await StopRemoteControl();
                         }
                     }
                 }

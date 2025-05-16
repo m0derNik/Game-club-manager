@@ -134,7 +134,7 @@ namespace GameClubManager.Admin.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Ошибка загрузки компьютеров: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -157,7 +157,7 @@ namespace GameClubManager.Admin.ViewModels
         {
             if (computer == null) return;
             
-            var result = MessageBox.Show(
+            var result = System.Windows.MessageBox.Show(
                 $"Вы действительно хотите перезапустить компьютер {computer.Name}?", 
                 "Подтверждение", 
                 MessageBoxButton.YesNo, 
@@ -173,7 +173,7 @@ namespace GameClubManager.Admin.ViewModels
         {
             if (computer == null) return;
             
-            var result = MessageBox.Show(
+            var result = System.Windows.MessageBox.Show(
                 $"Вы действительно хотите выключить компьютер {computer.Name}?", 
                 "Подтверждение", 
                 MessageBoxButton.YesNo, 
@@ -202,7 +202,7 @@ namespace GameClubManager.Admin.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при подключении к удаленному рабочему столу: {ex.Message}", 
+                System.Windows.MessageBox.Show($"Ошибка при подключении к удаленному рабочему столу: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

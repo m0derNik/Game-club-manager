@@ -43,6 +43,11 @@ namespace GameClubManager.Admin.Commands
                 _execute();
             }
         }
+        
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
     }
 
     public class RelayCommand<T> : ICommand
@@ -70,6 +75,11 @@ namespace GameClubManager.Admin.Commands
         public void Execute(object parameter)
         {
             _execute((T)parameter);
+        }
+        
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 } 

@@ -119,3 +119,9 @@ C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\sr
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\bin\Debug\net8.0-windows\System.Text.Json.dll
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\bin\Debug\net8.0-windows\System.Threading.Channels.dll
 C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\Pages\TariffsPage.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\Pages\TariffsPage.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\Pages\FoodPage.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\Pages\FoodPage.baml
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\Pages\GamesPage.g.cs
+C:\Users\kiril\OneDrive\Рабочий стол\projects\C#\Game-club-manager\src\GameClubManager.Admin\obj\Debug\net8.0-windows\Pages\GamesPage.baml

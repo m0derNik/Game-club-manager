@@ -67,39 +67,42 @@ namespace GameClubManager.Admin.Pages
             }
         }
         
-        // Обработка события обновления скриншота
-        private void OnScreenshotUpdated(BitmapImage screenshot)
+        // Обработка обновления скриншота
+        private void OnScreenshotUpdated(object sender, ScreenshotEventArgs e)
         {
-            // Вызываем метод в UI-потоке
-            Dispatcher.Invoke(() =>
+            try
             {
-                if (screenshot != null)
+                // Обновляем изображение в UI потоке
+                Dispatcher.Invoke(() =>
                 {
-                    // Обновляем изображение
-                    RemoteDesktopImage.Source = screenshot;
+                    RemoteDesktopImage.Source = e.Screenshot;
+                    
+                    // Вычисляем масштаб для правильного преобразования координат мыши
+                    _scaleX = e.Width / RemoteDesktopImage.ActualWidth;
+                    _scaleY = e.Height / RemoteDesktopImage.ActualHeight;
                     
                     // Обновляем информацию о разрешении
-                    ResolutionText.Text = $"{screenshot.PixelWidth}x{screenshot.PixelHeight}";
-                    
-                    // Вычисляем масштаб для преобразования координат
-                    _scaleX = screenshot.PixelWidth / RemoteDesktopImage.ActualWidth;
-                    _scaleY = screenshot.PixelHeight / RemoteDesktopImage.ActualHeight;
+                    ResolutionText.Text = $"Разрешение: {e.Width}x{e.Height}";
                     
                     // Обновляем счетчик FPS
                     _frameCount++;
                     if (_fpsStopwatch.ElapsedMilliseconds >= 1000)
                     {
                         _currentFps = _frameCount;
-                        FpsText.Text = _currentFps.ToString();
+                        FpsText.Text = $"FPS: {_currentFps}";
                         _frameCount = 0;
                         _fpsStopwatch.Restart();
                     }
-                }
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка обновления скриншота: {ex.Message}");
+            }
         }
         
         // Обработка событий мыши
-        private async void RemoteDesktopImage_MouseMove(object sender, MouseEventArgs e)
+        private async void RemoteDesktopImage_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (_remoteDesktopService.IsConnected)
             {
@@ -167,7 +170,7 @@ namespace GameClubManager.Admin.Pages
         }
         
         // Обработка событий клавиатуры
-        private async void RemoteDesktopImage_KeyDown(object sender, KeyEventArgs e)
+        private async void RemoteDesktopImage_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (_remoteDesktopService.IsConnected)
             {
@@ -186,7 +189,7 @@ namespace GameClubManager.Admin.Pages
             }
         }
         
-        private async void RemoteDesktopImage_KeyUp(object sender, KeyEventArgs e)
+        private async void RemoteDesktopImage_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             // Обработка отпускания клавиш, если необходимо
         }
@@ -206,13 +209,13 @@ namespace GameClubManager.Admin.Pages
         // Отправка файла на удаленный компьютер - заглушка, будет реализовано позже
         private void SendFileButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog();
+            var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.Title = "Выберите файл для отправки";
             dialog.Multiselect = false;
             
             if (dialog.ShowDialog() == true)
             {
-                MessageBox.Show($"Отправка файлов будет реализована в следующей версии.", 
+                System.Windows.MessageBox.Show($"Отправка файлов будет реализована в следующей версии.", 
                     "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

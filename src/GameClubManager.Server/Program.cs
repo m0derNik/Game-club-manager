@@ -1,4 +1,5 @@
 using GameClubManager.Server.Data;
+using GameClubManager.Server.Middleware;
 using GameClubManager.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -104,8 +105,52 @@ app.UseCors();
 // Включаем HTTPS в режиме разработки
 app.UseHttpsRedirection();
 
-// Добавляем аутентификацию и авторизацию в конвейер
+// Добавляем аутентификацию в конвейер
 app.UseAuthentication();
+
+// Добавляем middleware для проверки админского клиента ПЕРЕД авторизацией
+app.UseAdminClientMiddleware();
+
+// Добавляем отладочное логирование
+app.Use(async (context, next) => 
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    var path = context.Request.Path.ToString();
+    
+    // Определяем пути, которые не нужно логировать для неаутентифицированных пользователей
+    var excludedPaths = new[] { 
+        "/api/remotecontrol", 
+        "/api/games/public",
+        "/api/tariffs",
+        "/api/food",
+        "/api/computers"
+    };
+    
+    // Проверяем, нужно ли логировать этот запрос
+    bool shouldLog = !excludedPaths.Any(excludedPath => 
+        path.StartsWith(excludedPath, StringComparison.OrdinalIgnoreCase));
+    
+    if (context.User.Identity?.IsAuthenticated == true)
+    {
+        // Всегда логируем запросы аутентифицированных пользователей
+        logger.LogInformation("Запрос к {Path}: Пользователь аутентифицирован, имя: {Name}", 
+            path, context.User.Identity.Name);
+            
+        var claims = context.User.Claims.ToList();
+        foreach (var claim in claims)
+        {
+            logger.LogInformation("Claim: {Type} = {Value}", claim.Type, claim.Value);
+        }
+    }
+    else if (shouldLog)
+    {
+        // Логируем запросы неаутентифицированных пользователей только если путь не в списке исключений
+        logger.LogInformation("Запрос к {Path}: Пользователь не аутентифицирован", path);
+    }
+    
+    await next();
+});
+
 app.UseAuthorization();
 
 app.MapControllers();
