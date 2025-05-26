@@ -5984,11 +5984,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\GameClubManager.Admin.csproj",
+      "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Admin\\GameClubManager.Admin.csproj",
       "projectName": "GameClubManager.Admin",
-      "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\GameClubManager.Admin.csproj",
+      "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Admin\\GameClubManager.Admin.csproj",
       "packagesPath": "C:\\Users\\kiril\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Admin\\obj\\",
+      "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Admin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kiril\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6006,8 +6006,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj": {
-              "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj"
+            "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj": {
+              "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj"
             }
           }
         }

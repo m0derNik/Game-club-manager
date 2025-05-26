@@ -189,36 +189,26 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <!-- Кнопка подключения для вызова администратора -->
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                <Button x:Name="HandleButton"
+                                        Style="{StaticResource MaterialDesignIconButton}"
                                         Command="{Binding DataContext.HandleNotificationCommand, 
                                                   RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}"
                                         ToolTip="Подключиться к компьютеру"
+                                        Margin="0,0,8,0"
                                         Visibility="{Binding IsTypeAdminCall, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <materialDesign:PackIcon Kind="Remote" 
                                                            Width="20" 
                                                            Height="20"/>
                                 </Button>
                                 
-                                <!-- Кнопка обработки уведомления -->
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        Command="{Binding DataContext.HandleNotificationCommand, 
-                                                  RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                        CommandParameter="{Binding}"
-                                        ToolTip="Обработать"
-                                        Visibility="{Binding IsRead, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                                    <materialDesign:PackIcon Kind="Check" 
-                                                           Width="20" 
-                                                           Height="20"/>
-                                </Button>
-                                
                                 <!-- Кнопка игнорирования уведомления -->
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                <Button x:Name="IgnoreButton"
+                                        Style="{StaticResource MaterialDesignIconButton}"
                                         Command="{Binding DataContext.IgnoreNotificationCommand, 
                                                   RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}"
-                                        ToolTip="Игнорировать"
-                                        Visibility="{Binding IsRead, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                                        ToolTip="Игнорировать уведомление">
                                     <materialDesign:PackIcon Kind="Close" 
                                                            Width="20" 
                                                            Height="20"/>

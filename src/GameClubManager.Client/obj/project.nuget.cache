@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iZ8wl6fOElA=",
+  "dgSpecHash": "Dw8zth4o50Q=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Client\\GameClubManager.Client.csproj",
+  "projectFilePath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Client\\GameClubManager.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiril\\.nuget\\packages\\lz4net\\1.0.15.93\\lz4net.1.0.15.93.nupkg.sha512",
     "C:\\Users\\kiril\\.nuget\\packages\\lz4net.unsafe.netcore\\1.0.15.93\\lz4net.unsafe.netcore.1.0.15.93.nupkg.sha512",

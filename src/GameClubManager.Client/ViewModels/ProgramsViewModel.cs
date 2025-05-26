@@ -9,15 +9,19 @@ using GameClubManager.Client.Models;
 using GameClubManager.Client.Commands;
 using GameClubManager.Client.Services;
 using System.Diagnostics;
+using System.Linq;
 
 namespace GameClubManager.Client.ViewModels
 {
     public class ProgramsViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
+        private readonly TimeService _timeService;
         private ObservableCollection<Game> _games;
+        private ObservableCollection<Game> _allGames;
         private bool _isLoading;
         private string _errorMessage;
+        private string _searchText;
 
         public ObservableCollection<Game> Games
         {
@@ -26,6 +30,17 @@ namespace GameClubManager.Client.ViewModels
             {
                 _games = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+                FilterGames();
             }
         }
 
@@ -55,12 +70,33 @@ namespace GameClubManager.Client.ViewModels
         public ProgramsViewModel()
         {
             _apiService = ApiService.Instance;
+            _timeService = TimeService.Instance;
+            _allGames = new ObservableCollection<Game>();
             Games = new ObservableCollection<Game>();
             LaunchGameCommand = new RelayCommand<Game>(LaunchGame);
             RefreshGamesCommand = new AsyncRelayCommand(LoadGamesAsync);
             
             // Загружаем игры при создании
             _ = LoadGamesAsync();
+        }
+
+        private void FilterGames()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                // Если строка поиска пуста, показываем все игры
+                Games = new ObservableCollection<Game>(_allGames);
+            }
+            else
+            {
+                // Фильтруем игры по имени и описанию
+                var filteredGames = _allGames.Where(g => 
+                    g.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || 
+                    g.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                
+                Games = new ObservableCollection<Game>(filteredGames);
+            }
         }
 
         private async Task LoadGamesAsync()
@@ -71,15 +107,18 @@ namespace GameClubManager.Client.ViewModels
             try
             {
                 var games = await _apiService.GetGamesForUserAsync();
-                Games.Clear();
+                _allGames.Clear();
                 
                 if (games != null)
                 {
                     foreach (var game in games)
                     {
-                        Games.Add(game);
+                        _allGames.Add(game);
                     }
                 }
+                
+                // Применяем фильтр к загруженным играм
+                FilterGames();
             }
             catch (Exception ex)
             {
@@ -109,6 +148,14 @@ namespace GameClubManager.Client.ViewModels
             {
                 System.Windows.MessageBox.Show("Путь к игре не указан", "Ошибка", 
                     System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return;
+            }
+
+            // Проверка наличия времени перед запуском игры
+            if (_timeService.RemainingTime <= TimeSpan.Zero)
+            {
+                System.Windows.MessageBox.Show("Невозможно запустить игру: у вас закончилось время. Пожалуйста, пополните время.", 
+                    "Доступ запрещен", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                 return;
             }
 

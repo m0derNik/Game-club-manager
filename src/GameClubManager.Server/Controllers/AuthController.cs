@@ -21,42 +21,28 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<AuthResponse>> Register(RegisterRequest request)
     {
-        try
+        var user = await _authService.RegisterAsync(request);
+        var token = _jwtService.GenerateToken(user);
+        
+        return Ok(new AuthResponse
         {
-            var user = await _authService.RegisterAsync(request);
-            var token = _jwtService.GenerateToken(user);
-            
-            return Ok(new AuthResponse
+            Token = token,
+            User = new UserDto
             {
-                Token = token,
-                User = new UserDto
-                {
-                    Id = user.Id,
-                    Username = user.Username,
-                    Email = user.Email,
-                    Role = user.Role,
-                    Balance = user.Balance
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email,
+                Role = user.Role,
+                Balance = user.Balance
+            }
+        });
     }
 
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponse>> Login(LoginRequest request)
     {
-        try
-        {
-            var response = await _authService.LoginAsync(request);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _authService.LoginAsync(request);
+        return Ok(response);
     }
 
     [Authorize]

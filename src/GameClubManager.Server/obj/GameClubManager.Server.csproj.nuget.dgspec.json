@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj": {}
+    "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj": {
+    "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj",
+        "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj",
         "projectName": "GameClubManager.Server",
-        "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj",
+        "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Server\\GameClubManager.Server.csproj",
         "packagesPath": "C:\\Users\\kiril\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Server\\obj\\",
+        "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kiril\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj": {
-                "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj"
+              "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj": {
+                "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj"
               }
             }
           }
@@ -53,6 +53,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.12.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -104,14 +108,14 @@
         }
       }
     },
-    "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj": {
+    "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
         "projectName": "GameClubManager.Shared",
-        "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
+        "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
         "packagesPath": "C:\\Users\\kiril\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\obj\\",
+        "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kiril\\AppData\\Roaming\\NuGet\\NuGet.Config",

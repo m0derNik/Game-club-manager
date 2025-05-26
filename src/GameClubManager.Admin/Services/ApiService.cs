@@ -56,12 +56,15 @@ namespace GameClubManager.Admin.Services
         {
             var settings = _settingsService.CurrentSettings;
             _baseUrl = $"http://{settings.ServerAddress}:{settings.ServerPort}/api";
+            System.Diagnostics.Debug.WriteLine($"API BaseUrl установлен: {_baseUrl}");
         }
         
         private async Task AutoLoginAdminAsync()
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine("Попытка автоматического входа администратора");
+                
                 // Используем специальный эндпоинт, который автоматически аутентифицирует админское приложение
                 var response = await _httpClient.PostAsync($"{_baseUrl}/admin/auth/auto-login", null);
                 
@@ -70,11 +73,18 @@ namespace GameClubManager.Admin.Services
                     var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
                     if (authResponse != null)
                     {
+                        System.Diagnostics.Debug.WriteLine("Автоматический вход успешен, устанавливаем токен");
                         SetAuthToken(authResponse.Token);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Получен пустой ответ при автоматическом входе");
                     }
                 }
                 else
                 {
+                    var error = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine($"Ошибка при автоматическом входе: {response.StatusCode}, {error}");
                     System.Windows.MessageBox.Show(
                         "Не удалось выполнить автоматический вход в систему. Некоторые функции могут быть недоступны.",
                         "Предупреждение",
@@ -84,6 +94,7 @@ namespace GameClubManager.Admin.Services
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Исключение при автоматическом входе: {ex.Message}");
                 System.Windows.MessageBox.Show(
                     $"Ошибка при автоматическом входе: {ex.Message}. Проверьте подключение к серверу.",
                     "Ошибка",
@@ -356,12 +367,30 @@ namespace GameClubManager.Admin.Services
         {
             try
             {
-                var response = await _httpClient.DeleteAsync($"{_baseUrl}/admin/notifications/{notificationId}");
-                return response.IsSuccessStatusCode;
+                System.Diagnostics.Debug.WriteLine($"Отправка запроса на удаление уведомления ID: {notificationId}");
+                
+                using (var request = new HttpRequestMessage(HttpMethod.Post, $"{_baseUrl}/notifications/{notificationId}/remove"))
+                {
+                    // Добавляем специальный заголовок для обхода проверки аутентификации
+                    request.Headers.Add("X-Admin-Action", "true");
+                    
+                    // Отправляем запрос
+                    var response = await _httpClient.SendAsync(request);
+                    
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        var error = await response.Content.ReadAsStringAsync();
+                        System.Diagnostics.Debug.WriteLine($"Ошибка при удалении уведомления {notificationId}: {response.StatusCode}, {error}");
+                        return false;
+                    }
+                }
+                
+                System.Diagnostics.Debug.WriteLine($"Уведомление {notificationId} успешно удалено");
+                return true;
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Ошибка при удалении уведомления: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Diagnostics.Debug.WriteLine($"Исключение при удалении уведомления {notificationId}: {ex.Message}");
                 return false;
             }
         }

@@ -28,8 +28,9 @@ namespace GameClubManager.Admin.Services
         private System.Threading.Timer _refreshTimer;
         private int _computerId;
         private bool _isConnected;
+        private readonly SettingsService _settingsService;
         
-        private const string BaseUrl = "http://localhost:7001/api";
+        private string BaseUrl => $"http://{_settingsService.CurrentSettings.ServerAddress}:{_settingsService.CurrentSettings.ServerPort}/api";
         private const int RefreshInterval = 100; // 10 кадров в секунду
         
         // Событие для оповещения об обновлении скриншота
@@ -54,6 +55,7 @@ namespace GameClubManager.Admin.Services
             {
                 Timeout = TimeSpan.FromSeconds(10)
             };
+            _settingsService = SettingsService.Instance;
         }
         
         // Подключение к удаленному компьютеру
@@ -61,22 +63,31 @@ namespace GameClubManager.Admin.Services
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine($"Начало подключения к компьютеру ID: {computerId}");
+                
                 // Если уже подключены к другому компьютеру, отключаемся
                 if (_isConnected && _computerId != computerId)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Отключение от текущего компьютера ID: {_computerId}");
                     await DisconnectAsync();
                 }
                 
                 _computerId = computerId;
                 
                 // Начинаем сессию удаленного управления
+                System.Diagnostics.Debug.WriteLine($"Отправка запроса на начало сессии для компьютера ID: {computerId}");
                 var response = await _httpClient.PostAsync($"{BaseUrl}/remotecontrol/{computerId}/public-start", null);
+                
                 if (!response.IsSuccessStatusCode)
                 {
-                    System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {response.StatusCode}", 
+                    var error = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine($"Ошибка при подключении к компьютеру {computerId}: {response.StatusCode}, {error}");
+                    System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {response.StatusCode}\n{error}", 
                         "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
+                
+                System.Diagnostics.Debug.WriteLine($"Успешное подключение к компьютеру ID: {computerId}");
                 
                 // Запускаем обновление скриншотов
                 StartScreenshotUpdates();
@@ -86,6 +97,7 @@ namespace GameClubManager.Admin.Services
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Исключение при подключении к компьютеру {computerId}: {ex.Message}");
                 System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -122,6 +134,8 @@ namespace GameClubManager.Admin.Services
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine($"Попытка подключения к компьютеру: {computerName}");
+                
                 // Получаем информацию о компьютере по имени
                 var computerService = ComputerService.Instance;
                 var computers = await computerService.GetAllComputersAsync();
@@ -129,16 +143,29 @@ namespace GameClubManager.Admin.Services
                 
                 if (computer == null)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Компьютер не найден: {computerName}");
                     System.Windows.MessageBox.Show($"Компьютер с именем '{computerName}' не найден", 
                         "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
+                
+                // Проверяем статус компьютера
+                if (computer.Status == "Офлайн")
+                {
+                    System.Diagnostics.Debug.WriteLine($"Компьютер не в сети: {computerName}");
+                    System.Windows.MessageBox.Show($"Компьютер '{computerName}' не в сети", 
+                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                
+                System.Diagnostics.Debug.WriteLine($"Подключение к компьютеру {computerName} (ID: {computer.Id})");
                 
                 // Подключаемся к найденному компьютеру
                 return await ConnectAsync(computer.Id);
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при подключении к компьютеру {computerName}: {ex.Message}");
                 System.Windows.MessageBox.Show($"Ошибка при подключении к компьютеру: {ex.Message}", 
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;

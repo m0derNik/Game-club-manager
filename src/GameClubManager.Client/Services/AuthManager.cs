@@ -8,6 +8,13 @@ using GameClubManager.Client.Models;
 
 namespace GameClubManager.Client.Services;
 
+// Результат аутентификации
+public class AuthResult
+{
+    public bool Success { get; set; }
+    public string ErrorMessage { get; set; }
+}
+
 public class AuthManager : INotifyPropertyChanged
 {
     private static AuthManager? _instance;
@@ -27,7 +34,7 @@ public class AuthManager : INotifyPropertyChanged
         _timeService = TimeService.Instance;
     }
 
-    public async Task<bool> RegisterAsync(string username, string email, string password)
+    public async Task<AuthResult> RegisterAsync(string username, string email, string password)
     {
         try
         {
@@ -46,19 +53,49 @@ public class AuthManager : INotifyPropertyChanged
                 await _timeService.LoadUserDataAsync(response.User.Id);
                 OnPropertyChanged(nameof(CurrentUser));
                 OnPropertyChanged(nameof(IsAuthenticated));
-                System.Windows.MessageBox.Show($"Успешная регистрация! Токен: {response.Token}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                return true;
+                return new AuthResult { Success = true };
             }
-            return false;
+            return new AuthResult 
+            { 
+                Success = false, 
+                ErrorMessage = "Не удалось создать аккаунт. Пожалуйста, попробуйте позже." 
+            };
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            return false;
+            // Обработка известных ошибок и возврат понятных сообщений
+            if (ex.Message.Contains("Email уже зарегистрирован"))
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Пользователь с таким email уже существует" };
+            }
+            else if (ex.Message.Contains("Имя пользователя уже занято"))
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Это имя пользователя уже занято" };
+            }
+            else if (ex.Message.Contains("Bad Request") || ex.Message.Contains("400"))
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Неверные данные. Проверьте введенную информацию" };
+            }
+            else if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("401"))
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Ошибка авторизации" };
+            }
+            else if (ex.Message.Contains("Forbidden") || ex.Message.Contains("403"))
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Доступ запрещен" };
+            }
+            else if (ex.Message.Contains("Not Found") || ex.Message.Contains("404"))
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Сервер не доступен. Попробуйте позже" };
+            }
+            else
+            {
+                return new AuthResult { Success = false, ErrorMessage = "Произошла ошибка при регистрации. Попробуйте позже" };
+            }
         }
     }
 
-    public async Task<bool> LoginAsync(string email, string password)
+    public async Task<AuthResult> LoginAsync(string email, string password)
     {
         try
         {
@@ -82,14 +119,30 @@ public class AuthManager : INotifyPropertyChanged
                 // Загружаем данные асинхронно
                 await _timeService.LoadUserDataAsync(response.User.Id);
                 
-                return true;
+                return new AuthResult { Success = true };
             }
-            return false;
+            return new AuthResult 
+            { 
+                Success = false, 
+                ErrorMessage = "Неверно введенные данные" 
+            };
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            return false;
+            // По умолчанию для всех ошибок входа используем сообщение о неверных данных
+            string errorMessage = "Неверно введенные данные";
+            
+            // Проверяем конкретные случаи, когда нужно показать другое сообщение
+            if (ex.Message.Contains("Not Found") || ex.Message.Contains("404"))
+            {
+                errorMessage = "Сервер не доступен. Попробуйте позже";
+            }
+            else if (ex.Message.Contains("timeout") || ex.Message.Contains("timed out"))
+            {
+                errorMessage = "Превышено время ожидания ответа от сервера";
+            }
+            
+            return new AuthResult { Success = false, ErrorMessage = errorMessage };
         }
     }
 

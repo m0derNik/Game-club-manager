@@ -56,13 +56,37 @@ public class ApiService
         try
         {
             var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/auth/register", request);
-            response.EnsureSuccessStatusCode();
+            
+            // Если ответ не успешный, пытаемся прочитать сообщение об ошибке
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(errorContent))
+                {
+                    // Пытаемся извлечь сообщение из JSON
+                    try
+                    {
+                        var errorObj = System.Text.Json.JsonSerializer.Deserialize<ErrorResponse>(errorContent);
+                        if (errorObj != null && !string.IsNullOrEmpty(errorObj.Error))
+                        {
+                            throw new Exception(errorObj.Error);
+                        }
+                    }
+                    catch
+                    {
+                        // Если не удалось распарсить JSON, используем содержимое как есть
+                    }
+                }
+                
+                // Если не удалось получить детальное сообщение, генерируем стандартное
+                throw new Exception($"Ошибка регистрации (HTTP {(int)response.StatusCode}): {response.ReasonPhrase}");
+            }
+            
             return await response.Content.ReadFromJsonAsync<AuthResponse>();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            System.Windows.MessageBox.Show($"Ошибка регистрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            return null;
+            throw;
         }
     }
 
@@ -71,13 +95,37 @@ public class ApiService
         try
         {
             var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/auth/login", request);
-            response.EnsureSuccessStatusCode();
+            
+            // Если ответ не успешный, пытаемся прочитать сообщение об ошибке
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(errorContent))
+                {
+                    // Пытаемся извлечь сообщение из JSON
+                    try
+                    {
+                        var errorObj = System.Text.Json.JsonSerializer.Deserialize<ErrorResponse>(errorContent);
+                        if (errorObj != null && !string.IsNullOrEmpty(errorObj.Error))
+                        {
+                            throw new Exception(errorObj.Error);
+                        }
+                    }
+                    catch
+                    {
+                        // Если не удалось распарсить JSON, используем содержимое как есть
+                    }
+                }
+                
+                // Если не удалось получить детальное сообщение, генерируем стандартное
+                throw new Exception($"Ошибка входа (HTTP {(int)response.StatusCode}): {response.ReasonPhrase}");
+            }
+            
             return await response.Content.ReadFromJsonAsync<AuthResponse>();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            System.Windows.MessageBox.Show($"Ошибка входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            return null;
+            throw;
         }
     }
 
@@ -491,6 +539,12 @@ public class UserData
 {
     public decimal Balance { get; set; }
     public TimeSpan RemainingTime { get; set; }
+}
+
+// Добавляем класс для десериализации ошибок
+public class ErrorResponse
+{
+    public string Error { get; set; }
 } 
 
 

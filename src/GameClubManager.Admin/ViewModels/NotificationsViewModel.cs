@@ -112,16 +112,24 @@ namespace GameClubManager.Admin.ViewModels
         {
             if (notification == null) return;
             
+            System.Diagnostics.Debug.WriteLine($"Обработка уведомления: ID={notification.Id}, Type={notification.Type}");
+            
             // Если это вызов администратора, можно добавить дополнительную логику (например, открыть удаленный рабочий стол)
             if (notification.Type == "AdminCall" && notification.ComputerId.HasValue)
             {
+                System.Diagnostics.Debug.WriteLine($"Попытка подключения к компьютеру: ID={notification.ComputerId.Value}");
                 var computerService = ComputerService.Instance;
                 var computerInfo = await computerService.GetComputerByIdAsync(notification.ComputerId.Value);
                 
                 if (computerInfo != null)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Подключение к компьютеру: {computerInfo.Name}");
                     var remoteService = RemoteDesktopService.Instance;
                     await remoteService.ConnectToComputerAsync(computerInfo.Name);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"Компьютер не найден: ID={notification.ComputerId.Value}");
                 }
             }
             
@@ -132,6 +140,8 @@ namespace GameClubManager.Admin.ViewModels
         private async void ExecuteIgnoreNotification(Models.AdminNotification notification)
         {
             if (notification == null) return;
+            
+            System.Diagnostics.Debug.WriteLine($"Игнорирование уведомления: ID={notification.Id}, Type={notification.Type}");
             
             // Отмечаем уведомление как прочитанное и удаляем его
             await MarkNotificationAsReadAsync(notification);
@@ -146,19 +156,36 @@ namespace GameClubManager.Admin.ViewModels
         {
             if (notification == null) return;
             
-            // Удаляем уведомление из базы данных и из коллекции
-            bool success = await _apiService.DeleteNotificationAsync(notification.Id);
+            System.Diagnostics.Debug.WriteLine($"Начало удаления уведомления: ID={notification.Id}");
             
-            // Если успешно, удаляем уведомление из коллекции
-            if (success)
+            try
             {
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                // Удаляем уведомление из базы данных и из коллекции
+                bool success = await _apiService.DeleteNotificationAsync(notification.Id);
+                
+                System.Diagnostics.Debug.WriteLine($"Результат удаления уведомления {notification.Id}: {success}");
+                
+                // Если успешно, удаляем уведомление из коллекции
+                if (success)
                 {
-                    Notifications.Remove(notification);
-                    OnPropertyChanged(nameof(Notifications));
-                    OnPropertyChanged(nameof(IsDataVisible));
-                    OnPropertyChanged(nameof(IsEmptyVisible));
-                });
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Notifications.Remove(notification);
+                        System.Diagnostics.Debug.WriteLine($"Уведомление {notification.Id} удалено из коллекции");
+                        OnPropertyChanged(nameof(Notifications));
+                        OnPropertyChanged(nameof(IsDataVisible));
+                        OnPropertyChanged(nameof(IsEmptyVisible));
+                    });
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"Не удалось удалить уведомление {notification.Id}");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при удалении уведомления {notification.Id}: {ex.Message}");
+                throw;
             }
         }
         

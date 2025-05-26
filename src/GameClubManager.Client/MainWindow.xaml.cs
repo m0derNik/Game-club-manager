@@ -203,6 +203,7 @@ namespace GameClubManager.Client
             {
                 e.Handled = true;
             }
+
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -251,5 +252,6 @@ namespace GameClubManager.Client
         }
     }
 }
+
 
 

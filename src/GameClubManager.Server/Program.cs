@@ -2,10 +2,13 @@ using GameClubManager.Server.Data;
 using GameClubManager.Server.Middleware;
 using GameClubManager.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net;
 using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -92,6 +95,40 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
+// Глобальный обработчик исключений для всех API
+app.UseExceptionHandler(appError =>
+{
+    appError.Run(async context =>
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.ContentType = "application/json";
+
+        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+        if (contextFeature != null)
+        {
+            var logger = app.Services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(contextFeature.Error, "Необработанное исключение в приложении");
+
+            // Определяем код статуса в зависимости от типа исключения
+            if (contextFeature.Error.Message.Contains("Пользователь не найден") ||
+                contextFeature.Error.Message.Contains("Email уже зарегистрирован") ||
+                contextFeature.Error.Message.Contains("Имя пользователя уже занято") ||
+                contextFeature.Error.Message.Contains("Неверный пароль"))
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            }
+
+            // Отправляем JSON с сообщением об ошибке
+            var response = JsonSerializer.Serialize(new
+            {
+                error = contextFeature.Error.Message
+            });
+
+            await context.Response.WriteAsync(response);
+        }
+    });
+});
+
 // Настройка конвейера HTTP-запросов
 if (app.Environment.IsDevelopment())
 {
@@ -110,6 +147,9 @@ app.UseAuthentication();
 
 // Добавляем middleware для проверки админского клиента ПЕРЕД авторизацией
 app.UseAdminClientMiddleware();
+
+// Добавляем middleware для обработки специального заголовка X-Admin-Action
+app.UseAdminActionMiddleware();
 
 // Добавляем отладочное логирование
 app.Use(async (context, next) => 

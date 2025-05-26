@@ -190,6 +190,14 @@ namespace GameClubManager.Client.ViewModels
         {
             if (game != null && game.IsAvailable)
             {
+                // Проверка наличия времени перед запуском игры
+                if (_timeService.RemainingTime <= TimeSpan.Zero)
+                {
+                    System.Windows.MessageBox.Show("Невозможно запустить игру: у вас закончилось время. Пожалуйста, пополните время.", 
+                        "Доступ запрещен", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                    return;
+                }
+
                 try
                 {
                     var startInfo = new ProcessStartInfo

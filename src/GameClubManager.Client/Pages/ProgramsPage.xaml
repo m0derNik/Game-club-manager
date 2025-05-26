@@ -42,6 +42,7 @@
                      materialDesign:HintAssist.Hint="Поиск игр..."
                      materialDesign:TextFieldAssist.HasClearButton="True"
                      materialDesign:TextFieldAssist.PrefixText="🔍"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      Foreground="{DynamicResource TextPrimaryBrush}"
                      CaretBrush="{DynamicResource TextPrimaryBrush}"/>
         </Grid>

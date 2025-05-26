@@ -566,11 +566,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
       "projectName": "GameClubManager.Shared",
-      "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
+      "projectPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\GameClubManager.Shared.csproj",
       "packagesPath": "C:\\Users\\kiril\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\C#\\Game-club-manager\\src\\GameClubManager.Shared\\obj\\",
+      "outputPath": "C:\\Users\\kiril\\OneDrive\\Рабочий стол\\projects\\Csharp\\Game-club-manager\\src\\GameClubManager.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kiril\\AppData\\Roaming\\NuGet\\NuGet.Config",

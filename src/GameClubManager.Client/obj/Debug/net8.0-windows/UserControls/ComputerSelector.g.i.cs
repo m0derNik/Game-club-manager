@@ -56,7 +56,7 @@ namespace GameClubManager.Client.UserControls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;V1.0.0.0;component/usercontrols/computerselector.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GameClubManager.Client;component/usercontrols/computerselector.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UserControls\ComputerSelector.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

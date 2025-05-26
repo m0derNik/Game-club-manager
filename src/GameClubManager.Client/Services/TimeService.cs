@@ -6,6 +6,7 @@ using GameClubManager.Client.Models;
 using System.Windows;
 using System.Threading;
 using System.Diagnostics;
+using System.Linq;
 
 namespace GameClubManager.Client.Services
 {
@@ -258,10 +259,92 @@ namespace GameClubManager.Client.Services
             else
             {
                 StopTimer();
+                
                 System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                    System.Windows.MessageBox.Show("Время истекло!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // Закрываем все сторонние процессы
+                    CloseAllNonClientProcesses();
+                    
+                    // Показываем предупреждение
+                    System.Windows.MessageBox.Show("Время истекло! Все программы закрыты.", 
+                        "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }));
             }
+        }
+
+        /// <summary>
+        /// Закрывает все запущенные процессы, кроме клиента GameClubManager.Client
+        /// </summary>
+        private void CloseAllNonClientProcesses()
+        {
+            try
+            {
+                // Получаем список всех процессов
+                Process[] processes = Process.GetProcesses();
+                
+                // Получаем имя текущего процесса
+                string currentProcessName = Process.GetCurrentProcess().ProcessName;
+                
+                Trace.WriteLine($"Закрытие всех процессов, кроме {currentProcessName}");
+                
+                // Исключаем системные процессы и сам GameClubManager.Client
+                var processesToClose = processes.Where(p => 
+                    !IsSystemProcess(p.ProcessName) && 
+                    !p.ProcessName.Equals(currentProcessName, StringComparison.OrdinalIgnoreCase) &&
+                    !p.ProcessName.Equals("explorer", StringComparison.OrdinalIgnoreCase) && // Не закрываем проводник Windows
+                    !p.ProcessName.StartsWith("svchost", StringComparison.OrdinalIgnoreCase) // Не закрываем системные службы
+                ).ToList();
+                
+                // Закрываем каждый процесс
+                foreach (var process in processesToClose)
+                {
+                    try
+                    {
+                        Trace.WriteLine($"Попытка закрыть процесс: {process.ProcessName}");
+                        process.CloseMainWindow();
+                        
+                        // Даем время на закрытие (500 мс)
+                        if (!process.WaitForExit(500))
+                        {
+                            // Если процесс не закрылся сам, завершаем его
+                            process.Kill();
+                            Trace.WriteLine($"Процесс {process.ProcessName} принудительно завершен");
+                        }
+                        else
+                        {
+                            Trace.WriteLine($"Процесс {process.ProcessName} закрыт успешно");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine($"Ошибка при закрытии процесса {process.ProcessName}: {ex.Message}");
+                    }
+                }
+                
+                Trace.WriteLine("Завершение работы с процессами");
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"Ошибка при закрытии процессов: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// Проверяет, является ли процесс системным
+        /// </summary>
+        private bool IsSystemProcess(string processName)
+        {
+            // Список системных процессов, которые не нужно закрывать
+            string[] systemProcesses = new[]
+            {
+                "system", "csrss", "wininit", "services", "lsass", "winlogon", 
+                "fontdrvhost", "dwm", "taskhostw", "rundll32", "conhost", 
+                "powershell", "cmd", "notepad", "devenv", "msedge", "chrome", 
+                "firefox", "taskmgr", "msiexec", "smss", "spoolsv", "SearchApp"
+            };
+            
+            return systemProcesses.Any(sp => 
+                processName.Equals(sp, StringComparison.OrdinalIgnoreCase) || 
+                processName.StartsWith(sp, StringComparison.OrdinalIgnoreCase));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

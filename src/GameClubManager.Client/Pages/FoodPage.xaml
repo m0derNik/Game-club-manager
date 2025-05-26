@@ -23,7 +23,8 @@
             
             <TextBlock Text="Еда и напитки"
                      Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                     FontWeight="SemiBold"/>
+                     FontWeight="SemiBold"
+                     Foreground="White"/>
             
             <StackPanel Grid.Column="1" 
                       Orientation="Horizontal"
@@ -40,56 +41,11 @@
         <!-- Основное содержимое -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <!-- Фильтры и категории -->
-            <StackPanel Margin="0,0,16,0">
-                <TextBlock Text="Категории"
-                         Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                         Margin="0,0,0,8"/>
-                
-                <materialDesign:Card Style="{StaticResource ModernCard}"
-                                   Margin="0,4">
-                    <RadioButton Content="Все"
-                               Margin="8"
-                               IsChecked="True"/>
-                </materialDesign:Card>
-                
-                <materialDesign:Card Style="{StaticResource ModernCard}"
-                                   Margin="0,4">
-                    <RadioButton Content="Еда"
-                               Margin="8"/>
-                </materialDesign:Card>
-                
-                <materialDesign:Card Style="{StaticResource ModernCard}"
-                                   Margin="0,4">
-                    <RadioButton Content="Напитки"
-                               Margin="8"/>
-                </materialDesign:Card>
-                
-                <materialDesign:Card Style="{StaticResource ModernCard}"
-                                   Margin="0,4">
-                    <RadioButton Content="Снеки"
-                               Margin="8"/>
-                </materialDesign:Card>
-                
-                <Button Style="{StaticResource ModernButton}"
-                        Command="{Binding ViewCartCommand}"
-                        Margin="0,24,0,0">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Cart" 
-                                               Width="20" 
-                                               Height="20"
-                                               Margin="0,0,8,0"/>
-                        <TextBlock Text="Корзина"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-            
             <!-- Список товаров -->
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding FoodItems}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -150,6 +106,20 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+            
+            <Button Style="{StaticResource ModernButton}"
+                    Command="{Binding ViewCartCommand}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,16,16">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Cart" 
+                                           Width="20" 
+                                           Height="20"
+                                           Margin="0,0,8,0"/>
+                    <TextBlock Text="Корзина"/>
+                </StackPanel>
+            </Button>
         </Grid>
     </Grid>
 </Page> 
